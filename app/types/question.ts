@@ -1,5 +1,5 @@
-export interface Question {
+export type Question = {
   id: string;
   job_id: string;
-  content: string;
-}
+  question: string;
+};
