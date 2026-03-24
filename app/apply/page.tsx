@@ -4,11 +4,10 @@
 import { useSearchParams, useRouter } from "next/navigation";
 import { useState } from "react";
 
-export default function Apply() {
-  const params = useSearchParams();
+export default function Apply({ searchParams }: any) {
+  const jobId = searchParams.jobId;
   const router = useRouter();
 
-  const jobId = params.get("jobId");
   const [email, setEmail] = useState("");
 
   const handleApply = async () => {
