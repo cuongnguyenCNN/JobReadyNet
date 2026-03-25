@@ -22,9 +22,12 @@ export default async function Home() {
       {/* HERO */}
       <section className="text-center py-20 px-6 max-w-3xl mx-auto">
         <h1 className="text-5xl font-bold leading-tight tracking-tight">
-          Get Hired Faster as a
+          Most .NET developers FAIL interviews.
           <br />
-          <span className="text-blue-600">.NET Developer 🚀</span>
+          <span className="text-blue-600">
+            Not because they can't code. But because they answer like a junior.
+            🚀
+          </span>
         </h1>
 
         <p className="mt-6 text-gray-600 text-lg">
@@ -35,25 +38,42 @@ export default async function Home() {
 
         <div className="mt-8 flex justify-center gap-4">
           <a
-            href="#jobs"
+            href="/login"
             className="bg-black text-white px-6 py-3 rounded-xl shadow hover:scale-105 transition"
           >
-            Browse Jobs
+            👉 Start Free (20 Questions)
           </a>
 
           <a
-            href="#"
+            href="/paywall"
             className="border px-6 py-3 rounded-xl hover:bg-gray-100 transition"
           >
-            View Questions
+            👉 Unlock Full System ($19)
           </a>
         </div>
 
-        <p className="mt-6 text-sm text-gray-400">
-          Trusted by 1000+ developers
+        <p className="text-sm text-gray-500">
+          🔥 1,278 developers are preparing interviews right now
         </p>
       </section>
+      <div className="bg-white p-6 rounded-xl shadow mt-10 max-w-2xl mx-auto">
+        <p className="text-sm text-gray-500 mb-2">Real interview question</p>
 
+        <h3 className="font-semibold mb-3">
+          Why is injecting Scoped into Singleton dangerous?
+        </h3>
+
+        <div className="text-red-500 text-sm mb-2">❌ Weak answer:</div>
+        <p className="text-sm text-gray-600 mb-3">
+          "Because of lifetime issues"
+        </p>
+
+        <div className="text-green-600 text-sm mb-2">✅ Strong answer:</div>
+        <p className="text-sm text-gray-600">
+          Explains how DI container works, memory lifecycle, and why it can
+          cause memory leaks...
+        </p>
+      </div>
       {/* FEATURE STRIP */}
       <section className="grid grid-cols-1 md:grid-cols-3 gap-6 px-6 max-w-5xl mx-auto pb-16">
         <div className="p-6 bg-white rounded-xl shadow-sm">
