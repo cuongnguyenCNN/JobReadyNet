@@ -45,7 +45,9 @@ export default async function JobDetail({ params }: any) {
       {/* Description */}
       <div className="mb-8">
         <h2 className="font-semibold text-lg mb-2">Job Description</h2>
-        <p className="text-gray-700 leading-relaxed">{job?.description}</p>
+        <p className="text-sm text-gray-600 whitespace-pre-line leading-relaxed">
+          {job?.description}
+        </p>
       </div>
 
       {/* CTA section */}
