@@ -194,7 +194,8 @@ export default function Dashboard() {
             </div>
             <button
               onClick={() =>
-                (window.location.href = "https://your-payment-link.com")
+                (window.location.href =
+                  "https://noteflowai.lemonsqueezy.com/checkout/buy/98ea2ea8-1378-4bcc-900b-c0c3ea03e359")
               }
               className="w-full bg-black text-white py-3 rounded-lg font-medium"
             >
