@@ -116,7 +116,7 @@ export default function EnterEmail() {
       const expiry = Date.now() + 3 * 24 * 60 * 60 * 1000;
 
       localStorage.setItem(
-        "user_email",
+        "user_email_practice",
         JSON.stringify({
           email: form.email,
           expiry,
