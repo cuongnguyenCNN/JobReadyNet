@@ -493,6 +493,7 @@ export default function Dashboard() {
   const [score, setScore] = useState<number | null>(null);
   const [feedback, setFeedback] = useState("");
   const [rank, setRank] = useState<number | null>(null);
+  const [startedCount, setStartedCount] = useState(0);
   // 🔐 Auth check
   useEffect(() => {
     const stored = localStorage.getItem("user_email");
@@ -516,9 +517,18 @@ export default function Dashboard() {
   if (!user) return null;
 
   const handleStart = (q: Question, index: number) => {
-    if (index >= FREE_LIMIT) {
+    // if (index >= FREE_LIMIT) {
+    //   setShowPaywall(true);
+    //   return;
+    // }
+
+    if (startedCount >= FREE_LIMIT) {
       setShowPaywall(true);
       return;
+    }
+
+    if (startedCount < FREE_LIMIT) {
+      setStartedCount((prev) => prev + 1);
     }
 
     setActiveQ(q);
@@ -631,19 +641,57 @@ export default function Dashboard() {
           </button>
         </div>
         {view === "practice" && !activeQ && (
-          <div className="space-y-4">
-            {mockQuestions.map((q, index) => (
-              <div key={q.id} className="bg-white p-5 rounded-xl shadow-sm">
-                <h3 className="font-semibold mb-3">{q.title}</h3>
+          <div className="space-y-4 relative">
+            <p className="text-sm text-gray-500">Showing 10/159 questions</p>
+            <p className="text-sm text-gray-500">
+              Free attempts: {startedCount}/{FREE_LIMIT}
+            </p>
+            {mockQuestions.map((q, index) => {
+              const isLocked = index >= 10;
+
+              return (
+                <div
+                  key={q.id}
+                  className={`bg-white p-5 rounded-xl shadow-sm relative ${
+                    isLocked ? "opacity-40 pointer-events-none" : ""
+                  }`}
+                >
+                  <h3 className="font-semibold mb-3">{q.title}</h3>
+
+                  {!isLocked ? (
+                    <button
+                      onClick={() => handleStart(q, index)}
+                      className="bg-black text-white px-4 py-2 rounded-lg text-sm"
+                    >
+                      🎯 Start Answering
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => setShowPaywall(true)}
+                      className="bg-gray-400 text-white px-4 py-2 rounded-lg text-sm"
+                    >
+                      🔒 Locked
+                    </button>
+                  )}
+                </div>
+              );
+            })}
+
+            {/* 🔥 FADE OVERLAY */}
+            <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-gray-50 to-transparent flex items-end justify-center">
+              <div className="mb-4 text-center">
+                <p className="text-sm text-gray-600 mb-2">
+                  🔒 Unlock 150 real interview questions
+                </p>
 
                 <button
-                  onClick={() => handleStart(q, index)}
-                  className="bg-black text-white px-4 py-2 rounded-lg text-sm"
+                  onClick={() => setShowPaywall(true)}
+                  className="bg-black text-white px-5 py-2 rounded-lg text-sm"
                 >
-                  🎯 Start Answering
+                  Unlock Full Access – $19
                 </button>
               </div>
-            ))}
+            </div>
           </div>
         )}
         {view === "failed" && (
