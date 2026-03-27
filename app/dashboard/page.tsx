@@ -492,6 +492,7 @@ export default function Dashboard() {
   const router = useRouter();
   const [score, setScore] = useState<number | null>(null);
   const [feedback, setFeedback] = useState("");
+  const [rank, setRank] = useState<number | null>(null);
   // 🔐 Auth check
   useEffect(() => {
     const stored = localStorage.getItem("user_email");
@@ -524,6 +525,17 @@ export default function Dashboard() {
     setSubmitted(false);
     setAnswer("");
   };
+  const calculateRank = (score: number) => {
+    // score từ 0 → 1
+
+    if (score < 0.2) return 85 + Math.random() * 10; // 85–95%
+    if (score < 0.4) return 65 + Math.random() * 10;
+    if (score < 0.6) return 40 + Math.random() * 15;
+    if (score < 0.8) return 20 + Math.random() * 15;
+
+    return 5 + Math.random() * 10;
+  };
+
   const evaluateAnswer = (userAnswer: string, strongAnswer: string) => {
     const keywords = strongAnswer
       .toLowerCase()
@@ -549,6 +561,9 @@ export default function Dashboard() {
 
     setScore(result);
     setSubmitted(true);
+
+    const calculatedRank = calculateRank(result);
+    setRank(calculatedRank);
 
     let fb = "";
 
@@ -638,15 +653,36 @@ export default function Dashboard() {
                 You haven't failed any questions yet.
               </p>
             ) : (
-              failedQuestions.map((q) => (
-                <div key={q.id} className="bg-red-50 p-4 rounded-lg">
-                  <p className="font-medium">{q.title}</p>
-                  <p className="text-sm text-red-600 mt-1">
-                    💀 You failed this. Try again.
+              <>
+                {/* Summary */}
+                <div className="bg-red-50 p-4 rounded-lg">
+                  <p className="text-sm font-medium text-red-600">
+                    You failed {failedQuestions.length}/{completed} questions.
                   </p>
-                  <button onClick={() => setActiveQ(q)}>Retry</button>
+
+                  <p className="text-xs text-gray-600 mt-1">
+                    This is why interviews feel hard.
+                  </p>
                 </div>
-              ))
+
+                {/* List failed questions */}
+                {failedQuestions.map((q) => (
+                  <div key={q.id} className="bg-white p-4 rounded-lg shadow-sm">
+                    <p className="font-medium">{q.title}</p>
+
+                    <p className="text-sm text-red-600 mt-1">
+                      💀 You failed this. Try again.
+                    </p>
+
+                    <button
+                      onClick={() => setActiveQ(q)}
+                      className="mt-2 text-sm text-blue-600"
+                    >
+                      Retry
+                    </button>
+                  </div>
+                ))}
+              </>
             )}
           </div>
         )}
@@ -686,97 +722,92 @@ export default function Dashboard() {
           <div className="bg-white p-6 rounded-xl shadow-sm max-w-2xl">
             <h2 className="font-semibold mb-4">{activeQ.title}</h2>
 
-            {
-              !submitted ? (
-                <>
-                  <textarea
-                    value={answer}
-                    onChange={(e) => setAnswer(e.target.value)}
-                    placeholder="Type your answer like in a real interview..."
-                    className="w-full border p-3 rounded-lg mb-4 text-sm"
-                    rows={5}
-                  />
+            {!submitted ? (
+              <>
+                <textarea
+                  value={answer}
+                  onChange={(e) => setAnswer(e.target.value)}
+                  placeholder="Type your answer like in a real interview..."
+                  className="w-full border p-3 rounded-lg mb-4 text-sm"
+                  rows={5}
+                />
 
-                  <button
-                    onClick={handleSubmit}
-                    className="bg-black text-white px-4 py-2 rounded-lg"
-                  >
-                    Submit Answer
-                  </button>
-                </>
-              ) : (
-                <div className="mt-4 space-y-4">
-                  <div className="bg-gray-100 p-4 rounded-lg">
-                    <p className="text-sm font-medium">
-                      🎯 Your score: {Math.round((score || 0) * 100)}%
-                    </p>
-                    <p className="text-sm mt-1">{feedback}</p>
-                  </div>
-
-                  {score !== null && score < 0.3 && (
-                    <div className="bg-red-50 p-4 rounded-lg">
-                      <p className="text-sm text-red-600 font-medium">
-                        💀 Why you sound like a junior:
-                      </p>
-                      <p className="text-sm mt-1">{activeQ?.trap}</p>
-                    </div>
-                  )}
-
-                  <div className="bg-green-50 p-4 rounded-lg">
-                    <p className="text-sm text-green-600 font-medium">
-                      ✅ Strong answer:
-                    </p>
-                    <p className="text-sm mt-1">{activeQ?.strong_answer}</p>
-                  </div>
-                  <button
-                    onClick={() => setShowPaywall(true)}
-                    className="bg-black text-white px-4 py-2 rounded-lg w-full"
-                  >
-                    🔓 Unlock 150 Questions
-                  </button>
-
-                  <button
-                    onClick={() => setActiveQ(null)}
-                    className="text-xm text-gray-600"
-                  >
-                    Back
-                  </button>
+                <button
+                  onClick={handleSubmit}
+                  className="bg-black text-white px-4 py-2 rounded-lg"
+                >
+                  Submit Answer
+                </button>
+              </>
+            ) : (
+              <div className="mt-4 space-y-4">
+                <div className="bg-gray-100 p-4 rounded-lg">
+                  <p className="text-sm font-medium">
+                    🎯 Your score: {Math.round((score || 0) * 100)}%
+                  </p>
+                  <p className="text-sm mt-1">{feedback}</p>
                 </div>
-              )
-              // (
-              //   <div className="space-y-4">
-              //     <div className="bg-red-50 p-4 rounded-lg">
-              //       <p className="text-sm text-red-600 font-medium">
-              //         💀 Why you sound like a junior:
-              //       </p>
-              //       <p className="text-sm text-gray-700 mt-1">{activeQ.trap}</p>
-              //     </div>
 
-              //     <div className="bg-green-50 p-4 rounded-lg">
-              //       <p className="text-sm text-green-600 font-medium">
-              //         ✅ Strong answer:
-              //       </p>
-              //       <p className="text-sm text-gray-800 mt-1">
-              //         {activeQ.strong_answer}
-              //       </p>
-              //     </div>
+                {score !== null && score < 0.3 && (
+                  <div className="bg-red-50 p-4 rounded-lg">
+                    <p className="text-sm text-red-600 font-medium">
+                      💀 Why you sound like a junior:
+                    </p>
+                    <p className="text-sm mt-1">{activeQ?.trap}</p>
+                  </div>
+                )}
 
-              //     <button
-              //       onClick={() => setShowPaywall(true)}
-              //       className="bg-black text-white px-4 py-2 rounded-lg w-full"
-              //     >
-              //       🔓 Unlock 150 Questions
-              //     </button>
+                <div className="bg-green-50 p-4 rounded-lg">
+                  <p className="text-sm text-green-600 font-medium">
+                    ✅ Strong answer:
+                  </p>
+                  <p className="text-sm mt-1">{activeQ?.strong_answer}</p>
+                </div>
+                <button
+                  onClick={() => setShowPaywall(true)}
+                  className="bg-black text-white px-4 py-2 rounded-lg w-full"
+                >
+                  🔓 Unlock 150 Questions
+                </button>
 
-              //     <button
-              //       onClick={() => setActiveQ(null)}
-              //       className="text-xs text-gray-400"
-              //     >
-              //       Back
-              //     </button>
-              //   </div>
-              // )
-            }
+                <button
+                  onClick={() => setActiveQ(null)}
+                  className="text-xm text-gray-600"
+                >
+                  Back
+                </button>
+              </div>
+            )}
+            {rank !== null && (
+              <div className="bg-black text-white p-5 rounded-xl text-center mt-4">
+                <p className="text-lg font-semibold">
+                  You are worse than {Math.round(rank)}% of developers.
+                </p>
+
+                <p className="text-sm text-gray-300 mt-2">
+                  Most candidates fail not because they don’t know. But because
+                  they can’t explain clearly.
+                </p>
+
+                <button
+                  onClick={() => setShowPaywall(true)}
+                  className="mt-4 bg-white text-black px-4 py-2 rounded-lg text-sm font-medium"
+                >
+                  🔓 Fix this before your next interview
+                </button>
+              </div>
+            )}
+            {submitted && failedQuestions.length > 0 && (
+              <div className="bg-red-50 p-4 rounded-lg mt-4">
+                <p className="text-sm text-red-600 font-medium">
+                  You failed {failedQuestions.length}/{completed + 1} questions.
+                </p>
+
+                <p className="text-xs text-gray-600 mt-1">
+                  This is why interviews feel hard.
+                </p>
+              </div>
+            )}
           </div>
         )}
       </div>
