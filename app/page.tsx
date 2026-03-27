@@ -20,20 +20,17 @@ export default async function Home() {
       </nav>
 
       {/* HERO */}
-      <section className="text-center py-20 px-6 max-w-3xl mx-auto">
-        <h1 className="text-5xl font-bold leading-tight tracking-tight">
-          Most .NET developers FAIL interviews.
+      <section className="flex flex-col justify-center items-center text-center px-6 py-20 px-6 mx-auto">
+        <h1 className="text-4xl md:text-6xl font-bold leading-tight max-w-4xl">
+          Pass Your Next .NET Interview
           <br />
           <span className="text-blue-600">
-            Not because they can't code. But because they answer like a junior.
-            🚀
+            By Answering Like a Senior (Even If You’re Not One Yet)
           </span>
         </h1>
-
-        <p className="mt-6 text-gray-600 text-lg">
-          Real jobs + real interview questions.
-          <br />
-          Everything you need to pass interviews.
+        <p className="mt-6 text-lg text-gray-600 max-w-2xl">
+          Learn how to explain systems, think in trade-offs, and answer like a
+          senior developer — even if you’re not one yet.
         </p>
 
         <div className="mt-8 flex justify-center gap-4">
