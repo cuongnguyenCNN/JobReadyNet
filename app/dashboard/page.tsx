@@ -494,6 +494,8 @@ export default function Dashboard() {
   const [feedback, setFeedback] = useState("");
   const [rank, setRank] = useState<number | null>(null);
   const [startedCount, setStartedCount] = useState(0);
+  const attemptsLeft = FREE_LIMIT - startedCount;
+  const [isLastAttempt, setIsLastAttempt] = useState(false);
   // 🔐 Auth check
   useEffect(() => {
     const stored = localStorage.getItem("user_email_practice");
@@ -513,7 +515,26 @@ export default function Dashboard() {
 
     setUser(parsed);
   }, [router]);
+  //   useEffect(() => {
+  //     localStorage.setItem("startedCount", startedCount.toString());
+  //   }, [startedCount]);
+  useEffect(() => {
+    const saved = localStorage.getItem("startedCount");
 
+    if (saved) {
+      setStartedCount(parseInt(saved));
+    }
+  }, []);
+  //   useEffect(() => {
+  //     localStorage.setItem("failedQuestions", JSON.stringify(failedQuestions));
+  //   }, [failedQuestions]);
+  useEffect(() => {
+    const saved = localStorage.getItem("failedQuestions");
+
+    if (saved) {
+      setFailedQuestions(JSON.parse(saved));
+    }
+  }, []);
   if (!user) return null;
 
   const handleStart = (q: Question, index: number) => {
@@ -529,8 +550,13 @@ export default function Dashboard() {
 
     if (startedCount < FREE_LIMIT) {
       setStartedCount((prev) => prev + 1);
+      localStorage.setItem("startedCount", (startedCount + 1).toString());
     }
-
+    if (startedCount === FREE_LIMIT - 1) {
+      setIsLastAttempt(true);
+    } else {
+      setIsLastAttempt(false);
+    }
     setActiveQ(q);
     setSubmitted(false);
     setAnswer("");
@@ -579,7 +605,16 @@ export default function Dashboard() {
 
     if (result < 0.3) {
       fb = "💀 You missed the core concept.";
-      setFailedQuestions((prev) => [...prev, activeQ!]);
+      setFailedQuestions((prev) => {
+        const map = new Map(prev.map((q) => [q.id, q]));
+
+        if (activeQ) {
+          map.set(activeQ.id, activeQ); // overwrite nếu trùng
+        }
+
+        return Array.from(map.values());
+      });
+      localStorage.setItem("failedQuestions", JSON.stringify(failedQuestions));
     } else if (result < 0.6) {
       fb = "⚠️ Decent, but lacks depth.";
     } else {
@@ -643,9 +678,36 @@ export default function Dashboard() {
         {view === "practice" && !activeQ && (
           <div className="space-y-4 relative">
             <p className="text-sm text-gray-500">Showing 10/159 questions</p>
-            <p className="text-sm text-gray-500">
+            {/* <p className="text-sm text-gray-500">
               Free attempts: {startedCount}/{FREE_LIMIT}
+            </p> */}
+            <p
+              className={`text-sm ${
+                attemptsLeft <= 3
+                  ? "text-red-600 font-semibold"
+                  : "text-gray-500"
+              }`}
+            >
+              ⏱ You have {attemptsLeft} free attempts left
             </p>
+            {attemptsLeft <= 0 && (
+              <div className="bg-black text-white p-5 rounded-xl text-center">
+                <p className="text-lg font-semibold">
+                  You've used all free attempts.
+                </p>
+
+                <p className="text-sm text-gray-300 mt-2">
+                  Most developers fail because they stop here.
+                </p>
+
+                <button
+                  onClick={() => setShowPaywall(true)}
+                  className="mt-4 bg-white text-black px-4 py-2 rounded-lg"
+                >
+                  🔓 Continue Practicing
+                </button>
+              </div>
+            )}
             {mockQuestions.map((q, index) => {
               const isLocked = index >= 10;
 
@@ -656,6 +718,11 @@ export default function Dashboard() {
                     isLocked ? "opacity-40 pointer-events-none" : ""
                   }`}
                 >
+                  {isLastAttempt && (
+                    <div className="bg-yellow-100 text-yellow-800 p-3 rounded-lg mb-4 text-sm">
+                      🔥 This is your last free question. Use it wisely.
+                    </div>
+                  )}
                   <h3 className="font-semibold mb-3">{q.title}</h3>
 
                   {!isLocked ? (
