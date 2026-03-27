@@ -2,6 +2,8 @@
 import { supabase } from "@/lib/supabase";
 import JobCard from "@/components/JobCard";
 import { mockJobs } from "@/data/jobs";
+import LiveViewers from "./components/LiveViewers";
+import FakeNotification from "./components/fakenotifications";
 
 const jobs = mockJobs;
 export default async function Home() {
@@ -131,6 +133,8 @@ export default async function Home() {
       <footer className="text-center text-sm text-gray-400 pb-6">
         © 2026 JobReady. Built for developers.
       </footer>
+      <LiveViewers></LiveViewers>
+      <FakeNotification></FakeNotification>
     </div>
   );
 }
