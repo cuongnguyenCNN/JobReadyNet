@@ -496,7 +496,7 @@ export default function Dashboard() {
   const [startedCount, setStartedCount] = useState(0);
   // 🔐 Auth check
   useEffect(() => {
-    const stored = localStorage.getItem("user_email");
+    const stored = localStorage.getItem("user_email_practice");
 
     if (!stored) {
       router.push("/");
@@ -506,7 +506,7 @@ export default function Dashboard() {
     const parsed = JSON.parse(stored);
 
     if (Date.now() > parsed.expiry) {
-      localStorage.removeItem("user_email");
+      localStorage.removeItem("user_email_practice");
       router.push("/");
       return;
     }

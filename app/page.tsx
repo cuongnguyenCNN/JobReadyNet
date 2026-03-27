@@ -14,8 +14,8 @@ export default async function Home() {
         <h1 className="font-bold text-lg">JobReady</h1>
         <div className="flex gap-6 text-sm text-gray-600">
           <a href="#jobs">Jobs</a>
-          <a href="#">Practice</a>
-          <a href="#">Pricing</a>
+          <a href="/login">Practice</a>
+          <a href="/paywall">Pricing</a>
         </div>
       </nav>
 
@@ -43,6 +43,7 @@ export default async function Home() {
 
           <a
             href="/paywall"
+            target="_blank"
             className="border px-6 py-3 rounded-xl hover:bg-gray-100 transition"
           >
             👉 Unlock Full System ($19)

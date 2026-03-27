@@ -133,7 +133,7 @@ export default function EnterEmail() {
 
   // 👉 Auto redirect nếu đã có email
   useEffect(() => {
-    const stored = localStorage.getItem("user_email");
+    const stored = localStorage.getItem("user_email_practice");
 
     if (stored) {
       const parsed = JSON.parse(stored);
@@ -141,7 +141,7 @@ export default function EnterEmail() {
       if (Date.now() < parsed.expiry) {
         router.push("/dashboard");
       } else {
-        localStorage.removeItem("user_email");
+        localStorage.removeItem("user_email_practice");
       }
     }
   }, [router]);
