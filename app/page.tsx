@@ -25,9 +25,15 @@ export default async function Home() {
             <a href="/login" className="hover:text-black transition">
               Practice
             </a>
-            <a href="/paywall" className="hover:text-black transition">
-              Pricing
+            <a
+              href="/dotnet-interview-questions"
+              className="hover:text-black transition"
+            >
+              blog
             </a>
+            {/* <a href="/paywall" className="hover:text-black transition">
+              Pricing
+            </a> */}
           </div>
 
           {/* CTA */}
