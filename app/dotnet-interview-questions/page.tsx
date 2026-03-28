@@ -19,7 +19,9 @@ It frees the thread while waiting, improving scalability.`,
       bad: "Task is lighter.",
       good: `Thread is OS-level. Task is managed by .NET and uses ThreadPool.
 Tasks are more efficient for concurrency.`,
+      slug: "task-vs-thread-csharp",
     },
+
     {
       title: "What is Middleware?",
       bad: "Handles requests.",
