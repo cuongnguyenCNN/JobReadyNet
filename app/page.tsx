@@ -12,12 +12,40 @@ export default async function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-100">
       {/* NAVBAR */}
-      <nav className="flex justify-between items-center px-6 py-4 max-w-6xl mx-auto">
-        <h1 className="font-bold text-lg">JobReady</h1>
-        <div className="flex gap-6 text-sm text-gray-600">
-          <a href="#jobs">Jobs</a>
-          <a href="/login">Practice</a>
-          <a href="/paywall">Pricing</a>
+      <nav className=" top-0 bg-white/80 backdrop-blur ">
+        <div className="flex justify-between items-center px-6 py-4 max-w-6xl mx-auto">
+          {/* Logo */}
+          <h1 className="font-bold text-lg tracking-tight">InterviewSystem</h1>
+
+          {/* Menu */}
+          <div className="hidden md:flex items-center gap-6 text-sm text-gray-600">
+            <a href="#jobs" className="hover:text-black transition">
+              Jobs
+            </a>
+            <a href="/login" className="hover:text-black transition">
+              Practice
+            </a>
+            <a href="/paywall" className="hover:text-black transition">
+              Pricing
+            </a>
+          </div>
+
+          {/* CTA */}
+          <div className="flex items-center gap-3">
+            <a
+              href="/login"
+              className="text-sm text-gray-600 hover:text-black transition hidden md:block"
+            >
+              Login
+            </a>
+
+            <a
+              href="/login"
+              className="bg-blue-600 text-white px-6 py-3 rounded-xl text-sm font-semibold shadow-lg hover:scale-105 transition"
+            >
+              👉 Start Free (Questions)
+            </a>
+          </div>
         </div>
       </nav>
 
