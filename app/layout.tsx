@@ -28,6 +28,11 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <title>.NET Interview Questions (Senior Answers)</title>
+      <meta
+        name="description"
+        content="Real .NET interview questions with senior-level answers. Stop memorizing, start understanding."
+      />
       <Script
         src="https://www.googletagmanager.com/gtag/js?id=G-FR2QH8DS3S"
         strategy="afterInteractive"
