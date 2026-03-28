@@ -5,6 +5,7 @@ async function getPosts() {
   return [
     { slug: "dependency-injection-csharp" },
     { slug: "async-await-csharp" },
+    { slug: "task-vs-thread-csharp" },
   ];
 }
 
