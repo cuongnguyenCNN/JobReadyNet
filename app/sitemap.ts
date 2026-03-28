@@ -9,7 +9,7 @@ async function getPosts() {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = "https://passdotnet.netlify.app/";
+  const baseUrl = "https://passdotnet.netlify.app";
   const posts = await getPosts();
 
   return [
