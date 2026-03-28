@@ -5,12 +5,14 @@ export default function Page() {
       bad: "It reduces coupling.",
       good: `Dependency Injection separates object creation from business logic.
 Dependencies are injected (usually via constructor), making the system more testable and maintainable.`,
+      slug: "dependency-injection-csharp",
     },
     {
       title: "What is async/await in C#?",
       bad: "It makes code asynchronous.",
       good: `async/await enables non-blocking I/O operations.
 It frees the thread while waiting, improving scalability.`,
+      slug: "async-await-csharp",
     },
     {
       title: "Task vs Thread?",
@@ -64,13 +66,22 @@ improving scalability and clarity.`,
               </div>
             </div>
 
-            <div className="mt-4">
+            <div className="mt-4 flex flex-col gap-2">
               <a
                 href="/login"
                 className="text-blue-600 font-semibold hover:underline"
               >
                 Practice this question →
               </a>
+
+              {q.slug && (
+                <a
+                  href={`/blog/${q.slug}`}
+                  className="text-sm text-gray-500 hover:underline"
+                >
+                  Read full explanation →
+                </a>
+              )}
             </div>
           </div>
         ))}
