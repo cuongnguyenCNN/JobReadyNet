@@ -29,7 +29,7 @@ export default async function Home() {
               href="/dotnet-interview-questions"
               className="hover:text-black transition"
             >
-              blog
+              Blog
             </a>
             {/* <a href="/paywall" className="hover:text-black transition">
               Pricing
