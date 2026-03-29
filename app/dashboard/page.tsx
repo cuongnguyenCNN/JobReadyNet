@@ -626,38 +626,61 @@ export default function Dashboard() {
   };
   return (
     <div className="flex min-h-screen bg-gray-50">
-      {/* Sidebar */}
-      <div className="sticky top-0 h-screen w-64 bg-white border-r p-5 hidden md:block">
-        <h2 className="font-semibold mb-4">Interview Training</h2>
-        <ul className="space-y-2 text-sm text-gray-600">
-          <li
-            className={`cursor-pointer ${view === "practice" && "font-bold"}`}
-            onClick={() => setView("practice")}
-          >
-            🎯 Practice
-          </li>
+      <div className="sticky top-0 left-0 h-screen w-64 bg-white border-r flex flex-col">
+        {/* TOP */}
+        <div>
+          {/* LOGO */}
+          <div className="px-5 py-4 border-b">
+            <h1 className="font-semibold text-gray-800 text-lg tracking-tight">
+              InterviewAI
+            </h1>
+            <p className="text-xs text-gray-400">Get hired faster</p>
+          </div>
 
-          <li
-            className={`cursor-pointer ${view === "failed" && "font-bold"}`}
-            onClick={() => setView("failed")}
-          >
-            🔥 Failed Questions
-          </li>
+          {/* MENU */}
+          <div className="p-3 space-y-1">
+            {[
+              { key: "practice", label: "Practice", icon: "🎯" },
+              { key: "failed", label: "Failed Questions", icon: "🔥" },
+              { key: "progress", label: "Progress", icon: "📈" },
+            ].map((item) => (
+              <div
+                key={item.key}
+                onClick={() => setView(item.key as View)}
+                className={`
+            flex items-center gap-3 px-3 py-2 rounded-lg cursor-pointer
+            transition-all duration-200
+            ${
+              view === item.key
+                ? "bg-gray-900 text-white shadow-sm"
+                : "text-gray-600 hover:bg-gray-100"
+            }
+          `}
+              >
+                <span className="text-lg">{item.icon}</span>
+                <span className="text-sm font-medium">{item.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
 
-          <li
-            className={`cursor-pointer ${view === "progress" && "font-bold"}`}
-            onClick={() => setView("progress")}
-          >
-            📈 Progress
-          </li>
+        {/* BOTTOM */}
+        <div className="p-4">
+          {/* UPGRADE CARD */}
+          <div className="bg-gradient-to-br from-indigo-500 to-purple-600 text-white rounded-xl p-4 shadow-md">
+            <p className="text-sm font-semibold">Upgrade to Pro</p>
+            <p className="text-xs opacity-80 mt-1">
+              Unlock all questions + AI feedback
+            </p>
 
-          <li
-            className="text-blue-600 cursor-pointer"
-            onClick={() => setShowPaywall(true)}
-          >
-            🔓 Upgrade
-          </li>
-        </ul>
+            <button
+              onClick={() => setShowPaywall(true)}
+              className="mt-3 w-full bg-white text-indigo-600 text-sm font-semibold py-2 rounded-lg hover:bg-gray-100 transition"
+            >
+              Upgrade
+            </button>
+          </div>
+        </div>
       </div>
 
       {/* Main */}
