@@ -6,7 +6,7 @@ async function getPosts() {
     { slug: "dependency-injection-csharp" },
     { slug: "async-await-csharp" },
     { slug: "task-vs-thread-csharp" },
-
+    { slug: "middleware-aspnet" },
     { slug: "garbage-collection-csharp" },
     { slug: "cqrs-pattern-csharp" },
   ];
