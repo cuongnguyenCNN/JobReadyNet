@@ -33,6 +33,15 @@ Each component can handle or pass to next.`,
       bad: "Separate read/write.",
       good: `CQRS separates commands and queries into different models,
 improving scalability and clarity.`,
+      slug: "cqrs-pattern-csharp",
+    },
+    {
+      title: "What is Garbage Collection in .NET?",
+      bad: "It frees memory.",
+      good: `Garbage Collection (GC) automatically reclaims memory from objects 
+that are no longer referenced. It uses a generational model (Gen 0, 1, 2) 
+to optimize performance and reduce overhead.`,
+      slug: "garbage-collection-csharp", // ✅ đúng
     },
   ];
 
