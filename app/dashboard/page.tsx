@@ -627,7 +627,7 @@ export default function Dashboard() {
   return (
     <div className="flex min-h-screen bg-gray-50">
       {/* Sidebar */}
-      <div className="w-64 bg-white border-r p-5 hidden md:block">
+      <div className="sticky top-0 h-screen w-64 bg-white border-r p-5 hidden md:block">
         <h2 className="font-semibold mb-4">Interview Training</h2>
         <ul className="space-y-2 text-sm text-gray-600">
           <li
