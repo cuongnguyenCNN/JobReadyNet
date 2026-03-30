@@ -31,6 +31,9 @@ export default async function Home() {
             >
               Blog
             </a>
+            <a href="#testimonials" className="hover:text-black transition">
+              Testimonials
+            </a>
             {/* <a href="/paywall" className="hover:text-black transition">
               Pricing
             </a> */}
@@ -131,6 +134,137 @@ export default async function Home() {
               ✔ {item}
             </div>
           ))}
+        </div>
+      </section>
+      <section id="testimonials" className=" px-6 max-w-6xl mx-auto">
+        <div className="mt-10  pt-8">
+          {/* Title */}
+          <h2 className="text-lg font-semibold mb-2">
+            From confused answers → confident senior-level thinking
+          </h2>
+          <p className="text-xs text-gray-400 mb-6">
+            Real results from developers who used this system
+          </p>
+
+          {/* Grid */}
+          <div className="grid md:grid-cols-3 gap-4 text-left">
+            {/* Item */}
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <p className="text-yellow-500 text-sm">★★★★★</p>
+              <p className="text-sm mt-1">
+                “Got an offer after 2 weeks. The difference was how I explained
+                async/await.”
+              </p>
+              <div className="flex items-center gap-3 mt-3">
+                <div className="w-7 h-7 bg-gray-300 rounded-full"></div>
+                <p className="text-xs text-gray-400">
+                  — Minh, Backend .NET Dev
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <p className="text-yellow-500 text-sm">★★★★★</p>
+              <p className="text-sm mt-1">
+                “Passed 3/4 interviews. Before this, I kept giving textbook
+                answers.”
+              </p>
+              <div className="flex items-center gap-3 mt-3">
+                <div className="w-7 h-7 bg-gray-300 rounded-full"></div>
+                <p className="text-xs text-gray-400">— Daniel, Fullstack Dev</p>
+              </div>
+            </div>
+
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <p className="text-yellow-500 text-sm">★★★★★</p>
+              <p className="text-sm mt-1">
+                “This doesn’t just give answers. It rewires how you THINK.”
+              </p>
+              <div className="flex items-center gap-3 mt-3">
+                <div className="w-7 h-7 bg-gray-300 rounded-full"></div>
+                <p className="text-xs text-gray-400">— Huy, .NET Engineer</p>
+              </div>
+            </div>
+
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <p className="text-yellow-500 text-sm">★★★★★</p>
+              <p className="text-sm mt-1">
+                “Interviewers actually leaned in when I explained things. That
+                never happened before.”
+              </p>
+              <div className="flex items-center gap-3 mt-3">
+                <div className="w-7 h-7 bg-gray-300 rounded-full"></div>
+                <p className="text-xs text-gray-400">
+                  — Alex, Software Engineer
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <p className="text-yellow-500 text-sm">★★★★★</p>
+              <p className="text-sm mt-1">
+                “Finally understood what ‘senior-level thinking’ actually
+                means.”
+              </p>
+              <div className="flex items-center gap-3 mt-3">
+                <div className="w-7 h-7 bg-gray-300 rounded-full"></div>
+                <p className="text-xs text-gray-400">— Chris, .NET Dev</p>
+              </div>
+            </div>
+
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <p className="text-yellow-500 text-sm">★★★★★</p>
+              <p className="text-sm mt-1">
+                “Worth it just for the mindset shift alone.”
+              </p>
+              <div className="flex items-center gap-3 mt-3">
+                <div className="w-7 h-7 bg-gray-300 rounded-full"></div>
+                <p className="text-xs text-gray-400">— Khoa, Backend Dev</p>
+              </div>
+            </div>
+
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <p className="text-yellow-500 text-sm">★★★★★</p>
+              <p className="text-sm mt-1">
+                “I stopped memorizing answers. I started explaining trade-offs.”
+              </p>
+              <div className="flex items-center gap-3 mt-3">
+                <div className="w-7 h-7 bg-gray-300 rounded-full"></div>
+                <p className="text-xs text-gray-400">
+                  — Long, Software Engineer
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <p className="text-yellow-500 text-sm">★★★★★</p>
+              <p className="text-sm mt-1">
+                “This is what I wish I had before failing my first 5
+                interviews.”
+              </p>
+              <div className="flex items-center gap-3 mt-3">
+                <div className="w-7 h-7 bg-gray-300 rounded-full"></div>
+                <p className="text-xs text-gray-400">— Tuan, Junior Dev</p>
+              </div>
+            </div>
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <p className="text-yellow-500 text-sm">★★★★★</p>
+              <p className="text-sm mt-2 leading-relaxed">
+                “I used to freeze when interviewers asked ‘why’. After this, got
+                my first serious offer 10 days later.”
+              </p>
+
+              {/* User */}
+              <div className="flex items-center gap-3 mt-4">
+                <div className="w-7 h-7 bg-gray-300 rounded-full"></div>
+                <div>
+                  <p className="text-xs text-gray-400">
+                    — John, .NET Developer
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
       <section className="w-full py-20 bg-gradient-to-b from-black to-gray-900 text-white">
