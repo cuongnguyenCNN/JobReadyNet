@@ -94,7 +94,7 @@ export default function LandingPageProNet() {
         <div className="mt-8 flex gap-4 flex-wrap">
           <button
             onClick={handleBuyClick}
-            className="bg-blue-600 text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-lg hover:scale-105 transition"
+            className="cursor-pointer bg-blue-600 text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-lg hover:scale-105 transition"
           >
             🚀 Get the Guide – $19
           </button>
