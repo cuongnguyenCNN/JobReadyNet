@@ -252,8 +252,7 @@ export default async function Home() {
           </p>
 
           <a
-            href="https://noteflowai.lemonsqueezy.com/checkout/buy/f9ba06c7-64db-42bf-92f1-970bc6193609"
-            target="_blank"
+            href="/interviewpro"
             rel="noopener noreferrer"
             className="mt-6 inline-block bg-white text-blue-600 px-6 py-3 rounded-xl font-semibold shadow hover:scale-105 transition"
           >
