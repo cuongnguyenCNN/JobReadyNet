@@ -9,6 +9,8 @@ async function getPosts() {
     { slug: "middleware-aspnet" },
     { slug: "garbage-collection-csharp" },
     { slug: "cqrs-pattern-csharp" },
+    { slug: "linq-csharp" },
+    { slug: "deadlock-csharp" },
   ];
 }
 

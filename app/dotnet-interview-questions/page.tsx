@@ -45,6 +45,23 @@ that are no longer referenced. It uses a generational model (Gen 0, 1, 2)
 to optimize performance and reduce overhead.`,
       slug: "garbage-collection-csharp", // ✅ đúng
     },
+    {
+      title: "What is LINQ in C#?",
+      bad: "It is used to query data.",
+      good: `LINQ (Language Integrated Query) provides a declarative way to query data 
+from collections, databases, and other sources using a unified syntax. 
+It can execute in memory (IEnumerable) or be translated into SQL (IQueryable), 
+depending on the data source.`,
+      slug: "linq-csharp",
+    },
+    {
+      title: "What is a Deadlock?",
+      bad: "When threads block each other.",
+      good: `A deadlock occurs when two or more threads are waiting on each other 
+to release resources, causing all of them to be stuck indefinitely. 
+It often happens due to improper locking or blocking async code (e.g., using .Result or .Wait()).`,
+      slug: "deadlock-csharp",
+    },
   ];
 
   return (
