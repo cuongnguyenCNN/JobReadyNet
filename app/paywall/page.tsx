@@ -39,8 +39,13 @@ export default function Paywall() {
                 event_category: "engagement",
                 event_label: "guide_19",
               });
-            window.location.href =
-              "https://noteflowai.lemonsqueezy.com/checkout/buy/98ea2ea8-1378-4bcc-900b-c0c3ea03e359";
+            window.open(
+              "https://noteflowai.lemonsqueezy.com/checkout/buy/98ea2ea8-1378-4bcc-900b-c0c3ea03e359",
+              "_blank",
+              "noopener,noreferrer",
+            );
+            // window.location.href =
+            //   "https://noteflowai.lemonsqueezy.com/checkout/buy/98ea2ea8-1378-4bcc-900b-c0c3ea03e359";
           }}
           className="cursor-pointer w-full bg-black text-white py-3 rounded-lg font-medium hover:opacity-90"
         >
