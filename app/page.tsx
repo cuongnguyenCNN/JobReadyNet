@@ -158,7 +158,7 @@ export default async function Home() {
               <div className="flex items-center gap-3 mt-3">
                 <div className="w-7 h-7 bg-gray-300 rounded-full"></div>
                 <p className="text-xs text-gray-400">
-                  — Minh, Backend .NET Dev
+                  — Michael, Backend .NET Dev (USA)
                 </p>
               </div>
             </div>
@@ -171,7 +171,9 @@ export default async function Home() {
               </p>
               <div className="flex items-center gap-3 mt-3">
                 <div className="w-7 h-7 bg-gray-300 rounded-full"></div>
-                <p className="text-xs text-gray-400">— Daniel, Fullstack Dev</p>
+                <p className="text-xs text-gray-400">
+                  — Daniel, Fullstack Dev (USA)
+                </p>
               </div>
             </div>
 
@@ -182,7 +184,9 @@ export default async function Home() {
               </p>
               <div className="flex items-center gap-3 mt-3">
                 <div className="w-7 h-7 bg-gray-300 rounded-full"></div>
-                <p className="text-xs text-gray-400">— Huy, .NET Engineer</p>
+                <p className="text-xs text-gray-400">
+                  — Ryan, .NET Engineer (Australia)
+                </p>
               </div>
             </div>
 
@@ -195,7 +199,7 @@ export default async function Home() {
               <div className="flex items-center gap-3 mt-3">
                 <div className="w-7 h-7 bg-gray-300 rounded-full"></div>
                 <p className="text-xs text-gray-400">
-                  — Alex, Software Engineer
+                  — Alex, Software Engineer (USA)
                 </p>
               </div>
             </div>
@@ -208,7 +212,9 @@ export default async function Home() {
               </p>
               <div className="flex items-center gap-3 mt-3">
                 <div className="w-7 h-7 bg-gray-300 rounded-full"></div>
-                <p className="text-xs text-gray-400">— Chris, .NET Dev</p>
+                <p className="text-xs text-gray-400">
+                  — Chris, .NET Dev(Canada)
+                </p>
               </div>
             </div>
 
@@ -219,7 +225,9 @@ export default async function Home() {
               </p>
               <div className="flex items-center gap-3 mt-3">
                 <div className="w-7 h-7 bg-gray-300 rounded-full"></div>
-                <p className="text-xs text-gray-400">— Khoa, Backend Dev</p>
+                <p className="text-xs text-gray-400">
+                  — Ethan, Backend Dev (Australia)
+                </p>
               </div>
             </div>
 
@@ -231,7 +239,7 @@ export default async function Home() {
               <div className="flex items-center gap-3 mt-3">
                 <div className="w-7 h-7 bg-gray-300 rounded-full"></div>
                 <p className="text-xs text-gray-400">
-                  — Long, Software Engineer
+                  — Jason, Software Engineer (USA)
                 </p>
               </div>
             </div>
@@ -244,7 +252,9 @@ export default async function Home() {
               </p>
               <div className="flex items-center gap-3 mt-3">
                 <div className="w-7 h-7 bg-gray-300 rounded-full"></div>
-                <p className="text-xs text-gray-400">— Tuan, Junior Dev</p>
+                <p className="text-xs text-gray-400">
+                  —— Kevin, Junior Developer (Canada)
+                </p>
               </div>
             </div>
             <div className="bg-gray-50 p-4 rounded-lg">
@@ -259,7 +269,7 @@ export default async function Home() {
                 <div className="w-7 h-7 bg-gray-300 rounded-full"></div>
                 <div>
                   <p className="text-xs text-gray-400">
-                    — John, .NET Developer
+                    — Matthew, .NET Developer (Australia)
                   </p>
                 </div>
               </div>
