@@ -46,6 +46,12 @@ export default function Paywall() {
         >
           🔓 Unlock Full Access
         </button>
+        <button
+          onClick={() => (window.location.href = "/")}
+          className="mt-4 text-xs text-gray-400"
+        >
+          Maybe later
+        </button>
         {/* Trust */}
         <p className="text-xs text-gray-400 mt-4">
           🔥 1,278 developers already joined
