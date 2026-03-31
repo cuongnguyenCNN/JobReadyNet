@@ -263,6 +263,14 @@ export default function Dashboard() {
   const attemptsLeft = FREE_LIMIT - startedCount;
   const [isLastAttempt, setIsLastAttempt] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [plan, setPlan] = useState<"lifetime" | "weekly">("lifetime");
+
+  const checkoutLinks = {
+    lifetime:
+      "https://noteflowai.lemonsqueezy.com/checkout/buy/98ea2ea8-1378-4bcc-900b-c0c3ea03e359",
+    weekly:
+      "https://noteflowai.lemonsqueezy.com/checkout/buy/4f3feb71-08f5-49d8-9193-bb533d1b1b68", // 👉 thay bằng link LemonSqueezy weekly
+  };
   // 🔐 Auth check
   useEffect(() => {
     const stored = localStorage.getItem("user_email_practice");
@@ -391,6 +399,7 @@ export default function Dashboard() {
     setFeedback(fb);
     setCompleted((prev) => prev + 1);
   };
+
   return (
     <>
       {/* <div className="flex min-h-screen bg-gray-50">
@@ -1149,21 +1158,59 @@ export default function Dashboard() {
                     <p>🔥 Hidden traps explained</p>
                     <p>🎯 Practice like real interview</p>
                   </div>
+                  {/* Pricing toggle */}
+                  <div className="flex gap-2 mb-6">
+                    <button
+                      onClick={() => setPlan("lifetime")}
+                      className={`flex-1 py-2 rounded-lg border ${
+                        plan === "lifetime"
+                          ? "bg-black text-white"
+                          : "text-gray-600"
+                      }`}
+                    >
+                      $19,99 Lifetime <br></br>
+                      <span className="text-xs text-green-500">Best value</span>
+                    </button>
+                    <button
+                      onClick={() => setPlan("weekly")}
+                      className={`flex-1 py-2 rounded-lg border ${
+                        plan === "weekly"
+                          ? "bg-black text-white"
+                          : "text-gray-600"
+                      }`}
+                    >
+                      $5,99 / week
+                    </button>
+                  </div>
 
-                  <p className="text-3xl font-bold mb-2">$19</p>
+                  {/* Price display */}
+                  <div className="mb-6">
+                    <p className="text-3xl font-bold">
+                      {plan === "lifetime" ? "$19,99" : "$5,99"}
+                    </p>
+                    <p className="text-xs text-gray-400">
+                      {plan === "lifetime"
+                        ? "One-time payment"
+                        : "Billed weekly"}
+                    </p>
+                  </div>
 
                   <Countdown />
 
+                  {/* CTA */}
                   <button
-                    onClick={() =>
-                      window.open(
-                        "https://noteflowai.lemonsqueezy.com/checkout/buy/98ea2ea8-1378-4bcc-900b-c0c3ea03e359",
-                        "_blank",
-                      )
-                    }
-                    className="w-full bg-black text-white py-3 rounded-lg mt-4"
+                    onClick={() => {
+                      if (window.gtag)
+                        window.gtag("event", "buy_click_on_paywall", {
+                          event_category: "engagement",
+                          event_label: plan,
+                        });
+
+                      window.open(checkoutLinks[plan], "_blank");
+                    }}
+                    className="cursor-pointer w-full bg-black text-white py-3 rounded-lg font-medium hover:opacity-90"
                   >
-                    🔓 Unlock Now
+                    🔓 Unlock Full Access
                   </button>
 
                   <button
