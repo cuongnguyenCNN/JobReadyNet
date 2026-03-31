@@ -6,6 +6,7 @@ import FakeNotification from "@/components/fakenotifications";
 import LiveViewers from "@/components/LiveViewers";
 import FakeHeatmap from "@/components/FakeHeatMap";
 import Countdown from "@/components/CountDown";
+import { Space } from "lucide-react";
 
 type Question = {
   id: string;
@@ -776,9 +777,11 @@ export default function Dashboard() {
             <div className="px-5 py-4 border-b flex justify-between items-center">
               <div>
                 <h1 className="font-semibold text-gray-800 text-lg">
-                  InterviewAI
+                  InterviewAI{" "}
+                  <span className="text-xs text-gray-400">
+                    Get hired faster
+                  </span>
                 </h1>
-                <p className="text-xs text-gray-400">Get hired faster</p>
               </div>
 
               {/* Close mobile */}
@@ -851,7 +854,7 @@ export default function Dashboard() {
               ☰
             </button>
 
-            <p className="font-semibold">Dashboard</p>
+            <h1 className="font-semibold text-gray-800 text-lg">Dashboard</h1>
 
             <div>👤</div>
           </div>
