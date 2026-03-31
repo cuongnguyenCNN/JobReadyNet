@@ -11,6 +11,8 @@ async function getPosts() {
     { slug: "cqrs-pattern-csharp" },
     { slug: "linq-csharp" },
     { slug: "deadlock-csharp" },
+    { slug: "boxing-unboxing-csharp" },
+    { slug: "span-csharp" },
   ];
 }
 

@@ -62,6 +62,30 @@ to release resources, causing all of them to be stuck indefinitely.
 It often happens due to improper locking or blocking async code (e.g., using .Result or .Wait()).`,
       slug: "deadlock-csharp",
     },
+    {
+      title: "What is Span<T> in C#?",
+      bad: "It is a faster array.",
+      good: `Span<T> is a lightweight structure that provides a safe way to work with contiguous memory 
+without allocations.
+
+It can point to stack memory, arrays, or unmanaged memory.
+
+Span helps reduce allocations and improve performance in high-throughput scenarios,
+but it must stay on the stack and cannot be stored on the heap.`,
+      slug: "span-csharp",
+    },
+    {
+      title: "What is boxing and unboxing in C#?",
+      bad: "It converts value types to reference types.",
+      good: `Boxing is the process of converting a value type into an object (reference type), 
+which causes heap allocation.
+
+Unboxing extracts the value type back from the object.
+
+Excessive boxing/unboxing can hurt performance due to allocations and casting,
+especially in loops or high-frequency operations.`,
+      slug: "boxing-unboxing-csharp",
+    },
   ];
 
   return (
