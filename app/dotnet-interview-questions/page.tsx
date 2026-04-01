@@ -1,4 +1,92 @@
 export default function Page() {
+  //   const questions = [
+  //     {
+  //       title: "What is Dependency Injection?",
+  //       bad: "It reduces coupling.",
+  //       good: `Dependency Injection separates object creation from business logic.
+  // Dependencies are injected (usually via constructor), making the system more testable and maintainable.`,
+  //       slug: "dependency-injection-csharp",
+  //     },
+  //     {
+  //       title: "What is async/await in C#?",
+  //       bad: "It makes code asynchronous.",
+  //       good: `async/await enables non-blocking I/O operations.
+  // It frees the thread while waiting, improving scalability.`,
+  //       slug: "async-await-csharp",
+  //     },
+  //     {
+  //       title: "Task vs Thread?",
+  //       bad: "Task is lighter.",
+  //       good: `Thread is OS-level. Task is managed by .NET and uses ThreadPool.
+  // Tasks are more efficient for concurrency.`,
+  //       slug: "task-vs-thread-csharp",
+  //     },
+
+  //     {
+  //       title: "What is Middleware?",
+  //       bad: "Handles requests.",
+  //       good: `Middleware processes HTTP requests in a pipeline.
+  // Each component can handle or pass to next.`,
+  //       slug: "middleware-aspnet",
+  //     },
+
+  //     {
+  //       title: "What is CQRS?",
+  //       bad: "Separate read/write.",
+  //       good: `CQRS separates commands and queries into different models,
+  // improving scalability and clarity.`,
+  //       slug: "cqrs-pattern-csharp",
+  //     },
+  //     {
+  //       title: "What is Garbage Collection in .NET?",
+  //       bad: "It frees memory.",
+  //       good: `Garbage Collection (GC) automatically reclaims memory from objects
+  // that are no longer referenced. It uses a generational model (Gen 0, 1, 2)
+  // to optimize performance and reduce overhead.`,
+  //       slug: "garbage-collection-csharp", // ✅ đúng
+  //     },
+  //     {
+  //       title: "What is LINQ in C#?",
+  //       bad: "It is used to query data.",
+  //       good: `LINQ (Language Integrated Query) provides a declarative way to query data
+  // from collections, databases, and other sources using a unified syntax.
+  // It can execute in memory (IEnumerable) or be translated into SQL (IQueryable),
+  // depending on the data source.`,
+  //       slug: "linq-csharp",
+  //     },
+  //     {
+  //       title: "What is a Deadlock?",
+  //       bad: "When threads block each other.",
+  //       good: `A deadlock occurs when two or more threads are waiting on each other
+  // to release resources, causing all of them to be stuck indefinitely.
+  // It often happens due to improper locking or blocking async code (e.g., using .Result or .Wait()).`,
+  //       slug: "deadlock-csharp",
+  //     },
+  //     {
+  //       title: "What is Span<T> in C#?",
+  //       bad: "It is a faster array.",
+  //       good: `Span<T> is a lightweight structure that provides a safe way to work with contiguous memory
+  // without allocations.
+
+  // It can point to stack memory, arrays, or unmanaged memory.
+
+  // Span helps reduce allocations and improve performance in high-throughput scenarios,
+  // but it must stay on the stack and cannot be stored on the heap.`,
+  //       slug: "span-csharp",
+  //     },
+  //     {
+  //       title: "What is boxing and unboxing in C#?",
+  //       bad: "It converts value types to reference types.",
+  //       good: `Boxing is the process of converting a value type into an object (reference type),
+  // which causes heap allocation.
+
+  // Unboxing extracts the value type back from the object.
+
+  // Excessive boxing/unboxing can hurt performance due to allocations and casting,
+  // especially in loops or high-frequency operations.`,
+  //       slug: "boxing-unboxing-csharp",
+  //     },
+  //   ];
   const questions = [
     {
       title: "What is Dependency Injection?",
@@ -6,6 +94,7 @@ export default function Page() {
       good: `Dependency Injection separates object creation from business logic.
 Dependencies are injected (usually via constructor), making the system more testable and maintainable.`,
       slug: "dependency-injection-csharp",
+      element: "di",
     },
     {
       title: "What is async/await in C#?",
@@ -13,6 +102,7 @@ Dependencies are injected (usually via constructor), making the system more test
       good: `async/await enables non-blocking I/O operations.
 It frees the thread while waiting, improving scalability.`,
       slug: "async-await-csharp",
+      element: "async",
     },
     {
       title: "Task vs Thread?",
@@ -20,22 +110,23 @@ It frees the thread while waiting, improving scalability.`,
       good: `Thread is OS-level. Task is managed by .NET and uses ThreadPool.
 Tasks are more efficient for concurrency.`,
       slug: "task-vs-thread-csharp",
+      element: "task",
     },
-
     {
       title: "What is Middleware?",
       bad: "Handles requests.",
       good: `Middleware processes HTTP requests in a pipeline.
 Each component can handle or pass to next.`,
       slug: "middleware-aspnet",
+      element: "middleware",
     },
-
     {
       title: "What is CQRS?",
       bad: "Separate read/write.",
       good: `CQRS separates commands and queries into different models,
 improving scalability and clarity.`,
       slug: "cqrs-pattern-csharp",
+      element: "cqrs",
     },
     {
       title: "What is Garbage Collection in .NET?",
@@ -43,7 +134,8 @@ improving scalability and clarity.`,
       good: `Garbage Collection (GC) automatically reclaims memory from objects 
 that are no longer referenced. It uses a generational model (Gen 0, 1, 2) 
 to optimize performance and reduce overhead.`,
-      slug: "garbage-collection-csharp", // ✅ đúng
+      slug: "garbage-collection-csharp",
+      element: "gc",
     },
     {
       title: "What is LINQ in C#?",
@@ -53,6 +145,7 @@ from collections, databases, and other sources using a unified syntax.
 It can execute in memory (IEnumerable) or be translated into SQL (IQueryable), 
 depending on the data source.`,
       slug: "linq-csharp",
+      element: "linq",
     },
     {
       title: "What is a Deadlock?",
@@ -61,6 +154,7 @@ depending on the data source.`,
 to release resources, causing all of them to be stuck indefinitely. 
 It often happens due to improper locking or blocking async code (e.g., using .Result or .Wait()).`,
       slug: "deadlock-csharp",
+      element: "deadlock",
     },
     {
       title: "What is Span<T> in C#?",
@@ -73,6 +167,7 @@ It can point to stack memory, arrays, or unmanaged memory.
 Span helps reduce allocations and improve performance in high-throughput scenarios,
 but it must stay on the stack and cannot be stored on the heap.`,
       slug: "span-csharp",
+      element: "span",
     },
     {
       title: "What is boxing and unboxing in C#?",
@@ -85,9 +180,9 @@ Unboxing extracts the value type back from the object.
 Excessive boxing/unboxing can hurt performance due to allocations and casting,
 especially in loops or high-frequency operations.`,
       slug: "boxing-unboxing-csharp",
+      element: "boxing",
     },
   ];
-
   return (
     // <>
     //   <nav className=" top-0 bg-white/80 backdrop-blur ">
@@ -308,7 +403,7 @@ especially in loops or high-frequency operations.`,
                 {/* Overlay */}
                 <div className="absolute inset-0 flex items-end justify-center pb-4 bg-gradient-to-t from-white/90 to-transparent rounded">
                   <a
-                    href="/login"
+                    href={`/real-answers?topic=${q.element}`}
                     className="bg-black text-white px-4 py-2 rounded-lg text-sm font-semibold"
                   >
                     Unlock full answer →
