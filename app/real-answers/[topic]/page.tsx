@@ -1,5 +1,5 @@
-"use client";
-import { useSearchParams } from "next/navigation";
+import Link from "next/link";
+import { redirect } from "next/navigation";
 
 const topicData = {
   di: {
@@ -32,20 +32,31 @@ const topicData = {
       "“It allows independent scaling and optimization of read and write operations.”",
   },
 };
-type TopicKey = "di" | "async" | "cqrs";
-export default function RealAnswersPage() {
-  const params = useSearchParams();
-  const rawTopic = params.get("topic");
-
-  const topic = Object.keys(topicData).includes(rawTopic as string)
-    ? (rawTopic as TopicKey)
-    : "di";
-
-  const data = topicData[topic];
-
+type TopicKey = keyof typeof topicData;
+type Props = {
+  params: {
+    topic: string;
+  };
+};
+export default async function RealAnswersPage({
+  params,
+}: {
+  params: Promise<{ topic: string }>;
+}) {
+  const { topic } = await params;
+  if (!(topic in topicData)) {
+    redirect("/dotnet-interview-questions");
+  }
+  const data = topicData[topic as TopicKey];
   return (
     <div className="max-w-4xl mx-auto px-6 py-16">
       {/* HERO */}
+      <Link
+        href="/dotnet-interview-questions"
+        className="text-sm text-blue-600 mb-6 inline-block"
+      >
+        ← Back to all questions
+      </Link>
       <h1 className="text-4xl font-bold mb-4 leading-tight">
         Stop failing {data.title} interview questions
         <br />

@@ -297,7 +297,7 @@ especially in loops or high-frequency operations.`,
     // </>
     <>
       {/* NAV */}
-      <nav className="top-0 bg-white/80 backdrop-blur border-b">
+      <nav className="top-0 bg-white/80 backdrop-blur ">
         <div className="flex justify-between items-center px-6 py-4 max-w-6xl mx-auto">
           <h1 className="font-bold text-lg tracking-tight">PassDotnet</h1>
 
@@ -403,7 +403,7 @@ especially in loops or high-frequency operations.`,
                 {/* Overlay */}
                 <div className="absolute inset-0 flex items-end justify-center pb-4 bg-gradient-to-t from-white/90 to-transparent rounded">
                   <a
-                    href={`/real-answers?topic=${q.element}`}
+                    href={`/real-answers/${q.element}`}
                     className="bg-black text-white px-4 py-2 rounded-lg text-sm font-semibold"
                   >
                     Unlock full answer →
