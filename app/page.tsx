@@ -126,7 +126,7 @@ export default function Home() {
             target="_blank"
             className="bg-black text-white px-6 py-3 rounded-xl shadow hover:scale-105 transition"
           >
-            👉 Unlock Full System ($19)
+            👉 Unlock Full System
           </a>
         </div>
 
@@ -155,7 +155,7 @@ export default function Home() {
           </div>
           {/* Urgency */}
           <div className="text-sm text-red-500 font-semibold">
-            ⏳ Price will increase to $29 soon
+            ⏳ Price will increase to $49 soon
           </div>
         </div>
       </section>
@@ -441,7 +441,7 @@ export default function Home() {
             rel="noopener noreferrer"
             className="mt-6 inline-block bg-white text-blue-600 px-6 py-3 rounded-xl font-semibold shadow hover:scale-105 transition"
           >
-            Get Instant Access - $19
+            Get Instant Access
           </a>
         </div>
       </section>
