@@ -1,23 +1,25 @@
 // app/page.tsx
+"use client";
 import { supabase } from "@/lib/supabase";
 import JobCard from "@/components/JobCard";
 import { mockJobs } from "@/data/jobs";
 import LiveViewers from "./components/LiveViewers";
 import FakeNotification from "./components/fakenotifications";
+import { useState } from "react";
 
 const jobs = mockJobs;
-export default async function Home() {
+export default function Home() {
+  const [open, setOpen] = useState(false);
   //const { data: jobs } = await supabase.from("jobs").select("*").limit(8);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-100">
-      {/* NAVBAR */}
-      <nav className=" top-0 bg-white/80 backdrop-blur ">
-        <div className="flex justify-between items-center px-6 py-4 max-w-6xl mx-auto">
+      <nav className="sticky top-0 bg-white/80 backdrop-blur z-999 ">
+        <div className="flex justify-between items-center px-4 py-4 max-w-6xl mx-auto">
           {/* Logo */}
           <h1 className="font-bold text-lg tracking-tight">PassDotnet</h1>
 
-          {/* Menu */}
+          {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-6 text-sm text-gray-600">
             <a href="#jobs" className="hover:text-black transition">
               Jobs
@@ -34,28 +36,67 @@ export default async function Home() {
             <a href="#testimonials" className="hover:text-black transition">
               Testimonials
             </a>
-            {/* <a href="/paywall" className="hover:text-black transition">
-              Pricing
-            </a> */}
           </div>
 
-          {/* CTA */}
+          {/* CTA + Mobile Button */}
           <div className="flex items-center gap-3">
+            {/* Desktop Login */}
             <a
               href="/login"
-              className="text-sm text-gray-600 hover:text-black transition hidden md:block"
+              className="hidden md:block text-sm text-gray-600 hover:text-black transition"
             >
               Login
             </a>
 
+            {/* CTA */}
             <a
               href="/login"
-              className="bg-blue-600 text-white px-6 py-3 rounded-xl text-sm font-semibold shadow-lg hover:scale-105 transition"
+              className="bg-blue-600 text-white px-4 py-2 md:px-6 md:py-3 rounded-xl text-sm font-semibold shadow-lg hover:scale-105 transition"
             >
-              👉 Start Free (Questions)
+              👉 Start Free
             </a>
+
+            {/* Hamburger */}
+            <button className="md:hidden ml-2" onClick={() => setOpen(!open)}>
+              <div className="space-y-1">
+                <span className="block w-6 h-0.5 bg-black"></span>
+                <span className="block w-6 h-0.5 bg-black"></span>
+                <span className="block w-6 h-0.5 bg-black"></span>
+              </div>
+            </button>
           </div>
         </div>
+
+        {/* Mobile Menu */}
+        {open && (
+          <div className="md:hidden px-4 pb-4 bg-white border-t">
+            <div className="flex flex-col gap-4 text-gray-700 text-sm">
+              <a href="#jobs" onClick={() => setOpen(false)}>
+                Jobs
+              </a>
+              <a href="/login" onClick={() => setOpen(false)}>
+                Practice
+              </a>
+              <a
+                href="/dotnet-interview-questions"
+                onClick={() => setOpen(false)}
+              >
+                Blog
+              </a>
+              <a href="#testimonials" onClick={() => setOpen(false)}>
+                Testimonials
+              </a>
+
+              <a
+                href="/login"
+                className="pt-2 border-t text-blue-600 font-semibold"
+                onClick={() => setOpen(false)}
+              >
+                Login
+              </a>
+            </div>
+          </div>
+        )}
       </nav>
 
       {/* HERO */}
