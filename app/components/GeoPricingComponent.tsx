@@ -87,7 +87,7 @@ export default function GeoPricing() {
       });
     }
 
-    window.location.href = url;
+    window.open(url, "_blank", "noopener,noreferrer");
   };
   const getUserLocation = async () => {
     const cached = localStorage.getItem("geoPricing");
@@ -130,7 +130,7 @@ export default function GeoPricing() {
                 "https://noteflowai.lemonsqueezy.com/checkout/buy/f9ba06c7-64db-42bf-92f1-970bc6193609",
               )
             }
-            className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-md"
+            className="cursor-pointer bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-md"
           >
             🎁 Get Instant Access - $19
           </button>
@@ -146,7 +146,7 @@ export default function GeoPricing() {
                 "https://noteflowai.lemonsqueezy.com/checkout/buy/eafef897-b5a8-4fe8-9efb-76d65bac0cc8",
               )
             }
-            className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-md"
+            className="cursor-pointer bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-md"
           >
             🎁 Get Instant Access - $9,99
           </button>
@@ -164,7 +164,7 @@ export default function GeoPricing() {
                 "https://noteflowai.lemonsqueezy.com/checkout/buy/052b0e2a-3b9d-4370-b23f-480593c02cdc",
               )
             }
-            className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-md"
+            className="cursor-pointer bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-md"
           >
             🎁 Get Instant Access - $5,99
           </button>

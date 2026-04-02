@@ -1,5 +1,6 @@
 "use client";
 import FakeHeatmap from "@/components/FakeHeatMap";
+import GeoPricing from "@/components/GeoPricingComponent";
 import LivePurchasePopup from "@/components/LivePurchasePopup";
 import LiveViewers from "@/components/LiveViewers";
 import React from "react";
@@ -86,12 +87,12 @@ export default function LandingPageProNet() {
           </div>
           {/* Urgency */}
           <div className="text-sm text-red-500 font-semibold">
-            ⏳ Price will increase to $29 soon
+            ⏳ Price will increase to $49 soon
           </div>
         </div>
+        <GeoPricing></GeoPricing>
 
-        {/* CTA */}
-        <div className="mt-8 flex gap-4 flex-wrap">
+        {/* <div className="mt-8 flex gap-4 flex-wrap">
           <button
             onClick={handleBuyClick}
             className="cursor-pointer bg-blue-600 text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-lg hover:scale-105 transition"
@@ -105,14 +106,7 @@ export default function LandingPageProNet() {
           >
             See Example
           </a>
-
-          {/* <button
-            onClick={handleBuyClick}
-            className="px-6 py-3 text-sm rounded-lg bg-black text-white hover:opacity-80 transition"
-          >
-            🚀 Get Instant Access – $19
-          </button> */}
-        </div>
+        </div> */}
         {/* VALUE */}
         <section className="py-20 px-6 max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold text-center mb-12">
@@ -174,18 +168,13 @@ export default function LandingPageProNet() {
 
           {/* CTA */}
           <div className="mt-12 text-center">
+            <GeoPricing></GeoPricing>
             {/* <button
-              onClick={handleBuyClick}
-              className="bg-blue-600 text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-lg hover:scale-105 transition"
-            >
-              🚀 Get the Guide – $19
-            </button> */}
-            <button
               onClick={handleBuyClick}
               className="inline-block px-8 py-4 text-lg font-semibold text-black transition bg-white rounded-xl  hover:scale-105 hover:bg-gray-200"
             >
               👉 Get Instant Access
-            </button>
+            </button> */}
           </div>
         </div>
       </section>
@@ -207,7 +196,7 @@ export default function LandingPageProNet() {
 
         <p className="mt-4 text-gray-600">
           If this helps you pass just one interview, it’s worth far more than
-          $19.
+          expected.
         </p>
       </section>
       {/* PROBLEM */}
@@ -306,18 +295,18 @@ export default function LandingPageProNet() {
       {/* OFFER */}
       <section className="py-20 text-center px-6">
         <div className="max-w-xl mx-auto border rounded-2xl p-10 shadow-lg">
-          <h2 className="text-4xl font-bold">$19</h2>
+          {/* <h2 className="text-4xl font-bold">$19</h2> */}
 
           <p className="mt-4 text-gray-600">
             One-time payment. Lifetime access.
           </p>
-
-          <button
+          <GeoPricing></GeoPricing>
+          {/* <button
             onClick={handleBuyClick}
             className="mt-8 inline-block bg-blue-600 text-white px-10 py-5 rounded-xl text-xl font-semibold hover:scale-105 transition"
           >
             Get Instant Access
-          </button>
+          </button> */}
           <p className="mt-4 text-sm text-red-500">
             ⚠ Price will increase after adding more examples
           </p>
@@ -335,12 +324,13 @@ export default function LandingPageProNet() {
           Or You Think Like a Senior
         </h2>
 
-        <button
+        {/* <button
           onClick={handleBuyClick}
           className="mt-6 inline-block bg-white text-blue-600 px-8 py-4 rounded-xl text-lg font-semibold hover:scale-105 transition"
         >
           Get the Guide Now
-        </button>
+        </button> */}
+        <GeoPricing></GeoPricing>
       </section>
       <footer className="mt-24 text-center text-gray-500 text-sm pb-10">
         Built for developers preparing for .NET interviews by{" "}
