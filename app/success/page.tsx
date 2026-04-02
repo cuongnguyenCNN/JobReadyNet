@@ -10,7 +10,7 @@ export default function Success() {
         href="/login"
         className="mt-6 inline-block bg-blue-600 text-white px-6 py-3 rounded"
       >
-        Get 150+ Questions - $19
+        Practice 150+ Questions - Deep Answers
       </a>
     </div>
   );
