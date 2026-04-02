@@ -176,8 +176,13 @@ export default function LandingPageFreePDF() {
 
           {success && <p className="mt-3 text-success">{success}</p>}
 
-          <button className="bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
-            {loading ? "Sending..." : " Send me the PDF  "}
+          <button
+            disabled={loading}
+            className={`cursor-pointer bg-blue-600 text-white py-3 rounded-lg font-semibold transition
+    ${loading ? "opacity-50 cursor-not-allowed" : "hover:bg-blue-700"}
+  `}
+          >
+            {loading ? "Sending..." : "Send me the PDF"}
           </button>
         </form>
 
