@@ -24,7 +24,7 @@ Requirements:
     id: "2",
     title: ".NET Backend Engineer",
     company: "FinTechX",
-    location: "Ho Chi Minh",
+    location: "India",
     salary: "$1500–$2500",
     description: `
 Join our fintech team to build secure and scalable financial systems that power modern digital payments.
@@ -87,7 +87,7 @@ Requirements:
     id: "5",
     title: "Junior .NET Developer",
     company: "DevBegin",
-    location: "Hanoi",
+    location: "Remote",
     salary: "$800–$1200",
     description: `
 Great opportunity for junior developers to kickstart their career in backend development.
