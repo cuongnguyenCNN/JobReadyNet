@@ -2,6 +2,7 @@
 import { supabase } from "@/lib/supabase";
 import QuestionPreview from "@/components/QuestionPreview";
 import { mockJobs } from "@/data/jobs";
+import { redirect } from "next/navigation";
 type Props = {
   params: { id: string };
 };
@@ -66,6 +67,12 @@ export default async function JobDetail({ params }: any) {
           🚀 Apply Now
         </a>
       </div>
+      <a
+        href={`/`}
+        className="bg-white text-black px-6 py-3 rounded font-medium hover:opacity-90"
+      >
+        ✨ Maybe later
+      </a>
     </div>
   );
 }

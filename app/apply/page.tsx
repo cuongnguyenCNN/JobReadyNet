@@ -1,7 +1,7 @@
 // app/apply/page.tsx
 "use client";
 
-import { useSearchParams, useRouter } from "next/navigation";
+import { useRouter, redirect } from "next/navigation";
 import { useState } from "react";
 
 export default function Apply({ searchParams }: any) {
@@ -48,6 +48,12 @@ export default function Apply({ searchParams }: any) {
       <p className="text-xs text-gray-400 text-center mt-3">
         No spam. Instant access. Takes 10 seconds.
       </p>
+      <button
+        onClick={() => redirect("/")}
+        className="cursor-pointer mt-4 text-grey py-3 rounded-lg font-medium hover:opacity-90 transition"
+      >
+        ✨ Maybe later
+      </button>
     </div>
   );
 }
