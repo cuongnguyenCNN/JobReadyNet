@@ -7,7 +7,7 @@ export default function Success() {
       <p className="mt-4">Want to pass this interview?</p>
 
       <a
-        href="YOUR_LEMONSQUEEZY_LINK"
+        href="/login"
         className="mt-6 inline-block bg-blue-600 text-white px-6 py-3 rounded"
       >
         Get 150+ Questions - $19
