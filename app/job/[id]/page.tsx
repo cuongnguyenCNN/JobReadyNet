@@ -1,11 +1,10 @@
 // app/job/[id]/page.tsx
-import { supabase } from "@/lib/supabase";
-import QuestionPreview from "@/components/QuestionPreview";
+// import { supabase } from "@/lib/supabase";
+// import QuestionPreview from "@/components/QuestionPreview";
 import { mockJobs } from "@/data/jobs";
-import { redirect } from "next/navigation";
-type Props = {
-  params: { id: string };
-};
+// type Props = {
+//   params: { id: string };
+// };
 const jobs = mockJobs;
 export default async function JobDetail({ params }: any) {
   const { id } = await params;
