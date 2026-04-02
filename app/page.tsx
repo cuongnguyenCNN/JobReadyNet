@@ -118,7 +118,7 @@ export default function Home() {
             href="/login"
             className="bg-blue-600 text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-lg hover:scale-105 transition"
           >
-            👉 Start Free (Questions)
+            👉 Start Practice Free (Questions)
           </a>
 
           <a
@@ -126,7 +126,7 @@ export default function Home() {
             target="_blank"
             className="bg-black text-white px-6 py-3 rounded-xl shadow hover:scale-105 transition"
           >
-            👉 Unlock Full System
+            👉 Unlock Senior-Level Answers
           </a>
         </div>
 
