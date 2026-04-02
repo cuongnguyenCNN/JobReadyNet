@@ -3,8 +3,8 @@ export const mockJobs = [
     id: "1",
     title: "Senior .NET Developer",
     company: "TechCorp",
-    location: "Remote",
-    salary: "$2000–$3000",
+    location: "USA",
+    salary: "$10000–$15000",
     description: `
 We are looking for a Senior .NET Developer to join our growing engineering team and help build scalable backend systems used by thousands of users globally.
 
