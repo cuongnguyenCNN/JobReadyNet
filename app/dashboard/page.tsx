@@ -965,7 +965,7 @@ export default function Dashboard() {
                       onClick={() => setShowPaywall(true)}
                       className="bg-black text-white px-5 py-2 rounded-lg text-sm"
                     >
-                      Unlock Full Access – $19
+                      Unlock Full Access – $29
                     </button>
                   </div>
                 </div>
@@ -1168,7 +1168,7 @@ export default function Dashboard() {
                           : "text-gray-600"
                       }`}
                     >
-                      $19,99 Lifetime <br></br>
+                      $29,99 Lifetime <br></br>
                       <span className="text-xs text-green-500">Best value</span>
                     </button>
                     <button
@@ -1186,7 +1186,7 @@ export default function Dashboard() {
                   {/* Price display */}
                   <div className="mb-6">
                     <p className="text-3xl font-bold">
-                      {plan === "lifetime" ? "$19,99" : "$5,99"}
+                      {plan === "lifetime" ? "$29,99" : "$5,99"}
                     </p>
                     <p className="text-xs text-gray-400">
                       {plan === "lifetime"
