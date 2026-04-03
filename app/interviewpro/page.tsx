@@ -311,9 +311,9 @@ export default function LandingPageProNet() {
           <p className="mt-4 text-sm text-red-500">
             ⚠ Price will increase after adding more examples
           </p>
-          {/* <p className="mt-2 text-gray-500 text-sm">
+          <p className="mt-2 text-gray-500 text-sm">
             💡 7-day money-back guarantee — no questions asked
-          </p> */}
+          </p>
         </div>
       </section>
 
