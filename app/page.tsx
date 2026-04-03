@@ -186,7 +186,7 @@ export default function Home() {
       </section>
       <section className="py-20 px-6 max-w-6xl mx-auto">
         <h2 className="text-3xl font-bold text-center mb-12">
-          After This Guide, You Will:
+          After Practice Questions, You Will:
         </h2>
 
         <div className="grid md:grid-cols-2 gap-8">
