@@ -109,22 +109,6 @@ export default function LandingPageProNet() {
         </div>
         <GeoPricing></GeoPricing>
 
-        {/* <div className="mt-8 flex gap-4 flex-wrap">
-          <button
-            onClick={handleBuyClick}
-            className="cursor-pointer bg-blue-600 text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-lg hover:scale-105 transition"
-          >
-            🚀 Get the Guide – $19
-          </button>
-
-          <a
-            href="#example"
-            className="px-8 py-4 rounded-xl text-lg border border-gray-300 hover:bg-gray-100 transition"
-          >
-            See Example
-          </a>
-        </div> */}
-        {/* VALUE */}
         <section className="py-20 px-6 max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold text-center mb-12">
             After This Guide, You Will:
@@ -144,7 +128,7 @@ export default function LandingPageProNet() {
           </div>
         </section>
       </section>
-      <section className="w-full py-20 bg-gradient-to-b from-black to-gray-900 text-white">
+      <section className="w-full py-20 ">
         <div className="max-w-6xl px-6 mx-auto">
           {/* Title */}
           <h2 className="mb-12 text-3xl font-bold text-center md:text-4xl">
@@ -159,7 +143,7 @@ export default function LandingPageProNet() {
                 Stay stuck
               </h3>
 
-              <ul className="space-y-4 text-gray-300">
+              <ul className="space-y-4 text-gray">
                 <li>❌ Memorizing answers like a junior</li>
                 <li>❌ Failing interviews again and again</li>
                 <li>❌ Watching less experienced devs get hired</li>
@@ -175,7 +159,7 @@ export default function LandingPageProNet() {
                 Level up
               </h3>
 
-              <ul className="space-y-4 text-gray-200">
+              <ul className="space-y-4 text-gray">
                 <li>✅ Answer like a senior developer</li>
                 <li>✅ Explain trade-offs with confidence</li>
                 <li>✅ Walk into interviews knowing you’ll pass</li>
