@@ -6,6 +6,7 @@ import { mockJobs } from "@/data/jobs";
 import LiveViewers from "./components/LiveViewers";
 import FakeNotification from "./components/fakenotifications";
 import { useState } from "react";
+import HeroHeadline from "./components/TestHeadLine";
 
 const jobs = mockJobs;
 export default function Home() {
@@ -101,13 +102,14 @@ export default function Home() {
 
       {/* HERO */}
       <section className="flex flex-col justify-center items-center text-center px-6 py-20 px-6 mx-auto">
-        <h1 className="text-4xl md:text-6xl font-bold leading-tight max-w-4xl">
+        {/* <h1 className="text-4xl md:text-6xl font-bold leading-tight max-w-4xl">
           Pass Your Next .NET Interview
           <br />
           <span className="text-blue-600">
             By Answering Like a Senior (Even If You’re Not One Yet)
           </span>
-        </h1>
+        </h1> */}
+        <HeroHeadline></HeroHeadline>
         <p className="mt-6 text-lg text-gray-600 max-w-2xl">
           Learn how to explain systems, think in trade-offs, and answer like a
           senior developer — even if you’re not one yet.
@@ -135,8 +137,7 @@ export default function Home() {
         </p>
         {/* Social Proof + Urgency */}
         <div className="mt-6 space-y-3">
-          {/* Testimonial */}
-          <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 text-sm">
+          {/* <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 text-sm">
             <p className="italic text-gray-700">
               “This guide helped me finally explain .NET concepts clearly in
               interviews. Totally worth it.”
@@ -144,8 +145,32 @@ export default function Home() {
             <p className="mt-2 font-semibold text-gray-900">
               — Michael T., Senior .NET Developer (USA 🇺🇸)
             </p>
-          </div>
+          </div> */}
+          <div className="bg-gray-50 border border-gray-200 rounded-xl p-5 text-sm max-w-xl">
+            <div className="flex items-start gap-3">
+              <img
+                src="/pass.webp"
+                alt="Michael T avatar"
+                className="w-15 h-15 rounded-full object-cover"
+              />
 
+              <div>
+                <p className="text-gray-500 text-xs mb-1">
+                  Failed 3 interviews → landed a US remote job
+                </p>
+
+                <p className="italic text-gray-700 leading-relaxed">
+                  “I knew the concepts, but I couldn’t explain them well. This
+                  completely changed how I answer — especially system and
+                  trade-offs.”
+                </p>
+
+                <p className="mt-2 font-semibold text-gray-900">
+                  Michael T. · Senior .NET Developer @ Fintech Company
+                </p>
+              </div>
+            </div>
+          </div>
           {/* Trust signal */}
           <div className="text-sm text-green-600 font-medium">
             ✅ Trusted by 1000+ .NET developers worldwide
