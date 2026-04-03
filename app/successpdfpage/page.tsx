@@ -28,7 +28,7 @@ export default function SuccessPage() {
           </p>
           {/* https://drive.google.com/uc?export=download&id=1wb6hTx5BstfWzZ7Z_4pYaG-rq0yho8ik */}
           <a
-            href="./download.pdf"
+            href="https://drive.google.com/uc?export=download&id=1wb6hTx5BstfWzZ7Z_4pYaG-rq0yho8ik"
             className="inline-block mt-4 bg-black text-white px-6 py-3 rounded-lg font-semibold"
           >
             Download Your PDF
