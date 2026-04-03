@@ -123,7 +123,7 @@ export default function GeoPricing() {
     <div style={{ textAlign: "center" }}>
       {geo.tier === "Tier1" && (
         <>
-          <h2>$29 - Full Interview Pack</h2>
+          <h2>$29 - Real Answers That Get You Hired</h2>
           <button
             onClick={() =>
               handleBuy(
