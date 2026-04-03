@@ -111,8 +111,8 @@ export default function Home() {
         </h1> */}
         <HeroHeadline></HeroHeadline>
         <p className="mt-6 text-lg text-gray-600 max-w-2xl">
-          Learn how to explain systems, think in trade-offs, and answer like a
-          senior developer — even if you’re not one yet.
+          Practice real interview questions, see senior-level answers, and learn
+          how to think in trade-offs like real engineers.
         </p>
 
         <div className="mt-8 flex justify-center gap-4">
