@@ -10,7 +10,7 @@ const variants = [
   {
     id: "outcome",
     line1: "Pass Your Next .NET Interview",
-    line2: "By Answering Like a Senior Developer",
+    line2: "By Answering Like a Senior,",
   },
   {
     id: "insight",
@@ -20,7 +20,7 @@ const variants = [
   {
     id: "hybrid",
     line1: "Stop Failing .NET Interviews",
-    line2: "Learn to Answer Like a Senior Developer",
+    line2: "Learn to Answer Like a Senior.",
   },
 ];
 
