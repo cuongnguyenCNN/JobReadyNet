@@ -137,17 +137,8 @@ export default function Home() {
         <p className="text-sm text-gray-500">
           🔥 1,278 developers are preparing interviews right now
         </p>
-        {/* Social Proof + Urgency */}
+
         <div className="mt-6 space-y-3">
-          {/* <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 text-sm">
-            <p className="italic text-gray-700">
-              “This guide helped me finally explain .NET concepts clearly in
-              interviews. Totally worth it.”
-            </p>
-            <p className="mt-2 font-semibold text-gray-900">
-              — Michael T., Senior .NET Developer (USA 🇺🇸)
-            </p>
-          </div> */}
           <div className="bg-gray-50 border border-gray-200 rounded-xl p-5 text-sm max-w-xl">
             <div className="flex items-start gap-3">
               <img
@@ -345,7 +336,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="w-full py-20 bg-gradient-to-b from-black to-gray-900 text-white">
+      <section className="w-full py-20 bg-gradient-to-b ">
         <div className="max-w-6xl px-6 mx-auto">
           {/* Title */}
           <h2 className="mb-12 text-3xl font-bold text-center md:text-4xl">
@@ -360,7 +351,7 @@ export default function Home() {
                 Stay stuck
               </h3>
 
-              <ul className="space-y-4 text-gray-300">
+              <ul className="space-y-4 text-gray">
                 <li>❌ Memorizing answers like a junior</li>
                 <li>❌ Failing interviews again and again</li>
                 <li>❌ Watching less experienced devs get hired</li>
@@ -376,7 +367,7 @@ export default function Home() {
                 Level up
               </h3>
 
-              <ul className="space-y-4 text-gray-200">
+              <ul className="space-y-4 text-gray">
                 <li>✅ Answer like a senior developer</li>
                 <li>✅ Explain trade-offs with confidence</li>
                 <li>✅ Walk into interviews knowing you’ll pass</li>
@@ -394,9 +385,9 @@ export default function Home() {
             </button> */}
             <a
               href="/login"
-              className="inline-block px-8 py-4 text-lg font-semibold text-black transition bg-white rounded-xl  hover:scale-105 hover:bg-gray-200"
+              className="bg-blue-600 text-white inline-block px-8 py-4 text-lg font-semibold transition rounded-xl  hover:scale-105 "
             >
-              👉 Start Free (Questions)
+              👉 Start Practice Free (Questions)
             </a>
           </div>
         </div>
