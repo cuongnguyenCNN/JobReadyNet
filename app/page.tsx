@@ -114,7 +114,6 @@ export default function Home() {
           Practice real interview questions, see senior-level answers, and learn
           how to think in trade-offs like real engineers.
         </p>
-
         <div className="mt-8 flex justify-center gap-4">
           <a
             href="/login"
@@ -131,6 +130,9 @@ export default function Home() {
             👉 Unlock Senior-Level Answers
           </a>
         </div>
+        <p className="text-sm text-gray-500">
+          👉 Interactive practice with real .NET interview questions
+        </p>
 
         <p className="text-sm text-gray-500">
           🔥 1,278 developers are preparing interviews right now
