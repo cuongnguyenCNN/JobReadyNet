@@ -12,7 +12,14 @@ export default function SuccessPage() {
   }, []);
 
   const handleUpsell = () => {
-    window.location.href = "https://your-upsell-link.com";
+    if (window.gtag) {
+      window.gtag("event", "purchase_update_bundle", {
+        event_category: "funnel",
+        event_label: "pdf_19",
+      });
+    }
+    window.location.href =
+      "https://noteflowai.lemonsqueezy.com/checkout/buy/4b80c234-0cbd-436d-8e85-f6a06f5e8bb3";
   };
 
   const goHome = () => {
