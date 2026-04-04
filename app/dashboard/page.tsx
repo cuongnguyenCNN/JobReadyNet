@@ -17,233 +17,419 @@ type Question = {
   trap: string;
 };
 
+// const mockQuestions: Question[] = [
+//   {
+//     id: "1",
+//     title: "What is Dependency Injection?",
+//     weak_answer: "Inject dependency to reduce coupling",
+//     strong_answer:
+//       "A design pattern where dependencies are provided externally to improve testability, modularity, and separation of concerns.",
+//     insight: "Connect DI to testing and flexibility, not just definition.",
+//     trap: "If you only say 'reduce coupling', you sound junior. Interviewers expect real-world impact like testing and swapping implementations.",
+//   },
+//   {
+//     id: "2",
+//     title: "Why is DI important in large systems?",
+//     weak_answer: "Because it's scalable",
+//     strong_answer:
+//       "DI helps manage complexity by improving maintainability, enabling easier testing, and allowing flexible replacement of implementations.",
+//     insight: "Talk about maintainability, not scalability.",
+//     trap: "Most devs say 'scalable' but can't explain how DI actually reduces complexity.",
+//   },
+//   {
+//     id: "3",
+//     title: "Difference between IEnumerable and IQueryable?",
+//     weak_answer: "One is for memory, one is for database",
+//     strong_answer:
+//       "IEnumerable executes in memory, while IQueryable builds expression trees and executes queries in the database.",
+//     insight: "Focus on execution location and performance.",
+//     trap: "Most devs memorize definitions but can't explain SQL generation or performance impact.",
+//   },
+//   {
+//     id: "4",
+//     title: "Why is async/await not always faster?",
+//     weak_answer: "Because async is slower",
+//     strong_answer:
+//       "Async improves scalability by freeing threads, but adds overhead and is not always faster.",
+//     insight: "Scalability ≠ speed.",
+//     trap: "If you say async is faster, interviewer knows you don't understand concurrency.",
+//   },
+//   {
+//     id: "5",
+//     title: "What is a deadlock?",
+//     weak_answer: "Threads waiting for each other",
+//     strong_answer:
+//       "A situation where two or more threads block each other by holding resources the others need.",
+//     insight: "Explain real scenario + prevention.",
+//     trap: "Most devs define it but can't explain how to avoid or debug it.",
+//   },
+//   {
+//     id: "6",
+//     title: "What is middleware?",
+//     weak_answer: "Something in the pipeline",
+//     strong_answer:
+//       "Middleware are components that handle HTTP requests/responses in a pipeline in ASP.NET Core.",
+//     insight: "Explain request flow clearly.",
+//     trap: "If you can't explain execution order, you don't understand backend flow.",
+//   },
+//   {
+//     id: "7",
+//     title: "What is REST?",
+//     weak_answer: "API using HTTP",
+//     strong_answer:
+//       "An architectural style using stateless communication, standard HTTP methods, and resource-based design.",
+//     insight: "Mention stateless + resources.",
+//     trap: "Most devs confuse REST with just 'API endpoints'.",
+//   },
+//   {
+//     id: "8",
+//     title: "What is caching?",
+//     weak_answer: "Store data to make it faster",
+//     strong_answer:
+//       "Caching stores frequently accessed data to reduce latency and load on underlying systems.",
+//     insight: "Talk about performance trade-offs.",
+//     trap: "Most devs ignore cache invalidation, which is the hardest problem.",
+//   },
+//   {
+//     id: "9",
+//     title: "What is SOLID?",
+//     weak_answer: "5 principles",
+//     strong_answer:
+//       "A set of principles that improve maintainability and scalability of object-oriented systems.",
+//     insight: "Explain at least 1 principle deeply.",
+//     trap: "Listing all 5 without understanding any = instant fail.",
+//   },
+//   {
+//     id: "10",
+//     title: "What is Single Responsibility Principle?",
+//     weak_answer: "One class one job",
+//     strong_answer:
+//       "A class should have only one reason to change, improving maintainability.",
+//     insight: "Focus on 'reason to change'.",
+//     trap: "Most devs misunderstand SRP as 'one method only'.",
+//   },
+//   {
+//     id: "11",
+//     title: "What is database indexing?",
+//     weak_answer: "Make query faster",
+//     strong_answer:
+//       "Indexes improve query performance by allowing faster data lookup at the cost of write overhead.",
+//     insight: "Always mention trade-off.",
+//     trap: "If you ignore write cost, you don't understand real systems.",
+//   },
+//   {
+//     id: "12",
+//     title: "What is normalization?",
+//     weak_answer: "Remove duplication",
+//     strong_answer:
+//       "A process to structure data to reduce redundancy and improve consistency.",
+//     insight: "Talk about trade-offs.",
+//     trap: "Most devs don't know when to denormalize.",
+//   },
+//   {
+//     id: "13",
+//     title: "What is a transaction?",
+//     weak_answer: "Group of queries",
+//     strong_answer:
+//       "A unit of work that ensures ACID properties: atomicity, consistency, isolation, durability.",
+//     insight: "Mention ACID.",
+//     trap: "If you can't explain isolation, you're guessing.",
+//   },
+//   {
+//     id: "14",
+//     title: "What is eventual consistency?",
+//     weak_answer: "Data becomes consistent later",
+//     strong_answer:
+//       "A model where data consistency is achieved over time rather than immediately.",
+//     insight: "Used in distributed systems.",
+//     trap: "Most devs don't know why it's needed.",
+//   },
+//   {
+//     id: "15",
+//     title: "What is load balancing?",
+//     weak_answer: "Distribute traffic",
+//     strong_answer:
+//       "Distributes incoming traffic across multiple servers to improve availability and performance.",
+//     insight: "Mention fault tolerance.",
+//     trap: "If you can't explain why it's needed, answer is shallow.",
+//   },
+//   {
+//     id: "16",
+//     title: "What is microservices?",
+//     weak_answer: "Split services",
+//     strong_answer:
+//       "An architectural style where systems are built as independent, loosely coupled services.",
+//     insight: "Talk about trade-offs.",
+//     trap: "Most devs ignore complexity (network, data consistency).",
+//   },
+//   {
+//     id: "17",
+//     title: "What is a race condition?",
+//     weak_answer: "Multiple threads conflict",
+//     strong_answer:
+//       "Occurs when multiple threads access shared data and outcome depends on execution order.",
+//     insight: "Explain unpredictability.",
+//     trap: "Most devs can't give real example.",
+//   },
+//   {
+//     id: "18",
+//     title: "What is idempotency?",
+//     weak_answer: "Same result",
+//     strong_answer:
+//       "An operation that produces the same result even if executed multiple times.",
+//     insight: "Important for APIs.",
+//     trap: "Most devs can't relate it to retries.",
+//   },
+//   {
+//     id: "19",
+//     title: "What is scalability?",
+//     weak_answer: "Handle more users",
+//     strong_answer:
+//       "Ability of a system to handle increased load by scaling vertically or horizontally.",
+//     insight: "Mention both types.",
+//     trap: "Most devs only know one type.",
+//   },
+//   {
+//     id: "20",
+//     title: "What is latency vs throughput?",
+//     weak_answer: "Speed vs volume",
+//     strong_answer:
+//       "Latency is response time, throughput is number of requests handled over time.",
+//     insight: "Important trade-off.",
+//     trap: "Most devs confuse the two.",
+//   },
+//   {
+//     id: "21",
+//     title: "What is JWT?",
+//     weak_answer: "Token auth",
+//     strong_answer:
+//       "A compact token used for secure data transmission, often for authentication.",
+//     insight: "Explain structure.",
+//     trap: "Most devs don't know header/payload/signature.",
+//   },
+//   {
+//     id: "22",
+//     title: "What is OAuth?",
+//     weak_answer: "Login with Google",
+//     strong_answer:
+//       "An authorization framework allowing third-party access without sharing credentials.",
+//     insight: "Auth vs AuthZ.",
+//     trap: "Most devs confuse authentication vs authorization.",
+//   },
+//   {
+//     id: "23",
+//     title: "What is CQRS?",
+//     weak_answer: "Separate read/write",
+//     strong_answer:
+//       "Separates read and write operations to optimize performance and scalability.",
+//     insight: "Explain use case.",
+//     trap: "Most devs don't know when to use it.",
+//   },
+//   {
+//     id: "24",
+//     title: "What is event-driven architecture?",
+//     weak_answer: "Use events",
+//     strong_answer: "A system design where components communicate via events.",
+//     insight: "Loose coupling.",
+//     trap: "Most devs can't explain async communication.",
+//   },
+//   {
+//     id: "25",
+//     title: "What is eventual consistency vs strong consistency?",
+//     weak_answer: "One is delayed",
+//     strong_answer:
+//       "Strong consistency ensures immediate consistency, eventual consistency allows delay for scalability.",
+//     insight: "Trade-off CAP theorem.",
+//     trap: "Most devs can't connect to distributed systems.",
+//   },
+// ];
 const mockQuestions: Question[] = [
   {
     id: "1",
-    title: "What is Dependency Injection?",
-    weak_answer: "Inject dependency to reduce coupling",
+    title:
+      "In your last project, how did you manage dependencies between services?",
+    weak_answer: "We used Dependency Injection to reduce coupling",
     strong_answer:
-      "A design pattern where dependencies are provided externally to improve testability, modularity, and separation of concerns.",
-    insight: "Connect DI to testing and flexibility, not just definition.",
-    trap: "If you only say 'reduce coupling', you sound junior. Interviewers expect real-world impact like testing and swapping implementations.",
+      "We used DI to inject services via constructor, which allowed us to easily mock dependencies in unit tests and swap implementations without changing business logic. It also helped maintain clear separation between layers.",
+    insight: "Always connect DI to testing and flexibility in real projects.",
+    trap: "If you only say 'reduce coupling' without real usage, you sound like you’ve never applied it.",
   },
   {
     id: "2",
-    title: "Why is DI important in large systems?",
-    weak_answer: "Because it's scalable",
+    title:
+      "Tell me about a time DI caused problems or confusion in your system.",
+    weak_answer: "DI is always good, no issues",
     strong_answer:
-      "DI helps manage complexity by improving maintainability, enabling easier testing, and allowing flexible replacement of implementations.",
-    insight: "Talk about maintainability, not scalability.",
-    trap: "Most devs say 'scalable' but can't explain how DI actually reduces complexity.",
+      "We had an issue where too many nested dependencies made debugging difficult. It became hard to trace which implementation was being injected. We solved it by simplifying service structure and improving logging.",
+    insight: "Senior engineers acknowledge trade-offs, not just benefits.",
+    trap: "Saying DI has no downside = junior mindset.",
   },
   {
     id: "3",
-    title: "Difference between IEnumerable and IQueryable?",
-    weak_answer: "One is for memory, one is for database",
+    title:
+      "Have you ever had performance issues with LINQ or Entity Framework?",
+    weak_answer: "LINQ is slow sometimes",
     strong_answer:
-      "IEnumerable executes in memory, while IQueryable builds expression trees and executes queries in the database.",
-    insight: "Focus on execution location and performance.",
-    trap: "Most devs memorize definitions but can't explain SQL generation or performance impact.",
+      "Yes, we had a query taking ~3 seconds due to loading too much data. The issue was using IQueryable with unintended joins. I fixed it by projecting only needed fields and reducing query complexity, bringing it down to ~200ms.",
+    insight: "Talk about real debugging + measurable improvement.",
+    trap: "If you can’t explain what caused slowness, you don’t understand ORM.",
   },
   {
     id: "4",
-    title: "Why is async/await not always faster?",
-    weak_answer: "Because async is slower",
+    title: "When would you NOT use async/await?",
+    weak_answer: "Async is always better",
     strong_answer:
-      "Async improves scalability by freeing threads, but adds overhead and is not always faster.",
-    insight: "Scalability ≠ speed.",
-    trap: "If you say async is faster, interviewer knows you don't understand concurrency.",
+      "Async adds overhead and complexity. For CPU-bound tasks or simple operations, it may not provide benefits. I only use async when dealing with I/O-bound operations like database or API calls.",
+    insight: "Scalability ≠ speed. Show decision-making.",
+    trap: "Saying async is always faster shows lack of concurrency understanding.",
   },
   {
     id: "5",
-    title: "What is a deadlock?",
-    weak_answer: "Threads waiting for each other",
+    title: "Have you ever faced a deadlock? What did you do?",
+    weak_answer: "Deadlock is when threads wait each other",
     strong_answer:
-      "A situation where two or more threads block each other by holding resources the others need.",
-    insight: "Explain real scenario + prevention.",
-    trap: "Most devs define it but can't explain how to avoid or debug it.",
+      "Yes, we had a deadlock due to improper locking order in multi-threaded code. I resolved it by enforcing consistent lock ordering and reducing shared resource locking.",
+    insight: "Always include cause + fix.",
+    trap: "Definition without real scenario = weak.",
   },
   {
     id: "6",
-    title: "What is middleware?",
-    weak_answer: "Something in the pipeline",
+    title: "Explain the request flow in ASP.NET Core using middleware.",
+    weak_answer: "Middleware handles requests",
     strong_answer:
-      "Middleware are components that handle HTTP requests/responses in a pipeline in ASP.NET Core.",
-    insight: "Explain request flow clearly.",
-    trap: "If you can't explain execution order, you don't understand backend flow.",
+      "Each middleware processes the request in sequence, can pass it to the next, and handle the response on the way back. Order is critical, for example authentication must run before authorization.",
+    insight: "Execution order is key.",
+    trap: "If you can’t explain flow, you don’t understand backend lifecycle.",
   },
   {
     id: "7",
-    title: "What is REST?",
-    weak_answer: "API using HTTP",
+    title: "In your API design, how do you ensure it follows REST principles?",
+    weak_answer: "We use HTTP methods",
     strong_answer:
-      "An architectural style using stateless communication, standard HTTP methods, and resource-based design.",
-    insight: "Mention stateless + resources.",
-    trap: "Most devs confuse REST with just 'API endpoints'.",
+      "We design APIs around resources, use proper HTTP methods, ensure stateless communication, and structure endpoints for clarity. For example, avoiding verbs in URLs and using status codes properly.",
+    insight: "REST = design thinking, not just endpoints.",
+    trap: "Saying 'we use GET/POST' is too shallow.",
   },
   {
     id: "8",
-    title: "What is caching?",
-    weak_answer: "Store data to make it faster",
+    title:
+      "Tell me about a time caching improved performance — or made things worse.",
+    weak_answer: "Caching makes things faster",
     strong_answer:
-      "Caching stores frequently accessed data to reduce latency and load on underlying systems.",
-    insight: "Talk about performance trade-offs.",
-    trap: "Most devs ignore cache invalidation, which is the hardest problem.",
+      "Caching reduced load significantly, but we faced stale data issues. We had to implement cache invalidation strategies and expiration policies to balance consistency and performance.",
+    insight: "Cache invalidation is the real challenge.",
+    trap: "Ignoring stale data = no real experience.",
   },
   {
     id: "9",
-    title: "What is SOLID?",
-    weak_answer: "5 principles",
+    title:
+      "Which SOLID principle do you use most in your code? Give an example.",
+    weak_answer: "I use all 5 principles",
     strong_answer:
-      "A set of principles that improve maintainability and scalability of object-oriented systems.",
-    insight: "Explain at least 1 principle deeply.",
-    trap: "Listing all 5 without understanding any = instant fail.",
+      "I often apply Single Responsibility Principle by separating business logic from data access. For example, moving logic out of controllers into services improved maintainability and testability.",
+    insight: "Depth > listing all principles.",
+    trap: "Listing 5 principles without example = instant fail.",
   },
   {
     id: "10",
-    title: "What is Single Responsibility Principle?",
-    weak_answer: "One class one job",
+    title: "Have you ever violated SRP? What happened?",
+    weak_answer: "No",
     strong_answer:
-      "A class should have only one reason to change, improving maintainability.",
-    insight: "Focus on 'reason to change'.",
-    trap: "Most devs misunderstand SRP as 'one method only'.",
+      "Yes, we had a class handling both business logic and database operations. It became hard to maintain. We refactored it into separate services, improving readability and testability.",
+    insight: "Admitting mistakes = senior signal.",
+    trap: "Saying 'never' = unrealistic.",
   },
   {
     id: "11",
-    title: "What is database indexing?",
-    weak_answer: "Make query faster",
+    title: "How do you decide when to add a database index?",
+    weak_answer: "To make queries faster",
     strong_answer:
-      "Indexes improve query performance by allowing faster data lookup at the cost of write overhead.",
-    insight: "Always mention trade-off.",
-    trap: "If you ignore write cost, you don't understand real systems.",
+      "I add indexes based on query patterns, especially for frequently filtered or joined columns. But I also consider write overhead and avoid over-indexing.",
+    insight: "Always mention trade-offs.",
+    trap: "Ignoring write cost = incomplete understanding.",
   },
   {
     id: "12",
-    title: "What is normalization?",
-    weak_answer: "Remove duplication",
+    title: "Have you ever had to denormalize a database? Why?",
+    weak_answer: "Normalization is always better",
     strong_answer:
-      "A process to structure data to reduce redundancy and improve consistency.",
-    insight: "Talk about trade-offs.",
-    trap: "Most devs don't know when to denormalize.",
+      "Yes, for performance reasons. In a reporting system, we denormalized some data to reduce joins and improve read performance.",
+    insight: "Real systems require trade-offs.",
+    trap: "Thinking normalization is always best = academic thinking.",
   },
   {
     id: "13",
-    title: "What is a transaction?",
-    weak_answer: "Group of queries",
+    title: "How do you ensure data consistency in a transaction?",
+    weak_answer: "Using transactions",
     strong_answer:
-      "A unit of work that ensures ACID properties: atomicity, consistency, isolation, durability.",
-    insight: "Mention ACID.",
-    trap: "If you can't explain isolation, you're guessing.",
+      "By ensuring ACID properties, especially isolation levels depending on use case. For example, we adjusted isolation to avoid dirty reads while maintaining performance.",
+    insight: "Mention isolation = strong signal.",
+    trap: "If you can’t explain isolation, you’re guessing.",
   },
   {
     id: "14",
-    title: "What is eventual consistency?",
-    weak_answer: "Data becomes consistent later",
+    title: "Where would you use eventual consistency in your system?",
+    weak_answer: "When data is not important",
     strong_answer:
-      "A model where data consistency is achieved over time rather than immediately.",
-    insight: "Used in distributed systems.",
-    trap: "Most devs don't know why it's needed.",
+      "In distributed systems where immediate consistency is costly, like event-driven architectures. For example, syncing data across services asynchronously.",
+    insight: "Tie to distributed systems.",
+    trap: "Saying 'not important data' = wrong thinking.",
   },
   {
     id: "15",
-    title: "What is load balancing?",
-    weak_answer: "Distribute traffic",
+    title: "How does load balancing improve system reliability?",
+    weak_answer: "It distributes traffic",
     strong_answer:
-      "Distributes incoming traffic across multiple servers to improve availability and performance.",
+      "It distributes traffic across instances and prevents single points of failure. If one server goes down, others can handle the load, improving availability.",
     insight: "Mention fault tolerance.",
-    trap: "If you can't explain why it's needed, answer is shallow.",
+    trap: "Only saying 'distribute traffic' = shallow.",
   },
   {
     id: "16",
-    title: "What is microservices?",
-    weak_answer: "Split services",
+    title: "When would you avoid using microservices?",
+    weak_answer: "Microservices are always good",
     strong_answer:
-      "An architectural style where systems are built as independent, loosely coupled services.",
-    insight: "Talk about trade-offs.",
-    trap: "Most devs ignore complexity (network, data consistency).",
+      "For small systems, microservices add unnecessary complexity like network latency, deployment overhead, and data consistency issues. A monolith can be more efficient initially.",
+    insight: "Knowing when NOT to use is key.",
+    trap: "Blindly promoting microservices = junior.",
   },
   {
     id: "17",
-    title: "What is a race condition?",
-    weak_answer: "Multiple threads conflict",
+    title: "Have you ever debugged a race condition?",
+    weak_answer: "Race condition is thread conflict",
     strong_answer:
-      "Occurs when multiple threads access shared data and outcome depends on execution order.",
-    insight: "Explain unpredictability.",
-    trap: "Most devs can't give real example.",
+      "Yes, we had inconsistent results due to shared state access. I fixed it using proper synchronization and reducing shared mutable state.",
+    insight: "Explain unpredictability + fix.",
+    trap: "No real example = weak.",
   },
   {
     id: "18",
-    title: "What is idempotency?",
-    weak_answer: "Same result",
+    title: "How do you design idempotent APIs?",
+    weak_answer: "Same result every time",
     strong_answer:
-      "An operation that produces the same result even if executed multiple times.",
-    insight: "Important for APIs.",
-    trap: "Most devs can't relate it to retries.",
+      "By ensuring repeated requests produce the same outcome, often using unique request IDs or safe HTTP methods like PUT. This is critical for retry mechanisms.",
+    insight: "Connect to retries.",
+    trap: "Not linking to retries = incomplete.",
   },
   {
     id: "19",
-    title: "What is scalability?",
-    weak_answer: "Handle more users",
+    title: "How would you scale a system under heavy load?",
+    weak_answer: "Add more servers",
     strong_answer:
-      "Ability of a system to handle increased load by scaling vertically or horizontally.",
-    insight: "Mention both types.",
-    trap: "Most devs only know one type.",
+      "I would evaluate vertical vs horizontal scaling, use load balancing, caching, and optimize bottlenecks based on profiling.",
+    insight: "Multiple strategies, not one.",
+    trap: "Only saying 'add servers' = naive.",
   },
   {
     id: "20",
-    title: "What is latency vs throughput?",
-    weak_answer: "Speed vs volume",
+    title: "Explain a situation where you optimized latency or throughput.",
+    weak_answer: "I made it faster",
     strong_answer:
-      "Latency is response time, throughput is number of requests handled over time.",
-    insight: "Important trade-off.",
-    trap: "Most devs confuse the two.",
-  },
-  {
-    id: "21",
-    title: "What is JWT?",
-    weak_answer: "Token auth",
-    strong_answer:
-      "A compact token used for secure data transmission, often for authentication.",
-    insight: "Explain structure.",
-    trap: "Most devs don't know header/payload/signature.",
-  },
-  {
-    id: "22",
-    title: "What is OAuth?",
-    weak_answer: "Login with Google",
-    strong_answer:
-      "An authorization framework allowing third-party access without sharing credentials.",
-    insight: "Auth vs AuthZ.",
-    trap: "Most devs confuse authentication vs authorization.",
-  },
-  {
-    id: "23",
-    title: "What is CQRS?",
-    weak_answer: "Separate read/write",
-    strong_answer:
-      "Separates read and write operations to optimize performance and scalability.",
-    insight: "Explain use case.",
-    trap: "Most devs don't know when to use it.",
-  },
-  {
-    id: "24",
-    title: "What is event-driven architecture?",
-    weak_answer: "Use events",
-    strong_answer: "A system design where components communicate via events.",
-    insight: "Loose coupling.",
-    trap: "Most devs can't explain async communication.",
-  },
-  {
-    id: "25",
-    title: "What is eventual consistency vs strong consistency?",
-    weak_answer: "One is delayed",
-    strong_answer:
-      "Strong consistency ensures immediate consistency, eventual consistency allows delay for scalability.",
-    insight: "Trade-off CAP theorem.",
-    trap: "Most devs can't connect to distributed systems.",
+      "We reduced latency by optimizing database queries and caching frequent responses, while maintaining throughput by scaling horizontally.",
+    insight: "Differentiate latency vs throughput.",
+    trap: "Confusing the two = common fail.",
   },
 ];
-
 const FREE_LIMIT = 5;
 type View = "practice" | "failed" | "progress";
 export default function Dashboard() {
