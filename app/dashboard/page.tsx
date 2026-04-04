@@ -243,6 +243,278 @@ type Question = {
 //     trap: "Most devs can't connect to distributed systems.",
 //   },
 // ];
+// const realInterviewQuestions: Question[] = [
+//   {
+//     id: "1",
+//     title: "In your last project, how did you manage dependencies between services?",
+//     weak_answer: "We used DI",
+//     strong_answer:
+//       "We used constructor injection to decouple services and enable unit testing. It allowed us to mock dependencies easily and swap implementations without touching business logic.",
+//     insight: "Always tie DI to testing and flexibility.",
+//     trap: "Just saying 'reduce coupling' = textbook answer.",
+//   },
+//   {
+//     id: "2",
+//     title: "Tell me about a time DI made debugging harder.",
+//     weak_answer: "DI is always good",
+//     strong_answer:
+//       "We had deeply nested dependencies, making it hard to trace execution. We improved logging and simplified service layers to reduce complexity.",
+//     insight: "Senior = knows trade-offs.",
+//     trap: "Saying DI has no downside = junior.",
+//   },
+//   {
+//     id: "3",
+//     title: "Have you ever had performance issues with Entity Framework?",
+//     weak_answer: "EF is slow",
+//     strong_answer:
+//       "A query took ~3s due to loading unnecessary data via lazy loading. I fixed it by using projection and reducing joins, bringing it down to ~200ms.",
+//     insight: "Problem → root cause → measurable fix.",
+//     trap: "No real example = weak.",
+//   },
+//   {
+//     id: "4",
+//     title: "When would you avoid using async/await?",
+//     weak_answer: "Async is always better",
+//     strong_answer:
+//       "For CPU-bound tasks or simple operations, async adds overhead. I use it mainly for I/O-bound operations like DB or API calls.",
+//     insight: "Scalability ≠ speed.",
+//     trap: "Async is faster = wrong.",
+//   },
+//   {
+//     id: "5",
+//     title: "Tell me about a deadlock you encountered.",
+//     weak_answer: "Threads wait each other",
+//     strong_answer:
+//       "We had a deadlock due to inconsistent lock ordering. I fixed it by enforcing a consistent locking strategy and reducing shared resources.",
+//     insight: "Always explain cause + fix.",
+//     trap: "Definition only = fail.",
+//   },
+//   {
+//     id: "6",
+//     title: "Explain the middleware pipeline in ASP.NET Core.",
+//     weak_answer: "Middleware handles requests",
+//     strong_answer:
+//       "Middleware runs in sequence, processing request and response. Order matters — for example, authentication must run before authorization.",
+//     insight: "Execution order is key.",
+//     trap: "If you can’t explain flow, you don’t understand backend.",
+//   },
+//   {
+//     id: "7",
+//     title: "How do you design a clean REST API?",
+//     weak_answer: "Use HTTP methods",
+//     strong_answer:
+//       "I design around resources, ensure statelessness, use proper HTTP verbs, and meaningful status codes. I avoid verbs in URLs.",
+//     insight: "REST is design, not syntax.",
+//     trap: "GET/POST answer = shallow.",
+//   },
+//   {
+//     id: "8",
+//     title: "Tell me about a time caching caused issues.",
+//     weak_answer: "Caching is good",
+//     strong_answer:
+//       "We had stale data issues due to improper invalidation. We implemented expiration policies and manual invalidation to balance performance and consistency.",
+//     insight: "Cache invalidation = real problem.",
+//     trap: "Ignoring stale data = no experience.",
+//   },
+//   {
+//     id: "9",
+//     title: "Which SOLID principle do you actually use the most?",
+//     weak_answer: "All 5",
+//     strong_answer:
+//       "SRP — we separated business logic from controllers into services, improving maintainability and testing.",
+//     insight: "Depth > listing.",
+//     trap: "Listing all 5 = junior.",
+//   },
+//   {
+//     id: "10",
+//     title: "Tell me about a time you violated SRP.",
+//     weak_answer: "Never",
+//     strong_answer:
+//       "We had a class handling DB + logic. It became hard to maintain. We refactored into separate services.",
+//     insight: "Admitting mistakes = strong signal.",
+//     trap: "Perfect answers = fake.",
+//   },
+//   {
+//     id: "11",
+//     title: "How do you decide when to add an index?",
+//     weak_answer: "To make query faster",
+//     strong_answer:
+//       "Based on query patterns — frequent filters/joins. But I balance it with write overhead and avoid over-indexing.",
+//     insight: "Trade-offs matter.",
+//     trap: "Ignoring writes = incomplete.",
+//   },
+//   {
+//     id: "12",
+//     title: "Have you ever denormalized a database?",
+//     weak_answer: "No",
+//     strong_answer:
+//       "Yes, for read-heavy reporting. It reduced joins and improved performance significantly.",
+//     insight: "Real systems ≠ textbook.",
+//     trap: "Normalization always best = junior.",
+//   },
+//   {
+//     id: "13",
+//     title: "How do you handle transaction isolation levels?",
+//     weak_answer: "Use transactions",
+//     strong_answer:
+//       "I adjust isolation based on use case to avoid dirty reads while maintaining performance.",
+//     insight: "Isolation = key concept.",
+//     trap: "No isolation knowledge = guessing.",
+//   },
+//   {
+//     id: "14",
+//     title: "Where would you use eventual consistency?",
+//     weak_answer: "When not important",
+//     strong_answer:
+//       "In distributed systems where strong consistency is costly — like async data sync between services.",
+//     insight: "Tie to system design.",
+//     trap: "Wrong reasoning = fail.",
+//   },
+//   {
+//     id: "15",
+//     title: "How does load balancing improve reliability?",
+//     weak_answer: "Distribute traffic",
+//     strong_answer:
+//       "It removes single points of failure and ensures availability if one instance goes down.",
+//     insight: "Mention fault tolerance.",
+//     trap: "Only traffic = shallow.",
+//   },
+//   {
+//     id: "16",
+//     title: "When would you avoid microservices?",
+//     weak_answer: "Never",
+//     strong_answer:
+//       "For small systems — adds complexity like network latency, deployment overhead, and data consistency issues.",
+//     insight: "Knowing when NOT to use = senior.",
+//     trap: "Blind microservices = junior.",
+//   },
+//   {
+//     id: "17",
+//     title: "Tell me about a race condition you debugged.",
+//     weak_answer: "Threads conflict",
+//     strong_answer:
+//       "We had inconsistent results due to shared state. I fixed it using synchronization and reducing shared mutable data.",
+//     insight: "Explain unpredictability.",
+//     trap: "No real example = weak.",
+//   },
+//   {
+//     id: "18",
+//     title: "How do you design idempotent APIs?",
+//     weak_answer: "Same result",
+//     strong_answer:
+//       "Using unique request IDs and safe methods like PUT to handle retries safely.",
+//     insight: "Retries = key.",
+//     trap: "Missing retry context.",
+//   },
+//   {
+//     id: "19",
+//     title: "How do you scale a system?",
+//     weak_answer: "Add servers",
+//     strong_answer:
+//       "I evaluate vertical/horizontal scaling, caching, load balancing, and optimize bottlenecks.",
+//     insight: "Multiple levers.",
+//     trap: "One solution = naive.",
+//   },
+//   {
+//     id: "20",
+//     title: "Explain a performance optimization you did.",
+//     weak_answer: "Made it faster",
+//     strong_answer:
+//       "Optimized DB queries and added caching, reducing latency significantly.",
+//     insight: "Be specific.",
+//     trap: "Vague = weak.",
+//   },
+//   {
+//     id: "21",
+//     title: "How do you secure APIs in production?",
+//     weak_answer: "Use JWT",
+//     strong_answer:
+//       "JWT for authentication, validation, HTTPS, rate limiting, and proper authorization checks.",
+//     insight: "Security is layered.",
+//     trap: "JWT only = shallow.",
+//   },
+//   {
+//     id: "22",
+//     title: "Tell me about a bug that was hard to find.",
+//     weak_answer: "Fixed a bug",
+//     strong_answer:
+//       "A race condition caused intermittent failures. I used logging and reproduction steps to isolate and fix it.",
+//     insight: "Debugging process matters.",
+//     trap: "No process = weak.",
+//   },
+//   {
+//     id: "23",
+//     title: "How do you handle logging in production?",
+//     weak_answer: "Use logs",
+//     strong_answer:
+//       "Structured logging with levels, centralized logging system, and correlation IDs for tracing requests.",
+//     insight: "Observability = senior skill.",
+//     trap: "Basic logging = junior.",
+//   },
+//   {
+//     id: "24",
+//     title: "How do you design for failure?",
+//     weak_answer: "Handle errors",
+//     strong_answer:
+//       "Retries, fallback strategies, circuit breakers, and graceful degradation.",
+//     insight: "Failure is expected.",
+//     trap: "Ignoring failure = naive.",
+//   },
+//   {
+//     id: "25",
+//     title: "What would you do if database becomes bottleneck?",
+//     weak_answer: "Upgrade DB",
+//     strong_answer:
+//       "Optimize queries, add caching, indexing, read replicas, or split services depending on bottleneck.",
+//     insight: "Multiple solutions.",
+//     trap: "Single fix = weak.",
+//   },
+//   {
+//     id: "26",
+//     title: "How do you version APIs?",
+//     weak_answer: "Add v1",
+//     strong_answer:
+//       "Use URL or header versioning, ensure backward compatibility, and avoid breaking clients.",
+//     insight: "Client impact matters.",
+//     trap: "Just 'v1' = shallow.",
+//   },
+//   {
+//     id: "27",
+//     title: "How do you handle large file uploads?",
+//     weak_answer: "Upload file",
+//     strong_answer:
+//       "Stream uploads, validate size, and offload to storage like S3 to avoid memory issues.",
+//     insight: "Memory awareness.",
+//     trap: "Naive upload = risky.",
+//   },
+//   {
+//     id: "28",
+//     title: "How do you prevent duplicate requests?",
+//     weak_answer: "Check data",
+//     strong_answer:
+//       "Use idempotency keys or unique constraints to ensure safe retries.",
+//     insight: "Real-world API problem.",
+//     trap: "No strategy = weak.",
+//   },
+//   {
+//     id: "29",
+//     title: "How do you test your APIs?",
+//     weak_answer: "Unit test",
+//     strong_answer:
+//       "Unit tests for logic, integration tests for DB/API, and sometimes end-to-end tests.",
+//     insight: "Multiple layers.",
+//     trap: "Only unit test = incomplete.",
+//   },
+//   {
+//     id: "30",
+//     title: "What’s the biggest mistake you made in a backend system?",
+//     weak_answer: "No mistake",
+//     strong_answer:
+//       "We over-engineered with microservices too early, causing complexity. Later simplified architecture improved delivery speed.",
+//     insight: "Self-awareness = senior.",
+//     trap: "No mistakes = fake.",
+//   },
+// ];
 const mockQuestions: Question[] = [
   {
     id: "1",
@@ -1024,14 +1296,15 @@ export default function Dashboard() {
             <div className="bg-gradient-to-br from-indigo-500 to-purple-600 text-white rounded-xl p-4 shadow-md">
               <p className="text-sm font-semibold">Upgrade to Pro</p>
               <p className="text-xs opacity-80 mt-1">
-                Unlock all questions + AI feedback
+                {/* Unlock all questions + AI feedback */}
+                Pass your next .NET interview (or stay stuck)
               </p>
 
               <button
                 onClick={() => setShowPaywall(true)}
                 className="mt-3 w-full bg-white text-indigo-600 text-sm font-semibold py-2 rounded-lg hover:bg-gray-100 transition"
               >
-                Upgrade
+                Pass Interview Faster
               </button>
             </div>
           </div>
@@ -1066,7 +1339,7 @@ export default function Dashboard() {
                 onClick={() => setShowPaywall(true)}
                 className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm"
               >
-                Upgrade
+                Pass Interview Faster
               </button>
             </div>
             {view === "practice" && !activeQ && (
@@ -1084,7 +1357,8 @@ export default function Dashboard() {
                       : "text-gray-500"
                   }`}
                 >
-                  ⏱ You have {attemptsLeft} free attempts left
+                  🚨 Only {attemptsLeft} answers left before lock (Most users
+                  fail before finishing)
                 </p>
                 {attemptsLeft <= 0 && (
                   <div className="bg-black text-white p-5 rounded-xl text-center">
@@ -1341,8 +1615,9 @@ export default function Dashboard() {
 
                   <div className="text-left text-sm mb-6 space-y-2">
                     <p>✅ 150 real interview questions</p>
-                    <p>🔥 Hidden traps explained</p>
-                    <p>🎯 Practice like real interview</p>
+                    <p>✅ Strong answers (not textbook)</p>
+                    <p>✅ Thinking framework</p>
+                    <p>✅ Lifetime access</p>
                   </div>
                   {/* Pricing toggle */}
                   <div className="flex gap-2 mb-6">
