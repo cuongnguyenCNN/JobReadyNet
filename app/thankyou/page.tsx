@@ -19,7 +19,9 @@ export default function ThankYouPage() {
       });
     }
   }, []);
-
+  const goHome = () => {
+    window.location.href = "/";
+  };
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4 min-h-screen bg-gradient-to-br from-white to-gray-100">
       <div className="max-w-2xl w-full">
@@ -30,15 +32,22 @@ export default function ThankYouPage() {
             I’ve sent you the FREE .NET interview PDF
           </p>
         </div>
-
+        <div className="mt-4">
+          <button
+            onClick={goHome}
+            className="cursor-pointer text-sm text-gray-500 underline"
+          >
+            ← Back to homepage
+          </button>
+        </div>
         {/* MESSAGE */}
         <div className="bg-white shadow-sm rounded-xl p-6 mb-6">
           <h2 className="text-xl font-semibold mb-2">Before you go...</h2>
-          <p className="text-gray-700">
+          {/* <p className="text-gray-700">
             Most developers still fail interviews even after reading questions.
-          </p>
+          </p> */}
           <p className="font-semibold mt-2">
-            👉 Because they don’t know how to explain answers clearly.
+            👉 Practice to know how to explain answers clearly.
           </p>
         </div>
 
@@ -92,25 +101,32 @@ export default function ThankYouPage() {
           <p className="text-xs text-gray-500 mt-2">
             Free access. No signup required.
           </p>
-
+          <div className="mt-3">
+            <button
+              onClick={goHome}
+              className="text-sm text-gray-500 underline"
+            >
+              No thanks, I’ll stick with the basic version
+            </button>
+          </div>
           <p className="text-green-600 mt-3 font-semibold">
             👉 This is how top candidates actually prepare
           </p>
         </div>
         {/* BONUS */}
-        <div className="bg-white rounded-xl p-6 mb-6 shadow-sm">
+        {/* <div className="bg-white rounded-xl p-6 mb-6 shadow-sm">
           <h3 className="font-semibold mb-2">🎁 Bonus included:</h3>
           <ul className="space-y-1 text-gray-700">
             <li>Common traps cheat sheet</li>
             <li>Answer frameworks</li>
             <li>Real examples</li>
           </ul>
-        </div>
+        </div> */}
 
         {/* SOCIAL PROOF */}
         <div className="text-center italic text-gray-600 mb-6">
           <p>💬 “This helped me pass my interview”</p>
-          <p>💬 “Worth way more than $19”</p>
+          <p>💬 “Worth way more than expected”</p>
         </div>
 
         {/* ALT */}
