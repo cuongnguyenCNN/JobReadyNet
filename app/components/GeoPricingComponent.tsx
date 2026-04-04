@@ -152,16 +152,16 @@ export default function GeoPricing() {
           </button>
         </>
       )}
-
+      {/* https://noteflowai.lemonsqueezy.com/checkout/buy/052b0e2a-3b9d-4370-b23f-480593c02cdc */}
       {geo.tier === "Tier3" && (
         <>
-          <h2>🎁 Special Regional Price: $5,99</h2>
+          <h2>🎁 Special Regional Price: $9,99</h2>
           <p>Affordable access for your region</p>
 
           <button
             onClick={() =>
               handleBuy(
-                "https://noteflowai.lemonsqueezy.com/checkout/buy/052b0e2a-3b9d-4370-b23f-480593c02cdc",
+                "https://noteflowai.lemonsqueezy.com/checkout/buy/eafef897-b5a8-4fe8-9efb-76d65bac0cc8",
               )
             }
             className="cursor-pointer bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-md"
