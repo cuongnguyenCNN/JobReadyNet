@@ -515,6 +515,99 @@ type Question = {
 //     trap: "No mistakes = fake.",
 //   },
 // ];
+// const mockQuestions: Question[] = [
+//   {
+//     id: "1",
+//     title:
+//       "In your last project, how did you manage dependencies between services?",
+//     weak_answer: "We used DI",
+//     strong_answer:
+//       "In my last project, we relied heavily on Dependency Injection to keep our architecture clean and maintainable as the system grew. Instead of instantiating dependencies directly inside classes, we used constructor injection to clearly define what each component depended on. This made the code much easier to test, since we could mock dependencies during unit testing without touching real implementations.\n\nA real benefit showed up when we had to switch an external payment provider. Because our services depended on interfaces rather than concrete implementations, we only needed to replace the implementation in the DI container without rewriting business logic. It also improved readability — when I look at a class constructor, I immediately understand what it needs to function.\n\nHowever, we also had to be careful not to overcomplicate things. At one point, too many layers of abstraction made debugging harder, so we simplified some services. Overall, DI helped us scale the codebase while keeping it flexible and testable.",
+//     insight: "Story + real benefit + trade-off.",
+//     trap: "No real usage = weak.",
+//   },
+//   {
+//     id: "2",
+//     title: "Tell me about a time DI made debugging harder.",
+//     weak_answer: "DI is always good",
+//     strong_answer:
+//       "In one project, we went too far with abstraction using Dependency Injection. Almost every service depended on multiple interfaces, and those interfaces had multiple implementations registered in the container. While this looked clean architecturally, it created a real problem during debugging — it was hard to trace which implementation was actually being used at runtime.\n\nWe had a production issue where a service behaved differently than expected, and it took a while to realize that a different implementation was being injected due to environment-specific configuration. The fix wasn’t just technical — we had to rethink how we structured dependencies. We reduced unnecessary abstractions, added clearer naming conventions, and improved logging to show which implementations were being resolved.\n\nThat experience taught me that DI is powerful, but overusing abstraction can hurt clarity. There’s always a balance between flexibility and simplicity, and as systems grow, that balance becomes critical.",
+//     insight: "Senior = understands downside.",
+//     trap: "DI is perfect = junior.",
+//   },
+//   {
+//     id: "3",
+//     title: "Have you ever had performance issues with Entity Framework?",
+//     weak_answer: "EF is slow",
+//     strong_answer:
+//       "Yes, we ran into a serious performance issue in a reporting feature where a query was taking around 3–5 seconds to complete. Initially, it wasn’t obvious what the problem was because the LINQ query looked clean and simple. After profiling the application and inspecting the generated SQL, we discovered that Entity Framework was loading far more data than necessary due to navigation properties and implicit joins.\n\nThe main issue was that we were returning full entities instead of projecting only the fields we needed. This resulted in unnecessary data transfer and memory usage. I refactored the query to use explicit projection (Select) and limited the dataset, which reduced execution time to under 300ms.\n\nThis experience changed how I use EF — I no longer trust the abstraction blindly. I always consider what SQL is being generated and whether the query is efficient. ORMs are powerful, but if you don’t understand what’s happening under the hood, they can easily become a performance bottleneck.",
+//     insight: "Show investigation + fix.",
+//     trap: "No SQL understanding.",
+//   },
+//   {
+//     id: "4",
+//     title: "When would you avoid using async/await?",
+//     weak_answer: "Async is always better",
+//     strong_answer:
+//       "Async/await is great for improving scalability in I/O-bound operations, but I’ve learned that it’s not always the right choice. In one case, we applied async across the board, including simple CPU-bound operations. This actually made the code harder to read and introduced unnecessary overhead without any performance benefit.\n\nAsync shines when you're dealing with external resources like databases or APIs, where threads would otherwise be blocked waiting for responses. But for quick, in-memory computations, the overhead of context switching and task management isn’t worth it.\n\nI now treat async as a tool, not a default. I ask: is this operation I/O-bound? Will async actually free up resources? If not, I keep it simple and synchronous. This mindset helps avoid over-engineering and keeps the codebase easier to maintain while still gaining the scalability benefits where they actually matter.",
+//     insight: "Decision-making mindset.",
+//     trap: "Async everywhere.",
+//   },
+//   {
+//     id: "5",
+//     title: "Tell me about a deadlock you encountered.",
+//     weak_answer: "Threads wait each other",
+//     strong_answer:
+//       "We encountered a deadlock in a background processing system where multiple threads were accessing shared resources. The issue wasn’t obvious at first because it only happened under high load. After investigating logs and reproducing the issue locally, we realized that different parts of the code were acquiring locks in inconsistent orders.\n\nFor example, one thread would lock resource A then B, while another would lock B then A. Under certain timing conditions, both threads would end up waiting indefinitely for each other to release the lock.\n\nTo fix it, we enforced a strict locking order across the codebase and reduced the number of shared resources where possible. In some cases, we replaced locks with concurrent data structures to avoid blocking entirely.\n\nThis taught me that deadlocks are not just theoretical — they happen in real systems, especially under load. Prevention requires discipline in how locks are used and minimizing shared state whenever possible.",
+//     insight: "Real debugging story.",
+//     trap: "Only definition.",
+//   },
+//   {
+//     id: "6",
+//     title: "Explain the middleware pipeline in ASP.NET Core.",
+//     weak_answer: "Middleware handles requests",
+//     strong_answer:
+//       "In ASP.NET Core, middleware forms a pipeline where each component processes the HTTP request and optionally passes it to the next middleware. What’s important is that this pipeline is ordered — the sequence in which middleware is registered directly affects how requests and responses are handled.\n\nFor example, authentication middleware must run before authorization, otherwise the system won’t know who the user is when checking permissions. Similarly, exception handling middleware is usually placed early in the pipeline so it can catch errors from downstream components.\n\nEach middleware can also act on the response as it flows back up the pipeline, which makes it very powerful for things like logging or response transformation.\n\nIn practice, understanding this flow helped me debug issues where certain middleware didn’t behave as expected. Once I realized it was due to incorrect ordering, fixing it became straightforward. Middleware isn’t just a concept — it directly impacts how your application behaves at runtime.",
+//     insight: "Flow + real impact.",
+//     trap: "No execution understanding.",
+//   },
+//   {
+//     id: "7",
+//     title: "How do you design a clean REST API?",
+//     weak_answer: "Use HTTP methods",
+//     strong_answer:
+//       "When designing a REST API, I focus on clarity, consistency, and usability from the client’s perspective. Instead of thinking in terms of actions, I design around resources — for example, /users or /orders — and use HTTP methods like GET, POST, PUT, and DELETE to represent operations.\n\nI also make sure the API is stateless, meaning each request contains all the information needed to process it. This simplifies scaling and reduces hidden dependencies between requests. Proper use of status codes is another important aspect — returning 200, 404, or 500 appropriately helps clients handle responses correctly.\n\nIn one project, we refactored an API that used action-based endpoints like /getUser or /createOrder into a more RESTful structure. This made the API easier to understand and reduced onboarding time for new developers.\n\nA clean API is not just about following rules — it’s about making the system intuitive and predictable for anyone who uses it.",
+//     insight: "Client-centric thinking.",
+//     trap: "Only syntax.",
+//   },
+//   {
+//     id: "8",
+//     title: "Tell me about a time caching caused issues.",
+//     weak_answer: "Caching is good",
+//     strong_answer:
+//       "We implemented caching to reduce database load on a frequently accessed endpoint, and initially it worked great — response times dropped significantly. However, we started receiving complaints about outdated data being returned.\n\nThe issue was that we cached data aggressively but didn’t have a proper invalidation strategy. When underlying data changed, the cache wasn’t updated, leading to stale results.\n\nTo fix it, we introduced a combination of cache expiration and manual invalidation triggered by data updates. In some cases, we moved to shorter TTLs to reduce inconsistency risk.\n\nThis experience taught me that caching is not just about performance — it’s about managing consistency trade-offs. A fast system that returns incorrect data is worse than a slightly slower one that is accurate. Now, whenever I design caching, I think about invalidation strategy first, not just speed.",
+//     insight: "Real-world trade-off.",
+//     trap: "Ignoring stale data.",
+//   },
+//   {
+//     id: "9",
+//     title: "Which SOLID principle do you actually use the most?",
+//     weak_answer: "All 5",
+//     strong_answer:
+//       "In practice, the principle I use most is Single Responsibility Principle. In one project, we had controllers handling business logic, validation, and database calls all in one place. It worked initially, but as the system grew, it became difficult to maintain and test.\n\nWe refactored the code by moving business logic into separate service classes and keeping controllers focused only on handling HTTP requests. This separation made the code much cleaner and easier to test, since each component had a clear responsibility.\n\nThe biggest benefit was not just cleaner code, but faster development. When a bug appeared, we knew exactly where to look. When we needed to add features, we didn’t risk breaking unrelated parts of the system.\n\nSOLID principles are often taught as theory, but applying even one of them properly can significantly improve real-world codebases.",
+//     insight: "Depth over breadth.",
+//     trap: "Listing principles.",
+//   },
+//   {
+//     id: "10",
+//     title: "Tell me about a time you violated SRP.",
+//     weak_answer: "Never",
+//     strong_answer:
+//       "Early in one project, I created a service that handled both business logic and direct database operations. At first it seemed efficient, but as requirements grew, the class became large and difficult to maintain. Any change in business rules or database structure required modifying the same class, increasing the risk of bugs.\n\nThe problem became clear when we needed to add new features — every change felt risky and slowed down development. We decided to refactor by separating responsibilities: business logic into one service, and data access into another layer.\n\nAfter the refactor, the code was easier to understand, test, and extend. It also made onboarding new developers much smoother.\n\nThat experience taught me that violating SRP might feel faster initially, but it creates long-term complexity. Clean separation of responsibilities pays off as the system grows.",
+//     insight: "Mistakes = credibility.",
+//     trap: "Perfect dev = fake.",
+//   },
+// ];
 const mockQuestions: Question[] = [
   {
     id: "1",
