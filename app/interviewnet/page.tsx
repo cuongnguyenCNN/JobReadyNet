@@ -112,7 +112,7 @@ export default function LandingPageFreePDF() {
 
     try {
       await fetch(
-        "https://script.google.com/macros/s/AKfycbx5QE6Rl1jLoChaRdDxRuZCg0BxJKKr7E3lLSxpUOznog9GM3YofZIYIgP4-BtxIak6/exec",
+        "https://script.google.com/macros/s/AKfycbwmjqhJT4c7IUYX2AbD8bu3rsH-ogC1drnCSxQJsYUjl8zWqAbBCteqbIiZx1-jeQ5F/exec",
         {
           method: "POST",
           mode: "no-cors",
