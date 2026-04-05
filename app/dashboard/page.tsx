@@ -721,12 +721,12 @@ export default function Dashboard() {
   const attemptsLeft = FREE_LIMIT - startedCount;
   const [isLastAttempt, setIsLastAttempt] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [plan, setPlan] = useState<"lifetime" | "weekly">("lifetime");
+  const [plan, setPlan] = useState<"lifetime" | "monthly">("lifetime");
 
   const checkoutLinks = {
     lifetime:
       "https://noteflowai.lemonsqueezy.com/checkout/buy/98ea2ea8-1378-4bcc-900b-c0c3ea03e359",
-    weekly:
+    monthly:
       "https://noteflowai.lemonsqueezy.com/checkout/buy/4f3feb71-08f5-49d8-9193-bb533d1b1b68", // 👉 thay bằng link LemonSqueezy weekly
   };
   // 🔐 Auth check
@@ -1633,14 +1633,14 @@ export default function Dashboard() {
                       <span className="text-xs text-green-500">Best value</span>
                     </button>
                     <button
-                      onClick={() => setPlan("weekly")}
+                      onClick={() => setPlan("monthly")}
                       className={`flex-1 py-2 rounded-lg border ${
-                        plan === "weekly"
+                        plan === "monthly"
                           ? "bg-black text-white"
                           : "text-gray-600"
                       }`}
                     >
-                      $5,99 / week
+                      $9,99 / week
                     </button>
                   </div>
 
