@@ -1418,14 +1418,14 @@ export default function Dashboard() {
                 <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-gray-50 to-transparent flex items-end justify-center">
                   <div className="mb-4 text-center">
                     <p className="text-sm text-gray-600 mb-2">
-                      🔒 Unlock 150 real interview questions
+                      🔒 Unlock 150+ real interview questions
                     </p>
 
                     <button
                       onClick={() => setShowPaywall(true)}
                       className="bg-black text-white px-5 py-2 rounded-lg text-sm"
                     >
-                      Unlock Full Access – $29
+                      Unlock Full Access
                     </button>
                   </div>
                 </div>
