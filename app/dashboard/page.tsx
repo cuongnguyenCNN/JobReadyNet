@@ -1545,19 +1545,45 @@ export default function Dashboard() {
                         <p className="text-sm mt-1">{activeQ?.trap}</p>
                       </div>
                     )}
-
-                    <div className="bg-green-50 p-4 rounded-lg">
-                      <p className="text-sm text-green-600 font-medium">
-                        ✅ Strong answer:
+                    <div className="bg-red-50 p-4 rounded-lg">
+                      <p className="text-sm text-red-600 font-medium">
+                        ❌ Weak answer:
                       </p>
-                      <p className="text-sm mt-1">{activeQ?.strong_answer}</p>
+                      <p className="text-sm mt-1">{activeQ?.weak_answer}</p>
                     </div>
-                    <button
+                    <div className="bg-green-50 p-4 rounded-lg relative">
+                      <p className="text-sm text-green-600 font-medium">
+                        ✅ Strong Answer (locked)
+                      </p>
+
+                      {/* Preview rõ 1 dòng */}
+                      <p className="text-sm mt-1 line-clamp-2">
+                        {activeQ?.strong_answer}
+                      </p>
+
+                      {/* Gradient che phần dưới (fake blur) */}
+                      <div className="absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-green-50 to-transparent"></div>
+
+                      {/* Overlay lock */}
+                      <div className="absolute inset-0 flex flex-col items-center justify-center bg-white/60">
+                        <p className="text-xs text-gray-700 font-medium text-center px-4">
+                          🔒 Unlock to see how senior devs answer this
+                        </p>
+
+                        <button
+                          onClick={() => setShowPaywall(true)}
+                          className="mt-2 px-4 py-1.5 text-xs bg-black text-white rounded-md hover:bg-gray-800 transition"
+                        >
+                          Unlock Answers That Get You Hired
+                        </button>
+                      </div>
+                    </div>
+                    {/* <button
                       onClick={() => setShowPaywall(true)}
                       className="bg-black text-white px-4 py-2 rounded-lg w-full"
                     >
                       🔓 Unlock 150 Questions
-                    </button>
+                    </button> */}
 
                     <button
                       onClick={() => setActiveQ(null)}
