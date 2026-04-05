@@ -1667,7 +1667,7 @@ export default function Dashboard() {
                   </p>
 
                   <div className="text-left text-sm mb-6 space-y-2">
-                    <p>✅ 150 real interview questions</p>
+                    <p>✅ 150+ real interview questions</p>
                     <p>✅ Strong answers (not textbook)</p>
                     <p>✅ Thinking framework</p>
                     <p>✅ Lifetime access</p>
