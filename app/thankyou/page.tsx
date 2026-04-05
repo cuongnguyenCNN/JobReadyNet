@@ -20,6 +20,12 @@ export default function ThankYouPage() {
     }
   }, []);
   const goHome = () => {
+    if (window.gtag) {
+      window.gtag("event", "click_practice_thank_you_view", {
+        event_category: "funnel",
+        event_label: "click_practice_thank_you_view",
+      });
+    }
     window.location.href = "/dashboard";
   };
   return (
@@ -86,13 +92,7 @@ export default function ThankYouPage() {
           </ul>
 
           <button
-            onClick={() => {
-              window.gtag?.("event", "click_practice", {
-                step: "thankyou_page",
-              });
-
-              window.location.href = "/";
-            }}
+            onClick={goHome}
             className="cursor-pointer bg-black text-white px-6 py-3 rounded-lg text-lg font-semibold hover:opacity-90 transition w-full"
           >
             🚀 Start Practice Interview
