@@ -20,7 +20,7 @@ export default function ThankYouPage() {
     }
   }, []);
   const goHome = () => {
-    window.location.href = "/";
+    window.location.href = "/dashboard";
   };
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4 min-h-screen bg-gradient-to-br from-white to-gray-100">

@@ -100,7 +100,15 @@ export default function LandingPageFreePDF() {
       tier: getTier(location.countryCode),
     };
 
-    debugger;
+    const expiry = Date.now() + 5 * 24 * 60 * 60 * 1000;
+
+    localStorage.setItem(
+      "user_email_practice",
+      JSON.stringify({
+        email: form.email,
+        expiry,
+      }),
+    );
 
     try {
       await fetch(

@@ -112,8 +112,8 @@ export default function EnterEmail() {
         },
       );
 
-      // 👉 Lưu localStorage (3 ngày)
-      const expiry = Date.now() + 3 * 24 * 60 * 60 * 1000;
+      // 👉 Lưu localStorage (5 ngày)
+      const expiry = Date.now() + 5 * 24 * 60 * 60 * 1000;
 
       localStorage.setItem(
         "user_email_practice",
