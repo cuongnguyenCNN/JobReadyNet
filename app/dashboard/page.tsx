@@ -1551,20 +1551,53 @@ export default function Dashboard() {
                       </p>
                       <p className="text-sm mt-1">{activeQ?.weak_answer}</p>
                     </div>
-                    <div className="bg-green-50 p-4 rounded-lg relative">
+                    <div className="bg-green-50 p-4 rounded-lg relative overflow-hidden">
                       <p className="text-sm text-green-600 font-medium">
                         ✅ Strong Answer (locked)
                       </p>
 
-                      {/* Preview rõ 1 dòng */}
-                      <p className="text-sm mt-1 line-clamp-2">
-                        {activeQ?.strong_answer}
+                      <p className="text-sm mt-1">
+                        {activeQ?.strong_answer.slice(0, 90)}
+                      </p>
+                      <div className="relative">
+                        <p className="text-sm blur-sm select-none">
+                          {activeQ?.strong_answer.slice(90)}
+                        </p>
+                        <div className="absolute inset-0 bg-white/40"></div>
+                      </div>
+
+                      {/* CTA */}
+                      <div className="mt-2 text-center">
+                        <p className="text-xs text-gray-700 font-medium">
+                          🔒 Unlock to see how senior devs answer this
+                        </p>
+
+                        <button
+                          onClick={() => setShowPaywall(true)}
+                          className="mt-2 px-4 py-1.5 text-xs bg-black text-white rounded-md hover:bg-gray-800 transition"
+                        >
+                          Unlock Answers That Get You Hired
+                        </button>
+                      </div>
+                    </div>
+                    {/* <div className="bg-green-50 p-4 rounded-lg relative">
+                      <p className="text-sm text-green-600 font-medium">
+                        ✅ Strong Answer (locked)
                       </p>
 
-                      {/* Gradient che phần dưới (fake blur) */}
+                      <p className="text-sm mt-1">
+                        {activeQ?.strong_answer.slice(0, 120)}
+                      </p>
+                      <div className="relative">
+                        <p className="text-sm blur-sm select-none">
+                          {activeQ?.strong_answer.slice(120)}
+                        </p>
+                        <div className="absolute inset-0 bg-white/40"></div>
+                      </div>
+                      <p className="text-sm mt-1 line-clamp-1">
+                        {activeQ?.strong_answer}
+                      </p>
                       <div className="absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-green-50 to-transparent"></div>
-
-                      {/* Overlay lock */}
                       <div className="absolute inset-0 flex flex-col items-center justify-center bg-white/60">
                         <p className="text-xs text-gray-700 font-medium text-center px-4">
                           🔒 Unlock to see how senior devs answer this
@@ -1577,13 +1610,7 @@ export default function Dashboard() {
                           Unlock Answers That Get You Hired
                         </button>
                       </div>
-                    </div>
-                    {/* <button
-                      onClick={() => setShowPaywall(true)}
-                      className="bg-black text-white px-4 py-2 rounded-lg w-full"
-                    >
-                      🔓 Unlock 150 Questions
-                    </button> */}
+                    </div> */}
 
                     <button
                       onClick={() => setActiveQ(null)}
