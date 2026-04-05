@@ -1689,7 +1689,7 @@ export default function Dashboard() {
               onClick={() => setShowPaywall(true)}
               className="fixed bottom-4 left-1/2 -translate-x-1/2 bg-black text-white px-6 py-3 rounded-xl shadow-lg text-sm"
             >
-              🔓 Unlock full training – $29,99
+              🔓 Stop Failing .NET Interviews — Unlock Answers
             </div>
 
             {/* EFFECTS */}
