@@ -1666,7 +1666,7 @@ export default function Dashboard() {
                           : "text-gray-600"
                       }`}
                     >
-                      $9,99 / week
+                      $9,99 / month
                     </button>
                   </div>
 
