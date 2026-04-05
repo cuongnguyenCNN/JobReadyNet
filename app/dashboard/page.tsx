@@ -1673,12 +1673,12 @@ export default function Dashboard() {
                   {/* Price display */}
                   <div className="mb-6">
                     <p className="text-3xl font-bold">
-                      {plan === "lifetime" ? "$29,99" : "$5,99"}
+                      {plan === "lifetime" ? "$29,99" : "$9,99"}
                     </p>
                     <p className="text-xs text-gray-400">
                       {plan === "lifetime"
                         ? "One-time payment"
-                        : "Billed weekly"}
+                        : "Billed monthly"}
                     </p>
                   </div>
 
