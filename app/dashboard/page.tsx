@@ -1760,10 +1760,10 @@ export default function Dashboard() {
                   </p>
 
                   <div className="text-left text-sm mb-6 space-y-2">
-                    <p>✅ 150+ real interview questions</p>
-                    <p>✅ Strong answers (not textbook)</p>
-                    <p>✅ Thinking framework</p>
-                    <p>✅ Lifetime access</p>
+                    <p>✅ See how senior devs ACTUALLY answer </p>{" "}
+                    <p>✅ Understand what interviewers are testing</p>
+                    <p> ✅ Avoid the mistakes that get you rejected</p>{" "}
+                    <p>✅ Think like a senior (not memorize like a junior) </p>
                   </div>
                   {/* Pricing toggle */}
                   <div className="flex gap-2 mb-6">
@@ -1824,7 +1824,7 @@ export default function Dashboard() {
                     onClick={() => setShowPaywall(false)}
                     className="mt-4 text-xs text-gray-400"
                   >
-                    Maybe later
+                    Continue failing for free
                   </button>
                 </div>
               </div>

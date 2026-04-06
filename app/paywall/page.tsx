@@ -16,25 +16,30 @@ export default function Paywall() {
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4">
       <div className="bg-white rounded-2xl p-8 max-w-md w-full shadow-xl text-center">
         <h2 className="text-2xl font-semibold mb-3">
-          Most developers fail THIS question.
+          👉 That’s why most developers get rejected.
         </h2>
 
         <p className="text-sm text-gray-500 mb-4">
-          Not because they can't code.
+          🚀 You will fail interviews even if you know the answers Because you
+          explain like a junior.
         </p>
-
+        {/* 
         <p className="text-sm text-gray-500 mb-6">
           But because they don’t understand how things actually work.
-        </p>
+        </p> */}
 
         <p className="text-sm font-medium mb-6">👉 Don’t be one of them.</p>
 
         {/* Value */}
         <div className="text-left text-sm mb-6 space-y-2">
-          <p>✅ 150 real interview questions</p>
+          {/* <p>✅ 150 real interview questions</p>
           <p>✅ Strong answers (not textbook)</p>
           <p>✅ Thinking framework</p>
-          <p>✅ Lifetime access</p>
+          <p>✅ Lifetime access</p> */}
+          <p>✅ See how senior devs ACTUALLY answer </p>{" "}
+          <p>✅ Understand what interviewers are testing</p>
+          <p> ✅ Avoid the mistakes that get you rejected</p>{" "}
+          <p>✅ Think like a senior (not memorize like a junior) </p>
         </div>
 
         {/* Pricing toggle */}
@@ -90,7 +95,7 @@ export default function Paywall() {
           onClick={() => (window.location.href = "/")}
           className="mt-4 text-xs text-gray-400"
         >
-          Maybe later
+          Continue failing for free
         </button>
 
         <p className="text-xs text-gray-400 mt-4">
