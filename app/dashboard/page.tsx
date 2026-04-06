@@ -795,7 +795,7 @@ const mockQuestions: Question[] = [
     trap: "Confusing the two = common fail.",
   },
 ];
-const FREE_LIMIT = 5;
+const FREE_LIMIT = 3;
 type View = "practice" | "failed" | "progress";
 export default function Dashboard() {
   const [user, setUser] = useState<any>(null);
