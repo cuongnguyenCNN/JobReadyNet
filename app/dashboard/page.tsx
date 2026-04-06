@@ -1625,7 +1625,7 @@ export default function Dashboard() {
                   <div className="mt-4 space-y-4">
                     <div className="bg-gray-100 p-4 rounded-lg">
                       <p className="text-sm font-medium">
-                        🎯 Your score: {Math.round((score || 0) * 100)}%
+                        🎯 Your score: {Math.round((score || 0) * 10)}/10
                       </p>
                       <p className="text-sm mt-1">{feedback}</p>
                     </div>
