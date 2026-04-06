@@ -299,7 +299,7 @@ especially in loops or high-frequency operations.`,
       {/* NAV */}
       <nav className="top-0 bg-white/80 backdrop-blur ">
         <div className="flex justify-between items-center px-6 py-4 max-w-6xl mx-auto">
-          <h1 className="font-bold text-lg tracking-tight">PassDotnet</h1>
+          <h1 className="font-bold text-lg tracking-tight">.NetInterviewLab</h1>
 
           <div className="hidden md:flex items-center gap-6 text-sm text-gray-600">
             <a href="/login" className="hover:text-black transition">

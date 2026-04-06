@@ -18,7 +18,7 @@ export default function Home() {
       <nav className="sticky top-0 bg-white/80 backdrop-blur z-999 ">
         <div className="flex justify-between items-center px-4 py-4 max-w-6xl mx-auto">
           {/* Logo */}
-          <h1 className="font-bold text-lg tracking-tight">PassDotnet</h1>
+          <h1 className="font-bold text-lg tracking-tight">.NetInterviewLab</h1>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-6 text-sm text-gray-600">
