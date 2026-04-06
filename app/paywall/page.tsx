@@ -50,7 +50,7 @@ export default function Paywall() {
               plan === "lifetime" ? "bg-black text-white" : "text-gray-600"
             }`}
           >
-            $29,99 Lifetime <br></br>
+            $29 Lifetime <br></br>
             <span className="text-xs text-green-500">Best value</span>
           </button>
           <button
@@ -59,14 +59,14 @@ export default function Paywall() {
               plan === "monthly" ? "bg-black text-white" : "text-gray-600"
             }`}
           >
-            $9,99 / month
+            $9 / month
           </button>
         </div>
 
         {/* Price display */}
         <div className="mb-6">
           <p className="text-3xl font-bold">
-            {plan === "lifetime" ? "$29,99" : "$9,99"}
+            {plan === "lifetime" ? "$29" : "$9"}
           </p>
           <p className="text-xs text-gray-400">
             {plan === "lifetime" ? "One-time payment" : "Billed monthly"}
