@@ -104,7 +104,7 @@ export default function LandingPageProNet() {
           </div>
           {/* Urgency */}
           <div className="text-sm text-red-500 font-semibold">
-            ⏳ Price will increase to $49 soon
+            ⏳ Price will increase to $29 soon
           </div>
         </div>
         <GeoPricing></GeoPricing>

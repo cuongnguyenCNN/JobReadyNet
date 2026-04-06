@@ -123,7 +123,7 @@ export default function GeoPricing() {
     <div style={{ textAlign: "center" }}>
       {geo.tier === "Tier1" && (
         <>
-          <h2>$29 - Real Answers That Get You Hired</h2>
+          <h2>$19 - Real Answers That Get You Hired</h2>
           <button
             onClick={() =>
               handleBuy(
@@ -132,14 +132,14 @@ export default function GeoPricing() {
             }
             className="cursor-pointer bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-md"
           >
-            🎁 Get Instant Access - $29
+            🎁 Get Instant Access - $19
           </button>
         </>
       )}
 
       {geo.tier === "Tier2" && (
         <>
-          <h2>$9,99 - Special Price</h2>
+          <h2>$9 - Special Price</h2>
           <button
             onClick={() =>
               handleBuy(
@@ -148,14 +148,14 @@ export default function GeoPricing() {
             }
             className="cursor-pointer bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-md"
           >
-            🎁 Get Instant Access - $9,99
+            🎁 Get Instant Access - $9
           </button>
         </>
       )}
       {/* https://noteflowai.lemonsqueezy.com/checkout/buy/052b0e2a-3b9d-4370-b23f-480593c02cdc */}
       {geo.tier === "Tier3" && (
         <>
-          <h2>🎁 Special Regional Price: $9,99</h2>
+          <h2>🎁 Special Regional Price: $9</h2>
           <p>Affordable access for your region</p>
 
           <button
@@ -166,7 +166,7 @@ export default function GeoPricing() {
             }
             className="cursor-pointer bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-md"
           >
-            🎁 Get Instant Access - $5,99
+            🎁 Get Instant Access - $9
           </button>
         </>
       )}
