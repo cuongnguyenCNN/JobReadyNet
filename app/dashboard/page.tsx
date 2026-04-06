@@ -1775,7 +1775,7 @@ export default function Dashboard() {
                           : "text-gray-600"
                       }`}
                     >
-                      $29 Lifetime <br></br>
+                      $19 Lifetime <br></br>
                       <span className="text-xs text-green-500">Best value</span>
                     </button>
                     <button
@@ -1793,7 +1793,7 @@ export default function Dashboard() {
                   {/* Price display */}
                   <div className="mb-6">
                     <p className="text-3xl font-bold">
-                      {plan === "lifetime" ? "$29" : "$9"}
+                      {plan === "lifetime" ? "$19" : "$9"}
                     </p>
                     <p className="text-xs text-gray-400">
                       {plan === "lifetime"
