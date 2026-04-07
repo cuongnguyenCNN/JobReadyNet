@@ -41,7 +41,7 @@ export default function RightPanel({
 
         <button
           onClick={handleSubmit}
-          className={`px-4 py-2 rounded-lg text-white bg-black`}
+          className={`cursor-pointer px-4 py-2 rounded-lg text-white bg-black`}
         >
           Analyze answer
         </button>
