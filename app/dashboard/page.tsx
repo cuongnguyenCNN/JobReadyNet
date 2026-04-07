@@ -7,6 +7,11 @@ import LiveViewers from "@/components/LiveViewers";
 import FakeHeatmap from "@/components/FakeHeatMap";
 import Countdown from "@/components/CountDown";
 import { Space } from "lucide-react";
+import EmptyState from "@/components/EmptyStateRight";
+import Paywall from "@/paywall/page";
+import Header from "@/components/HeaderDashboard";
+import LeftPanel from "@/components/LeftPanelDashboard";
+import RightPanel from "@/components/RightPanelDashboard";
 
 type Question = {
   id: string;
@@ -815,7 +820,7 @@ export default function Dashboard() {
   const [isLastAttempt, setIsLastAttempt] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [plan, setPlan] = useState<"lifetime" | "monthly">("lifetime");
-
+  const [isMobile, setIsMobile] = useState(false);
   const checkoutLinks = {
     lifetime:
       "https://noteflowai.lemonsqueezy.com/checkout/buy/98ea2ea8-1378-4bcc-900b-c0c3ea03e359",
@@ -841,19 +846,19 @@ export default function Dashboard() {
 
     setUser(parsed);
   }, [router]);
-  //   useEffect(() => {
-  //     localStorage.setItem("startedCount", startedCount.toString());
-  //   }, [startedCount]);
+
   useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 1024);
+    check();
+    window.addEventListener("resize", check);
+
     const saved = localStorage.getItem("startedCount");
 
     if (saved) {
       setStartedCount(parseInt(saved));
     }
+    return () => window.removeEventListener("resize", check);
   }, []);
-  //   useEffect(() => {
-  //     localStorage.setItem("failedQuestions", JSON.stringify(failedQuestions));
-  //   }, [failedQuestions]);
   useEffect(() => {
     const saved = localStorage.getItem("failedQuestions");
 
@@ -864,11 +869,6 @@ export default function Dashboard() {
   if (!user) return null;
 
   const handleStart = (q: Question, index: number) => {
-    // if (index >= FREE_LIMIT) {
-    //   setShowPaywall(true);
-    //   return;
-    // }
-
     if (startedCount >= FREE_LIMIT) {
       setShowPaywall(true);
       return;
@@ -919,6 +919,7 @@ export default function Dashboard() {
     return score;
   };
   const handleSubmit = () => {
+    debugger;
     const result = evaluateAnswer(answer, activeQ!.strong_answer);
 
     setScore(result);
@@ -953,364 +954,6 @@ export default function Dashboard() {
 
   return (
     <>
-      {/* <div className="flex min-h-screen bg-gray-50">
-        <div className="sticky top-0 left-0 h-screen w-64 bg-white border-r flex flex-col hidden md:flex md:w-64">
-          <div>
-            <div className="px-5 py-4 border-b">
-              <h1 className="font-semibold text-gray-800 text-lg tracking-tight">
-                InterviewAI
-              </h1>
-              <p className="text-xs text-gray-400">Get hired faster</p>
-            </div>
-
-            <div className="p-3 space-y-1">
-              {[
-                { key: "practice", label: "Practice", icon: "🎯" },
-                { key: "failed", label: "Failed Questions", icon: "🔥" },
-                { key: "progress", label: "Progress", icon: "📈" },
-              ].map((item) => (
-                <div
-                  key={item.key}
-                  onClick={() => setView(item.key as View)}
-                  className={`
-            flex items-center gap-3 px-3 py-2 rounded-lg cursor-pointer
-            transition-all duration-200
-            ${
-              view === item.key
-                ? "bg-gray-900 text-white shadow-sm"
-                : "text-gray-600 hover:bg-gray-100"
-            }
-          `}
-                >
-                  <span className="text-lg">{item.icon}</span>
-                  <span className="text-sm font-medium">{item.label}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="p-4">
-            <div className="bg-gradient-to-br from-indigo-500 to-purple-600 text-white rounded-xl p-4 shadow-md">
-              <p className="text-sm font-semibold">Upgrade to Pro</p>
-              <p className="text-xs opacity-80 mt-1">
-                Unlock all questions + AI feedback
-              </p>
-
-              <button
-                onClick={() => setShowPaywall(true)}
-                className="mt-3 w-full bg-white text-indigo-600 text-sm font-semibold py-2 rounded-lg hover:bg-gray-100 transition"
-              >
-                Upgrade
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div className="flex-1 p-6">
-          <div className="flex justify-between mb-6">
-            <p className="text-sm text-gray-500">
-              🔥 78% devs fail these questions
-            </p>
-
-            <button
-              onClick={() => setShowPaywall(true)}
-              className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm"
-            >
-              Upgrade
-            </button>
-          </div>
-          {view === "practice" && !activeQ && (
-            <div className="space-y-4 relative">
-              <p className="text-sm text-gray-500">Showing 10/159 questions</p>
-
-              <p
-                className={`text-sm ${
-                  attemptsLeft <= 3
-                    ? "text-red-600 font-semibold"
-                    : "text-gray-500"
-                }`}
-              >
-                ⏱ You have {attemptsLeft} free attempts left
-              </p>
-              {attemptsLeft <= 0 && (
-                <div className="bg-black text-white p-5 rounded-xl text-center">
-                  <p className="text-lg font-semibold">
-                    You've used all free attempts.
-                  </p>
-
-                  <p className="text-sm text-gray-300 mt-2">
-                    Most developers fail because they stop here.
-                  </p>
-
-                  <button
-                    onClick={() => setShowPaywall(true)}
-                    className="mt-4 bg-white text-black px-4 py-2 rounded-lg"
-                  >
-                    🔓 Continue Practicing
-                  </button>
-                </div>
-              )}
-              {mockQuestions.map((q, index) => {
-                const isLocked = index >= 10;
-
-                return (
-                  <div
-                    key={q.id}
-                    className={`bg-white p-5 rounded-xl shadow-sm relative ${
-                      isLocked ? "opacity-40 pointer-events-none" : ""
-                    }`}
-                  >
-                    {isLastAttempt && (
-                      <div className="bg-yellow-100 text-yellow-800 p-3 rounded-lg mb-4 text-sm">
-                        🔥 This is your last free question. Use it wisely.
-                      </div>
-                    )}
-                    <h3 className="font-semibold mb-3">{q.title}</h3>
-
-                    {!isLocked ? (
-                      <button
-                        onClick={() => handleStart(q, index)}
-                        className="bg-black text-white px-4 py-2 rounded-lg text-sm"
-                      >
-                        🎯 Start Answering
-                      </button>
-                    ) : (
-                      <button
-                        onClick={() => setShowPaywall(true)}
-                        className="bg-gray-400 text-white px-4 py-2 rounded-lg text-sm"
-                      >
-                        🔒 Locked
-                      </button>
-                    )}
-                  </div>
-                );
-              })}
-
-        
-              <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-gray-50 to-transparent flex items-end justify-center">
-                <div className="mb-4 text-center">
-                  <p className="text-sm text-gray-600 mb-2">
-                    🔒 Unlock 150 real interview questions
-                  </p>
-
-                  <button
-                    onClick={() => setShowPaywall(true)}
-                    className="bg-black text-white px-5 py-2 rounded-lg text-sm"
-                  >
-                    Unlock Full Access – $19
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
-          {view === "failed" && (
-            <div className="space-y-4">
-              {failedQuestions.length === 0 ? (
-                <p className="text-gray-500 text-sm">
-                  You haven't failed any questions yet.
-                </p>
-              ) : (
-                <>
-             
-                  <div className="bg-red-50 p-4 rounded-lg">
-                    <p className="text-sm font-medium text-red-600">
-                      You failed {failedQuestions.length}/{completed} questions.
-                    </p>
-
-                    <p className="text-xs text-gray-600 mt-1">
-                      This is why interviews feel hard.
-                    </p>
-                  </div>
-
-          
-                  {failedQuestions.map((q) => (
-                    <div
-                      key={q.id}
-                      className="bg-white p-4 rounded-lg shadow-sm"
-                    >
-                      <p className="font-medium">{q.title}</p>
-
-                      <p className="text-sm text-red-600 mt-1">
-                        💀 You failed this. Try again.
-                      </p>
-
-                      <button
-                        onClick={() => setActiveQ(q)}
-                        className="mt-2 text-sm text-blue-600"
-                      >
-                        Retry
-                      </button>
-                    </div>
-                  ))}
-                </>
-              )}
-            </div>
-          )}
-          {view === "progress" && (
-            <div className="bg-white p-6 rounded-xl shadow-sm">
-              <p className="text-sm mb-2">Questions completed: {completed}</p>
-
-              <p className="text-sm mb-2">
-                Failed questions: {failedQuestions.length}
-              </p>
-
-              <p className="text-sm text-gray-500">
-                Keep practicing. Most devs fail before they pass.
-              </p>
-            </div>
-          )}
-          
-        
-          {activeQ && (
-            <div className="bg-white p-6 rounded-xl shadow-sm max-w-2xl">
-              <h2 className="font-semibold mb-4">{activeQ.title}</h2>
-
-              {!submitted ? (
-                <>
-                  <textarea
-                    value={answer}
-                    onChange={(e) => setAnswer(e.target.value)}
-                    placeholder="Type your answer like in a real interview..."
-                    className="w-full border p-3 rounded-lg mb-4 text-sm"
-                    rows={5}
-                  />
-
-                  <button
-                    onClick={handleSubmit}
-                    className="bg-black text-white px-4 py-2 rounded-lg"
-                  >
-                    Submit Answer
-                  </button>
-                </>
-              ) : (
-                <div className="mt-4 space-y-4">
-                  <div className="bg-gray-100 p-4 rounded-lg">
-                    <p className="text-sm font-medium">
-                      🎯 Your score: {Math.round((score || 0) * 100)}%
-                    </p>
-                    <p className="text-sm mt-1">{feedback}</p>
-                  </div>
-
-                  {score !== null && score < 0.3 && (
-                    <div className="bg-red-50 p-4 rounded-lg">
-                      <p className="text-sm text-red-600 font-medium">
-                        💀 Why you sound like a junior:
-                      </p>
-                      <p className="text-sm mt-1">{activeQ?.trap}</p>
-                    </div>
-                  )}
-
-                  <div className="bg-green-50 p-4 rounded-lg">
-                    <p className="text-sm text-green-600 font-medium">
-                      ✅ Strong answer:
-                    </p>
-                    <p className="text-sm mt-1">{activeQ?.strong_answer}</p>
-                  </div>
-                  <button
-                    onClick={() => setShowPaywall(true)}
-                    className="bg-black text-white px-4 py-2 rounded-lg w-full"
-                  >
-                    🔓 Unlock 150 Questions
-                  </button>
-
-                  <button
-                    onClick={() => setActiveQ(null)}
-                    className="text-xm text-gray-600"
-                  >
-                    Back
-                  </button>
-                </div>
-              )}
-              {rank !== null && (
-                <div className="bg-black text-white p-5 rounded-xl text-center mt-4">
-                  <p className="text-lg font-semibold">
-                    You are worse than {Math.round(rank)}% of developers.
-                  </p>
-
-                  <p className="text-sm text-gray-300 mt-2">
-                    Most candidates fail not because they don’t know. But
-                    because they can’t explain clearly.
-                  </p>
-
-                  <button
-                    onClick={() => setShowPaywall(true)}
-                    className="mt-4 bg-white text-black px-4 py-2 rounded-lg text-sm font-medium"
-                  >
-                    🔓 Fix this before your next interview
-                  </button>
-                </div>
-              )}
-              {submitted && failedQuestions.length > 0 && (
-                <div className="bg-red-50 p-4 rounded-lg mt-4">
-                  <p className="text-sm text-red-600 font-medium">
-                    You failed {failedQuestions.length}/{completed + 1}{" "}
-                    questions.
-                  </p>
-
-                  <p className="text-xs text-gray-600 mt-1">
-                    This is why interviews feel hard.
-                  </p>
-                </div>
-              )}
-            </div>
-          )}
-
-          {showPaywall && (
-            <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4">
-              <div className="bg-white rounded-2xl p-8 max-w-md w-full text-center">
-                <h2 className="text-2xl font-semibold mb-3">
-                  You don’t fail because you don’t know.
-                </h2>
-
-                <p className="text-sm text-gray-500 mb-6">
-                  You fail because you answer like a junior.
-                </p>
-
-                <div className="text-left text-sm mb-6 space-y-2">
-                  <p>✅ 150 real interview questions</p>
-                  <p>🔥 Hidden traps explained</p>
-                  <p>🎯 Practice like real interview</p>
-                </div>
-
-                <p className="text-3xl font-bold mb-2">$19</p>
-
-                <Countdown />
-
-                <button
-                  onClick={() =>
-                    window.open(
-                      "https://noteflowai.lemonsqueezy.com/checkout/buy/98ea2ea8-1378-4bcc-900b-c0c3ea03e359",
-                      "_blank",
-                    )
-                  }
-                  className="w-full bg-black text-white py-3 rounded-lg mt-4"
-                >
-                  🔓 Unlock Now
-                </button>
-
-                <button
-                  onClick={() => setShowPaywall(false)}
-                  className="mt-4 text-xs text-gray-400"
-                >
-                  Maybe later
-                </button>
-              </div>
-            </div>
-          )}
-
-          <div
-            onClick={() => setShowPaywall(true)}
-            className="fixed bottom-4 left-1/2 -translate-x-1/2 bg-black text-white px-6 py-3 rounded-xl shadow-lg text-sm"
-          >
-            🔓 Unlock full training – $19
-          </div>
-
-     
-          <LiveViewers />
-          <FakeHeatmap />
-          <FakeNotification />
-        </div>
-      </div> */}
       <div className="flex min-h-screen bg-gray-50">
         {isOpen && (
           <div
@@ -1319,7 +962,6 @@ export default function Dashboard() {
           />
         )}
 
-        {/* SIDEBAR */}
         <div
           className={`
           fixed md:sticky z-50
@@ -1331,7 +973,6 @@ export default function Dashboard() {
           md:translate-x-0
         `}
         >
-          {/* TOP */}
           <div>
             {/* LOGO + CLOSE */}
             <div className="px-5 py-4 border-b flex justify-between items-center">
@@ -1383,9 +1024,7 @@ export default function Dashboard() {
             </div>
           </div>
 
-          {/* BOTTOM */}
           <div className="p-4">
-            {/* UPGRADE CARD */}
             <div className="bg-gradient-to-br from-indigo-500 to-purple-600 text-white rounded-xl p-4 shadow-md">
               <p className="text-sm font-semibold">Upgrade to Pro</p>
               <p className="text-xs opacity-80 mt-1">
@@ -1402,352 +1041,99 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
+        <div className="hidden lg:block flex-1 flex flex-col">
+          {/* Header */}
+          <Header onOpenMenu={() => setIsOpen(true)} />
 
-        {/* MAIN */}
-        <div className="flex-1 flex flex-col">
-          {/* TOPBAR */}
-          <div className="flex items-center justify-between p-4 bg-white border-b">
-            {/* Open mobile */}
-            <button
-              onClick={() => setIsOpen(true)}
-              className="md:hidden bg-black text-white px-3 py-1 rounded"
-            >
-              ☰
-            </button>
+          {/* Main */}
+          <div className="px-4 py-4 max-w-8xl mx-auto w-full container">
+            <div className="lg:flex lg:gap-6">
+              {/* LEFT */}
+              <div className="w-full lg:w-[65%]">
+                <LeftPanel
+                  view={view}
+                  activeQ={activeQ}
+                  mockQuestions={mockQuestions}
+                  attemptsLeft={attemptsLeft}
+                  isLastAttempt={isLastAttempt}
+                  handleStart={handleStart}
+                  setShowPaywall={setShowPaywall}
+                />
+                {view === "failed" && (
+                  <div className="space-y-4">
+                    {failedQuestions.length === 0 ? (
+                      <p className="text-gray-500 text-sm">
+                        You haven't failed any questions yet.
+                      </p>
+                    ) : (
+                      <>
+                        <div className="bg-red-50 p-4 rounded-lg">
+                          <p className="text-sm font-medium text-red-600">
+                            You failed {failedQuestions.length}/{completed}{" "}
+                            questions.
+                          </p>
 
-            <h1 className="font-semibold text-gray-800 text-lg">Dashboard</h1>
-
-            <div>👤</div>
-          </div>
-
-          {/* CONTENT */}
-          <div className="flex-1 p-6">
-            {/* Top */}
-            <div className="flex justify-between mb-6">
-              <p className="text-sm text-gray-500">
-                🔥 78% devs fail these questions
-              </p>
-
-              <button
-                onClick={() => setShowPaywall(true)}
-                className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm"
-              >
-                Pass Interview Faster
-              </button>
-            </div>
-            {view === "practice" && !activeQ && (
-              <div className="space-y-4 relative">
-                <p className="text-sm text-gray-500">
-                  Showing 10/159 questions
-                </p>
-                {/* <p className="text-sm text-gray-500">
-              Free attempts: {startedCount}/{FREE_LIMIT}
-            </p> */}
-                <p
-                  className={`text-sm ${
-                    attemptsLeft <= 3
-                      ? "text-red-600 font-semibold"
-                      : "text-gray-500"
-                  }`}
-                >
-                  🚨 Only {attemptsLeft} answers left before lock (Most users
-                  fail before finishing)
-                </p>
-                {attemptsLeft <= 0 && (
-                  <div className="bg-black text-white p-5 rounded-xl text-center">
-                    <p className="text-lg font-semibold">
-                      You've used all free attempts.
-                    </p>
-
-                    <p className="text-sm text-gray-300 mt-2">
-                      Most developers fail because they stop here.
-                    </p>
-
-                    <button
-                      onClick={() => setShowPaywall(true)}
-                      className="mt-4 bg-white text-black px-4 py-2 rounded-lg"
-                    >
-                      🔓 Continue Practicing
-                    </button>
-                  </div>
-                )}
-                {mockQuestions.map((q, index) => {
-                  const isLocked = index >= 10;
-
-                  return (
-                    <div
-                      key={q.id}
-                      className={`bg-white p-5 rounded-xl shadow-sm relative ${
-                        isLocked ? "opacity-40 pointer-events-none" : ""
-                      }`}
-                    >
-                      {isLastAttempt && (
-                        <div className="bg-yellow-100 text-yellow-800 p-3 rounded-lg mb-4 text-sm">
-                          🔥 This is your last free question. Use it wisely.
+                          <p className="text-xs text-gray-600 mt-1">
+                            This is why interviews feel hard.
+                          </p>
                         </div>
-                      )}
-                      <h3 className="font-semibold mb-3">{q.title}</h3>
 
-                      {!isLocked ? (
-                        <button
-                          onClick={() => handleStart(q, index)}
-                          className="bg-black text-white px-4 py-2 rounded-lg text-sm"
-                        >
-                          🎯 Start Answering
-                        </button>
-                      ) : (
-                        <button
-                          onClick={() => setShowPaywall(true)}
-                          className="bg-gray-400 text-white px-4 py-2 rounded-lg text-sm"
-                        >
-                          🔒 Locked
-                        </button>
-                      )}
-                    </div>
-                  );
-                })}
+                        {failedQuestions.map((q) => (
+                          <div
+                            key={q.id}
+                            className="bg-white p-4 rounded-lg shadow-sm"
+                          >
+                            <p className="font-medium">{q.title}</p>
 
-                {/* 🔥 FADE OVERLAY */}
-                <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-gray-50 to-transparent flex items-end justify-center">
-                  <div className="mb-4 text-center">
-                    <p className="text-sm text-gray-600 mb-2">
-                      🔒 Unlock 150+ real interview questions
-                    </p>
+                            <p className="text-sm text-red-600 mt-1">
+                              💀 You failed this. Try again.
+                            </p>
 
-                    <button
-                      onClick={() => setShowPaywall(true)}
-                      className="bg-black text-white px-5 py-2 rounded-lg text-sm"
-                    >
-                      Unlock Full Access
-                    </button>
-                  </div>
-                </div>
-              </div>
-            )}
-            {view === "failed" && (
-              <div className="space-y-4">
-                {failedQuestions.length === 0 ? (
-                  <p className="text-gray-500 text-sm">
-                    You haven't failed any questions yet.
-                  </p>
-                ) : (
-                  <>
-                    {/* Summary */}
-                    <div className="bg-red-50 p-4 rounded-lg">
-                      <p className="text-sm font-medium text-red-600">
-                        You failed {failedQuestions.length}/{completed}{" "}
-                        questions.
-                      </p>
-
-                      <p className="text-xs text-gray-600 mt-1">
-                        This is why interviews feel hard.
-                      </p>
-                    </div>
-
-                    {/* List failed questions */}
-                    {failedQuestions.map((q) => (
-                      <div
-                        key={q.id}
-                        className="bg-white p-4 rounded-lg shadow-sm"
-                      >
-                        <p className="font-medium">{q.title}</p>
-
-                        <p className="text-sm text-red-600 mt-1">
-                          💀 You failed this. Try again.
-                        </p>
-
-                        <button
-                          onClick={() => setActiveQ(q)}
-                          className="mt-2 text-sm text-blue-600"
-                        >
-                          Retry
-                        </button>
-                      </div>
-                    ))}
-                  </>
-                )}
-              </div>
-            )}
-            {view === "progress" && (
-              <div className="bg-white p-6 rounded-xl shadow-sm">
-                <p className="text-sm mb-2">Questions completed: {completed}</p>
-
-                <p className="text-sm mb-2">
-                  Failed questions: {failedQuestions.length}
-                </p>
-
-                <p className="text-sm text-gray-500">
-                  Keep practicing. Most devs fail before they pass.
-                </p>
-              </div>
-            )}
-            {/* LIST */}
-            {/* {!activeQ && (
-          <div className="space-y-4">
-            {mockQuestions.map((q, index) => (
-              <div key={q.id} className="bg-white p-5 rounded-xl shadow-sm">
-                <h3 className="font-semibold mb-3">{q.title}</h3>
-
-                <button
-                  onClick={() => handleStart(q, index)}
-                  className="bg-black text-white px-4 py-2 rounded-lg text-sm"
-                >
-                  🎯 Start Answering
-                </button>
-              </div>
-            ))}
-          </div>
-        )} */}
-
-            {/* INTERVIEW MODE */}
-            {activeQ && (
-              <div className="bg-white p-6 rounded-xl shadow-sm max-w-2xl">
-                <h2 className="font-semibold mb-4">{activeQ.title}</h2>
-
-                {!submitted ? (
-                  <>
-                    <textarea
-                      value={answer}
-                      onChange={(e) => setAnswer(e.target.value)}
-                      placeholder="Type your answer like in a real interview..."
-                      className="w-full border p-3 rounded-lg mb-4 text-sm"
-                      rows={5}
-                    />
-
-                    <button
-                      onClick={handleSubmit}
-                      className="bg-black text-white px-4 py-2 rounded-lg"
-                    >
-                      Submit Answer
-                    </button>
-                  </>
-                ) : (
-                  <div className="mt-4 space-y-4">
-                    <div className="bg-gray-100 p-4 rounded-lg">
-                      <p className="text-sm font-medium">
-                        🎯 Your score: {Math.round((score || 0) * 10)}/10
-                      </p>
-                      <p className="text-sm mt-1">{feedback}</p>
-                    </div>
-
-                    {score !== null && score < 0.3 && (
-                      <div className="bg-red-50 p-4 rounded-lg">
-                        <p className="text-sm text-red-600 font-medium">
-                          💀 Why you sound like a junior:
-                        </p>
-                        <p className="text-sm mt-1">{activeQ?.trap}</p>
-                      </div>
+                            <button
+                              onClick={() => setActiveQ(q)}
+                              className="mt-2 text-sm text-blue-600"
+                            >
+                              Retry
+                            </button>
+                          </div>
+                        ))}
+                      </>
                     )}
-                    <div className="bg-red-50 p-4 rounded-lg">
-                      <p className="text-sm text-red-600 font-medium">
-                        ❌ Weak answer:
-                      </p>
-                      <p className="text-sm mt-1">{activeQ?.weak_answer}</p>
-                    </div>
-                    <div className="bg-green-50 p-4 rounded-lg relative overflow-hidden">
-                      <p className="text-sm text-green-600 font-medium">
-                        ✅ Strong Answer (locked)
-                      </p>
-
-                      <p className="text-sm mt-1">
-                        {activeQ?.strong_answer.slice(0, 90)}
-                      </p>
-                      <div className="relative">
-                        <p className="text-sm blur-sm select-none">
-                          {activeQ?.strong_answer.slice(90)}
-                        </p>
-                        <div className="absolute inset-0 bg-white/40"></div>
-                      </div>
-
-                      {/* CTA */}
-                      <div className="mt-2 text-center">
-                        <p className="text-xs text-gray-700 font-medium">
-                          🔒 Unlock to see how senior devs answer this
-                        </p>
-
-                        <button
-                          onClick={() => setShowPaywall(true)}
-                          className="mt-2 px-4 py-1.5 text-xs bg-black text-white rounded-md hover:bg-gray-800 transition"
-                        >
-                          Unlock Answers That Get You Hired
-                        </button>
-                      </div>
-                    </div>
-                    {/* <div className="bg-green-50 p-4 rounded-lg relative">
-                      <p className="text-sm text-green-600 font-medium">
-                        ✅ Strong Answer (locked)
-                      </p>
-
-                      <p className="text-sm mt-1">
-                        {activeQ?.strong_answer.slice(0, 120)}
-                      </p>
-                      <div className="relative">
-                        <p className="text-sm blur-sm select-none">
-                          {activeQ?.strong_answer.slice(120)}
-                        </p>
-                        <div className="absolute inset-0 bg-white/40"></div>
-                      </div>
-                      <p className="text-sm mt-1 line-clamp-1">
-                        {activeQ?.strong_answer}
-                      </p>
-                      <div className="absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-green-50 to-transparent"></div>
-                      <div className="absolute inset-0 flex flex-col items-center justify-center bg-white/60">
-                        <p className="text-xs text-gray-700 font-medium text-center px-4">
-                          🔒 Unlock to see how senior devs answer this
-                        </p>
-
-                        <button
-                          onClick={() => setShowPaywall(true)}
-                          className="mt-2 px-4 py-1.5 text-xs bg-black text-white rounded-md hover:bg-gray-800 transition"
-                        >
-                          Unlock Answers That Get You Hired
-                        </button>
-                      </div>
-                    </div> */}
-
-                    <button
-                      onClick={() => setActiveQ(null)}
-                      className="text-xm text-gray-600"
-                    >
-                      Back
-                    </button>
                   </div>
                 )}
-                {rank !== null && (
-                  <div className="bg-black text-white p-5 rounded-xl text-center mt-4">
-                    <p className="text-lg font-semibold">
-                      You are worse than {Math.round(rank)}% of developers.
+                {view === "progress" && (
+                  <div className="bg-white p-6 rounded-xl shadow-sm">
+                    <p className="text-sm mb-2">
+                      Questions completed: {completed}
                     </p>
 
-                    <p className="text-sm text-gray-300 mt-2">
-                      Most candidates fail not because they don’t know. But
-                      because they can’t explain clearly.
+                    <p className="text-sm mb-2">
+                      Failed questions: {failedQuestions.length}
                     </p>
 
-                    <button
-                      onClick={() => setShowPaywall(true)}
-                      className="mt-4 bg-white text-black px-4 py-2 rounded-lg text-sm font-medium"
-                    >
-                      🔓 Fix this before your next interview
-                    </button>
-                  </div>
-                )}
-                {submitted && failedQuestions.length > 0 && (
-                  <div className="bg-red-50 p-4 rounded-lg mt-4">
-                    <p className="text-sm text-red-600 font-medium">
-                      You failed {failedQuestions.length}/{completed + 1}{" "}
-                      questions.
-                    </p>
-
-                    <p className="text-xs text-gray-600 mt-1">
-                      This is why interviews feel hard.
+                    <p className="text-sm text-gray-500">
+                      Keep practicing. Most devs fail before they pass.
                     </p>
                   </div>
                 )}
               </div>
-            )}
 
-            {/* PAYWALL */}
+              {/* RIGHT */}
+              <div className="hidden lg:block lg:w-[35%]">
+                <RightPanel
+                  activeQ={activeQ}
+                  submitted={submitted}
+                  answer={answer}
+                  setAnswer={setAnswer}
+                  handleSubmit={handleSubmit}
+                  score={score}
+                  feedback={feedback}
+                  rank={rank}
+                  setActiveQ={setActiveQ}
+                  setShowPaywall={setShowPaywall}
+                />
+              </div>
+            </div>
             {showPaywall && (
               <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4">
                 <div className="bg-white rounded-2xl p-8 max-w-md w-full text-center">
@@ -1765,7 +1151,7 @@ export default function Dashboard() {
                     <p> ✅ Avoid the mistakes that get you rejected</p>{" "}
                     <p>✅ Think like a senior (not memorize like a junior) </p>
                   </div>
-                  {/* Pricing toggle */}
+
                   <div className="flex gap-2 mb-6">
                     <button
                       onClick={() => setPlan("lifetime")}
@@ -1790,7 +1176,6 @@ export default function Dashboard() {
                     </button>
                   </div>
 
-                  {/* Price display */}
                   <div className="mb-6">
                     <p className="text-3xl font-bold">
                       {plan === "lifetime" ? "$19" : "$9"}
@@ -1804,7 +1189,6 @@ export default function Dashboard() {
 
                   <Countdown />
 
-                  {/* CTA */}
                   <button
                     onClick={() => {
                       if (window.gtag)
@@ -1829,21 +1213,766 @@ export default function Dashboard() {
                 </div>
               </div>
             )}
-
-            {/* FLOAT CTA */}
-            <div
-              onClick={() => setShowPaywall(true)}
-              className="fixed bottom-4 left-1/2 -translate-x-1/2 bg-black text-white px-6 py-3 rounded-xl shadow-lg text-sm"
-            >
-              🔓 Unlock Answers That Get You Hired
-            </div>
-
-            {/* EFFECTS */}
-            <LiveViewers />
-            <FakeHeatmap />
-            <FakeNotification />
           </div>
         </div>
+        {/* <div className="flex-1 flex flex-col container">
+          <div className="flex items-center justify-between p-4 bg-white border-b">
+            <button
+              onClick={() => setIsOpen(true)}
+              className="md:hidden bg-black text-white px-3 py-1 rounded"
+            >
+              ☰
+            </button>
+
+            <h1 className="font-semibold text-gray-800 text-lg">Dashboard</h1>
+
+            <div>👤</div>
+          </div>
+          <div className="lg:flex lg:gap-6 justify-center">
+            <div className="w-full lg:w-[65%]">
+              <div className="flex justify-between mb-6">
+                <p className="text-sm text-gray-500">
+                  🔥 78% devs fail these questions
+                </p>
+
+                <button
+                  onClick={() => setShowPaywall(true)}
+                  className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm"
+                >
+                  Pass Interview Faster
+                </button>
+              </div>
+              {view === "practice" && !activeQ && (
+                <div className="space-y-4 relative">
+                  <p className="text-sm text-gray-500">
+                    Showing 10/159 questions
+                  </p>
+
+                  <p
+                    className={`text-sm ${
+                      attemptsLeft <= 3
+                        ? "text-red-600 font-semibold"
+                        : "text-gray-500"
+                    }`}
+                  >
+                    🚨 Only {attemptsLeft} answers left before lock (Most users
+                    fail before finishing)
+                  </p>
+                  {attemptsLeft <= 0 && (
+                    <div className="bg-black text-white p-5 rounded-xl text-center">
+                      <p className="text-lg font-semibold">
+                        You've used all free attempts.
+                      </p>
+
+                      <p className="text-sm text-gray-300 mt-2">
+                        Most developers fail because they stop here.
+                      </p>
+
+                      <button
+                        onClick={() => setShowPaywall(true)}
+                        className="mt-4 bg-white text-black px-4 py-2 rounded-lg"
+                      >
+                        🔓 Continue Practicing
+                      </button>
+                    </div>
+                  )}
+                  {mockQuestions.map((q, index) => {
+                    const isLocked = index >= 10;
+
+                    return (
+                      <div
+                        key={q.id}
+                        className={`bg-white p-5 rounded-xl shadow-sm relative ${
+                          isLocked ? "opacity-40 pointer-events-none" : ""
+                        }`}
+                      >
+                        {isLastAttempt && (
+                          <div className="bg-yellow-100 text-yellow-800 p-3 rounded-lg mb-4 text-sm">
+                            🔥 This is your last free question. Use it wisely.
+                          </div>
+                        )}
+                        <h3 className="font-semibold mb-3">{q.title}</h3>
+
+                        {!isLocked ? (
+                          <button
+                            onClick={() => handleStart(q, index)}
+                            className="bg-black text-white px-4 py-2 rounded-lg text-sm"
+                          >
+                            🎯 Start Answering
+                          </button>
+                        ) : (
+                          <button
+                            onClick={() => setShowPaywall(true)}
+                            className="bg-gray-400 text-white px-4 py-2 rounded-lg text-sm"
+                          >
+                            🔒 Locked
+                          </button>
+                        )}
+                      </div>
+                    );
+                  })}
+
+                  <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-gray-50 to-transparent flex items-end justify-center">
+                    <div className="mb-4 text-center">
+                      <p className="text-sm text-gray-600 mb-2">
+                        🔒 Unlock 150+ real interview questions
+                      </p>
+
+                      <button
+                        onClick={() => setShowPaywall(true)}
+                        className="bg-black text-white px-5 py-2 rounded-lg text-sm"
+                      >
+                        Unlock Full Access
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
+              {view === "failed" && (
+                <div className="space-y-4">
+                  {failedQuestions.length === 0 ? (
+                    <p className="text-gray-500 text-sm">
+                      You haven't failed any questions yet.
+                    </p>
+                  ) : (
+                    <>
+                      <div className="bg-red-50 p-4 rounded-lg">
+                        <p className="text-sm font-medium text-red-600">
+                          You failed {failedQuestions.length}/{completed}{" "}
+                          questions.
+                        </p>
+
+                        <p className="text-xs text-gray-600 mt-1">
+                          This is why interviews feel hard.
+                        </p>
+                      </div>
+
+                      {failedQuestions.map((q) => (
+                        <div
+                          key={q.id}
+                          className="bg-white p-4 rounded-lg shadow-sm"
+                        >
+                          <p className="font-medium">{q.title}</p>
+
+                          <p className="text-sm text-red-600 mt-1">
+                            💀 You failed this. Try again.
+                          </p>
+
+                          <button
+                            onClick={() => setActiveQ(q)}
+                            className="mt-2 text-sm text-blue-600"
+                          >
+                            Retry
+                          </button>
+                        </div>
+                      ))}
+                    </>
+                  )}
+                </div>
+              )}
+              {view === "progress" && (
+                <div className="bg-white p-6 rounded-xl shadow-sm">
+                  <p className="text-sm mb-2">
+                    Questions completed: {completed}
+                  </p>
+
+                  <p className="text-sm mb-2">
+                    Failed questions: {failedQuestions.length}
+                  </p>
+
+                  <p className="text-sm text-gray-500">
+                    Keep practicing. Most devs fail before they pass.
+                  </p>
+                </div>
+              )}
+
+              {showPaywall && (
+                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4">
+                  <div className="bg-white rounded-2xl p-8 max-w-md w-full text-center">
+                    <h2 className="text-2xl font-semibold mb-3">
+                      You don’t fail because you don’t know.
+                    </h2>
+
+                    <p className="text-sm text-gray-500 mb-6">
+                      You fail because you answer like a junior.
+                    </p>
+
+                    <div className="text-left text-sm mb-6 space-y-2">
+                      <p>✅ See how senior devs ACTUALLY answer </p>{" "}
+                      <p>✅ Understand what interviewers are testing</p>
+                      <p> ✅ Avoid the mistakes that get you rejected</p>{" "}
+                      <p>
+                        ✅ Think like a senior (not memorize like a junior){" "}
+                      </p>
+                    </div>
+
+                    <div className="flex gap-2 mb-6">
+                      <button
+                        onClick={() => setPlan("lifetime")}
+                        className={`flex-1 py-2 rounded-lg border ${
+                          plan === "lifetime"
+                            ? "bg-black text-white"
+                            : "text-gray-600"
+                        }`}
+                      >
+                        $19 Lifetime <br></br>
+                        <span className="text-xs text-green-500">
+                          Best value
+                        </span>
+                      </button>
+                      <button
+                        onClick={() => setPlan("monthly")}
+                        className={`flex-1 py-2 rounded-lg border ${
+                          plan === "monthly"
+                            ? "bg-black text-white"
+                            : "text-gray-600"
+                        }`}
+                      >
+                        $9 / month
+                      </button>
+                    </div>
+
+                    <div className="mb-6">
+                      <p className="text-3xl font-bold">
+                        {plan === "lifetime" ? "$19" : "$9"}
+                      </p>
+                      <p className="text-xs text-gray-400">
+                        {plan === "lifetime"
+                          ? "One-time payment"
+                          : "Billed monthly"}
+                      </p>
+                    </div>
+
+                    <Countdown />
+
+                    <button
+                      onClick={() => {
+                        if (window.gtag)
+                          window.gtag("event", "buy_click_on_paywall", {
+                            event_category: "engagement",
+                            event_label: plan,
+                          });
+
+                        window.open(checkoutLinks[plan], "_blank");
+                      }}
+                      className="cursor-pointer w-full bg-black text-white py-3 rounded-lg font-medium hover:opacity-90"
+                    >
+                      🔓 Unlock Full Access
+                    </button>
+
+                    <button
+                      onClick={() => setShowPaywall(false)}
+                      className="mt-4 text-xs text-gray-400"
+                    >
+                      Continue failing for free
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div className="hidden lg:block lg:w-[35%]">
+              {!activeQ ? <EmptyState></EmptyState> : ""}
+              {activeQ && (
+                <div className="bg-white p-6 rounded-xl shadow-sm max-w-2xl">
+                  <h2 className="font-semibold mb-4">{activeQ.title}</h2>
+
+                  {!submitted ? (
+                    <>
+                      <textarea
+                        value={answer}
+                        onChange={(e) => setAnswer(e.target.value)}
+                        placeholder="Type your answer like in a real interview..."
+                        className="w-full border p-3 rounded-lg mb-4 text-sm"
+                        rows={5}
+                      />
+
+                      <button
+                        onClick={handleSubmit}
+                        className="bg-black text-white px-4 py-2 rounded-lg"
+                      >
+                        Submit Answer
+                      </button>
+                    </>
+                  ) : (
+                    <div className="mt-4 space-y-4">
+                      <div className="bg-gray-100 p-4 rounded-lg">
+                        <p className="text-sm font-medium">
+                          🎯 Your score: {Math.round((score || 0) * 10)}/10
+                        </p>
+                        <p className="text-sm mt-1">{feedback}</p>
+                      </div>
+
+                      <div className="bg-red-50 p-4 rounded-lg">
+                        <p className="text-sm text-red-600 font-medium">
+                          ❌ Weak answer:
+                        </p>
+                        <p className="text-sm mt-1">{activeQ?.weak_answer}</p>
+                      </div>
+                      {score !== null && score < 0.3 && (
+                        <div className="bg-orange-50 border border-orange-200 p-4 rounded-lg">
+                          <p className="font-semibold text-orange-600">
+                            ⚠️ Why you sound like a junior
+                          </p>
+                          <p className="text-sm mt-1">{activeQ?.trap}</p>
+                        </div>
+                      )}
+                      <div className="bg-green-50 p-4 rounded-lg relative overflow-hidden">
+                        <p className="text-sm text-green-600 font-medium">
+                          ✅ Strong Answer (locked)
+                        </p>
+
+                        <p className="text-sm mt-1">
+                          {activeQ?.strong_answer.slice(0, 90)}
+                        </p>
+                        <div className="relative">
+                          <p className="text-sm blur-sm select-none">
+                            {activeQ?.strong_answer.slice(90)}
+                          </p>
+                          <div className="absolute inset-0 bg-white/40"></div>
+                        </div>
+
+                        <div className="mt-2 text-center">
+                          <p className="text-xs text-gray-700 font-medium">
+                            🔒 Unlock to see how senior devs answer this
+                          </p>
+
+                          <button
+                            onClick={() => setShowPaywall(true)}
+                            className="mt-2 px-4 py-1.5 text-xs bg-black text-white rounded-md hover:bg-gray-800 transition"
+                          >
+                            Unlock Answers That Get You Hired
+                          </button>
+                        </div>
+                      </div>
+
+                      <button
+                        onClick={() => setActiveQ(null)}
+                        className="text-xm text-gray-600"
+                      >
+                        Back
+                      </button>
+                    </div>
+                  )}
+                  {rank !== null && (
+                    <div className="bg-black text-white p-5 rounded-xl text-center mt-4">
+                      <p className="text-lg font-semibold">
+                        You are worse than {Math.round(rank)}% of developers.
+                      </p>
+
+                      <p className="text-sm text-gray-300 mt-2">
+                        Most candidates fail not because they don’t know. But
+                        because they can’t explain clearly.
+                      </p>
+
+                      <button
+                        onClick={() => setShowPaywall(true)}
+                        className="mt-4 bg-white text-black px-4 py-2 rounded-lg text-sm font-medium"
+                      >
+                        🔓 Fix this before your next interview
+                      </button>
+                    </div>
+                  )}
+                  {submitted && failedQuestions.length > 0 && (
+                    <div className="bg-red-50 p-4 rounded-lg mt-4">
+                      <p className="text-sm text-red-600 font-medium">
+                        You failed {failedQuestions.length}/{completed + 1}{" "}
+                        questions.
+                      </p>
+
+                      <p className="text-xs text-gray-600 mt-1">
+                        This is why interviews feel hard.
+                      </p>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+        </div> */}
+        {isMobile && (
+          <div className="flex-1 flex flex-col">
+            <div className="flex items-center justify-between p-4 bg-white border-b">
+              <button
+                onClick={() => setIsOpen(true)}
+                className="md:hidden bg-black text-white px-3 py-1 rounded"
+              >
+                ☰
+              </button>
+
+              <h1 className="font-semibold text-gray-800 text-lg">Dashboard</h1>
+
+              <div>👤</div>
+            </div>
+
+            <div className="flex-1 p-6">
+              <div className="flex justify-between mb-6">
+                <p className="text-sm text-gray-500">
+                  🔥 78% devs fail these questions
+                </p>
+
+                <button
+                  onClick={() => setShowPaywall(true)}
+                  className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm"
+                >
+                  Pass Interview Faster
+                </button>
+              </div>
+              {view === "practice" && !activeQ && (
+                <div className="space-y-4 relative">
+                  <p className="text-sm text-gray-500">
+                    Showing 10/159 questions
+                  </p>
+
+                  <p
+                    className={`text-sm ${
+                      attemptsLeft <= 3
+                        ? "text-red-600 font-semibold"
+                        : "text-gray-500"
+                    }`}
+                  >
+                    🚨 Only {attemptsLeft} answers left before lock (Most users
+                    fail before finishing)
+                  </p>
+                  {attemptsLeft <= 0 && (
+                    <div className="bg-black text-white p-5 rounded-xl text-center">
+                      <p className="text-lg font-semibold">
+                        You've used all free attempts.
+                      </p>
+
+                      <p className="text-sm text-gray-300 mt-2">
+                        Most developers fail because they stop here.
+                      </p>
+
+                      <button
+                        onClick={() => setShowPaywall(true)}
+                        className="mt-4 bg-white text-black px-4 py-2 rounded-lg"
+                      >
+                        🔓 Continue Practicing
+                      </button>
+                    </div>
+                  )}
+                  {mockQuestions.map((q, index) => {
+                    const isLocked = index >= 10;
+
+                    return (
+                      <div
+                        key={q.id}
+                        className={`bg-white p-5 rounded-xl shadow-sm relative ${
+                          isLocked ? "opacity-40 pointer-events-none" : ""
+                        }`}
+                      >
+                        {isLastAttempt && (
+                          <div className="bg-yellow-100 text-yellow-800 p-3 rounded-lg mb-4 text-sm">
+                            🔥 This is your last free question. Use it wisely.
+                          </div>
+                        )}
+                        <h3 className="font-semibold mb-3">{q.title}</h3>
+
+                        {!isLocked ? (
+                          <button
+                            onClick={() => handleStart(q, index)}
+                            className="bg-black text-white px-4 py-2 rounded-lg text-sm"
+                          >
+                            🎯 Start Answering
+                          </button>
+                        ) : (
+                          <button
+                            onClick={() => setShowPaywall(true)}
+                            className="bg-gray-400 text-white px-4 py-2 rounded-lg text-sm"
+                          >
+                            🔒 Locked
+                          </button>
+                        )}
+                      </div>
+                    );
+                  })}
+
+                  <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-gray-50 to-transparent flex items-end justify-center">
+                    <div className="mb-4 text-center">
+                      <p className="text-sm text-gray-600 mb-2">
+                        🔒 Unlock 150+ real interview questions
+                      </p>
+
+                      <button
+                        onClick={() => setShowPaywall(true)}
+                        className="bg-black text-white px-5 py-2 rounded-lg text-sm"
+                      >
+                        Unlock Full Access
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
+              {view === "failed" && (
+                <div className="space-y-4">
+                  {failedQuestions.length === 0 ? (
+                    <p className="text-gray-500 text-sm">
+                      You haven't failed any questions yet.
+                    </p>
+                  ) : (
+                    <>
+                      <div className="bg-red-50 p-4 rounded-lg">
+                        <p className="text-sm font-medium text-red-600">
+                          You failed {failedQuestions.length}/{completed}{" "}
+                          questions.
+                        </p>
+
+                        <p className="text-xs text-gray-600 mt-1">
+                          This is why interviews feel hard.
+                        </p>
+                      </div>
+
+                      {failedQuestions.map((q) => (
+                        <div
+                          key={q.id}
+                          className="bg-white p-4 rounded-lg shadow-sm"
+                        >
+                          <p className="font-medium">{q.title}</p>
+
+                          <p className="text-sm text-red-600 mt-1">
+                            💀 You failed this. Try again.
+                          </p>
+
+                          <button
+                            onClick={() => setActiveQ(q)}
+                            className="mt-2 text-sm text-blue-600"
+                          >
+                            Retry
+                          </button>
+                        </div>
+                      ))}
+                    </>
+                  )}
+                </div>
+              )}
+              {view === "progress" && (
+                <div className="bg-white p-6 rounded-xl shadow-sm">
+                  <p className="text-sm mb-2">
+                    Questions completed: {completed}
+                  </p>
+
+                  <p className="text-sm mb-2">
+                    Failed questions: {failedQuestions.length}
+                  </p>
+
+                  <p className="text-sm text-gray-500">
+                    Keep practicing. Most devs fail before they pass.
+                  </p>
+                </div>
+              )}
+
+              {activeQ && (
+                <div className="bg-white p-6 rounded-xl shadow-sm max-w-2xl">
+                  <h2 className="font-semibold mb-4">{activeQ.title}</h2>
+
+                  {!submitted ? (
+                    <>
+                      <textarea
+                        value={answer}
+                        onChange={(e) => setAnswer(e.target.value)}
+                        placeholder="Type your answer like in a real interview..."
+                        className="w-full border p-3 rounded-lg mb-4 text-sm"
+                        rows={5}
+                      />
+
+                      <button
+                        onClick={handleSubmit}
+                        className="bg-black text-white px-4 py-2 rounded-lg"
+                      >
+                        Submit Answer
+                      </button>
+                    </>
+                  ) : (
+                    <div className="mt-4 space-y-4">
+                      <button
+                        onClick={() => setActiveQ(null)}
+                        className="text-xm text-gray-600"
+                      >
+                        Back
+                      </button>
+                      <div className="bg-gray-100 p-4 rounded-lg">
+                        <p className="text-sm font-medium">
+                          🎯 Your score: {Math.round((score || 0) * 10)}/10
+                        </p>
+                        <p className="text-sm mt-1">{feedback}</p>
+                      </div>
+
+                      {score !== null && score < 0.3 && (
+                        <div className="bg-red-50 p-4 rounded-lg">
+                          <p className="text-sm text-red-600 font-medium">
+                            💀 Why you sound like a junior:
+                          </p>
+                          <p className="text-sm mt-1">{activeQ?.trap}</p>
+                        </div>
+                      )}
+                      <div className="bg-red-50 p-4 rounded-lg">
+                        <p className="text-sm text-red-600 font-medium">
+                          ❌ Weak answer:
+                        </p>
+                        <p className="text-sm mt-1">{activeQ?.weak_answer}</p>
+                      </div>
+                      <div className="bg-green-50 p-4 rounded-lg relative overflow-hidden">
+                        <p className="text-sm text-green-600 font-medium">
+                          ✅ Strong Answer (locked)
+                        </p>
+
+                        <p className="text-sm mt-1">
+                          {activeQ?.strong_answer.slice(0, 90)}
+                        </p>
+                        <div className="relative">
+                          <p className="text-sm blur-sm select-none">
+                            {activeQ?.strong_answer.slice(90)}
+                          </p>
+                          <div className="absolute inset-0 bg-white/40"></div>
+                        </div>
+
+                        <div className="mt-2 text-center">
+                          <p className="text-xs text-gray-700 font-medium">
+                            🔒 Unlock to see how senior devs answer this
+                          </p>
+
+                          <button
+                            onClick={() => setShowPaywall(true)}
+                            className="mt-2 px-4 py-1.5 text-xs bg-black text-white rounded-md hover:bg-gray-800 transition"
+                          >
+                            Unlock Answers That Get You Hired
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  {rank !== null && (
+                    <div className="bg-black text-white p-5 rounded-xl text-center mt-4">
+                      <p className="text-lg font-semibold">
+                        You are worse than {Math.round(rank)}% of developers.
+                      </p>
+
+                      <p className="text-sm text-gray-300 mt-2">
+                        Most candidates fail not because they don’t know. But
+                        because they can’t explain clearly.
+                      </p>
+
+                      <button
+                        onClick={() => setShowPaywall(true)}
+                        className="mt-4 bg-white text-black px-4 py-2 rounded-lg text-sm font-medium"
+                      >
+                        🔓 Fix this before your next interview
+                      </button>
+                    </div>
+                  )}
+                  {submitted && failedQuestions.length > 0 && (
+                    <div className="bg-red-50 p-4 rounded-lg mt-4">
+                      <p className="text-sm text-red-600 font-medium">
+                        You failed {failedQuestions.length}/{completed + 1}{" "}
+                        questions.
+                      </p>
+
+                      <p className="text-xs text-gray-600 mt-1">
+                        This is why interviews feel hard.
+                      </p>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {showPaywall && (
+                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4">
+                  <div className="bg-white rounded-2xl p-8 max-w-md w-full text-center">
+                    <h2 className="text-2xl font-semibold mb-3">
+                      You don’t fail because you don’t know.
+                    </h2>
+
+                    <p className="text-sm text-gray-500 mb-6">
+                      You fail because you answer like a junior.
+                    </p>
+
+                    <div className="text-left text-sm mb-6 space-y-2">
+                      <p>✅ See how senior devs ACTUALLY answer </p>{" "}
+                      <p>✅ Understand what interviewers are testing</p>
+                      <p> ✅ Avoid the mistakes that get you rejected</p>{" "}
+                      <p>
+                        ✅ Think like a senior (not memorize like a junior){" "}
+                      </p>
+                    </div>
+
+                    <div className="flex gap-2 mb-6">
+                      <button
+                        onClick={() => setPlan("lifetime")}
+                        className={`flex-1 py-2 rounded-lg border ${
+                          plan === "lifetime"
+                            ? "bg-black text-white"
+                            : "text-gray-600"
+                        }`}
+                      >
+                        $19 Lifetime <br></br>
+                        <span className="text-xs text-green-500">
+                          Best value
+                        </span>
+                      </button>
+                      <button
+                        onClick={() => setPlan("monthly")}
+                        className={`flex-1 py-2 rounded-lg border ${
+                          plan === "monthly"
+                            ? "bg-black text-white"
+                            : "text-gray-600"
+                        }`}
+                      >
+                        $9 / month
+                      </button>
+                    </div>
+
+                    <div className="mb-6">
+                      <p className="text-3xl font-bold">
+                        {plan === "lifetime" ? "$19" : "$9"}
+                      </p>
+                      <p className="text-xs text-gray-400">
+                        {plan === "lifetime"
+                          ? "One-time payment"
+                          : "Billed monthly"}
+                      </p>
+                    </div>
+
+                    <Countdown />
+
+                    <button
+                      onClick={() => {
+                        if (window.gtag)
+                          window.gtag("event", "buy_click_on_paywall", {
+                            event_category: "engagement",
+                            event_label: plan,
+                          });
+
+                        window.open(checkoutLinks[plan], "_blank");
+                      }}
+                      className="cursor-pointer w-full bg-black text-white py-3 rounded-lg font-medium hover:opacity-90"
+                    >
+                      🔓 Unlock Full Access
+                    </button>
+
+                    <button
+                      onClick={() => setShowPaywall(false)}
+                      className="mt-4 text-xs text-gray-400"
+                    >
+                      Continue failing for free
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              <div
+                onClick={() => setShowPaywall(true)}
+                className="fixed bottom-4 left-1/2 -translate-x-1/2 bg-black text-white px-6 py-3 rounded-xl shadow-lg text-sm"
+              >
+                🔓 Unlock Answers That Get You Hired
+              </div>
+
+              <LiveViewers />
+              <FakeHeatmap />
+              <FakeNotification />
+            </div>
+          </div>
+        )}
       </div>
     </>
   );
