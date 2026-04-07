@@ -1,3 +1,4 @@
+import { useState } from "react";
 import EmptyState from "./EmptyStateRight";
 
 type RightPanelProps = {
@@ -24,10 +25,8 @@ export default function RightPanel({
   setActiveQ,
   setShowPaywall,
 }: RightPanelProps) {
-  // STATE 1: chưa chọn
   if (!activeQ) return <EmptyState />;
 
-  // STATE 2: đang trả lời
   if (!submitted) {
     return (
       <div className="bg-white p-6 rounded-xl shadow-sm">
@@ -42,9 +41,10 @@ export default function RightPanel({
 
         <button
           onClick={handleSubmit}
-          className="bg-black text-white px-4 py-2 rounded-lg"
+          className={`px-4 py-2 rounded-lg text-white bg-black"
+          `}
         >
-          Submit Answer
+          Analyze answer
         </button>
       </div>
     );
@@ -58,7 +58,7 @@ export default function RightPanel({
         <p className="font-semibold text-lg text-red-600">
           {Math.round((score || 0) * 10)}/10
         </p>
-        <p className="text-sm">{feedback}</p>
+        <p className="whitespace-pre-line text-sm">{feedback}</p>
       </div>
 
       {/* Weak */}

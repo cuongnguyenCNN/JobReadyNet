@@ -828,6 +828,23 @@ export default function Dashboard() {
       "https://noteflowai.lemonsqueezy.com/checkout/buy/4f3feb71-08f5-49d8-9193-bb533d1b1b68", // 👉 thay bằng link LemonSqueezy weekly
   };
   // 🔐 Auth check
+  const [displayedText, setDisplayedText] = useState("");
+
+  useEffect(() => {
+    if (!feedback) return;
+
+    let i = 0;
+    setDisplayedText("");
+
+    const interval = setInterval(() => {
+      setDisplayedText((prev) => prev + feedback[i]);
+      i++;
+
+      if (i >= feedback.length) clearInterval(interval);
+    }, 15);
+
+    return () => clearInterval(interval);
+  }, [feedback]);
   useEffect(() => {
     const stored = localStorage.getItem("user_email_practice");
 
@@ -918,38 +935,100 @@ export default function Dashboard() {
 
     return score;
   };
-  const handleSubmit = () => {
-    debugger;
-    const result = evaluateAnswer(answer, activeQ!.strong_answer);
+  // const handleSubmit = () => {
+  //   debugger;
+  //   const result = evaluateAnswer(answer, activeQ!.strong_answer);
+
+  //   setScore(result);
+  //   setSubmitted(true);
+
+  //   const calculatedRank = calculateRank(result);
+  //   setRank(calculatedRank);
+
+  //   let fb = "";
+
+  //   if (result < 0.3) {
+  //     fb = "💀 You missed the core concept.";
+  //     setFailedQuestions((prev) => {
+  //       const map = new Map(prev.map((q) => [q.id, q]));
+
+  //       if (activeQ) {
+  //         map.set(activeQ.id, activeQ); // overwrite nếu trùng
+  //       }
+
+  //       return Array.from(map.values());
+  //     });
+  //     localStorage.setItem("failedQuestions", JSON.stringify(failedQuestions));
+  //   } else if (result < 0.6) {
+  //     fb = "⚠️ Decent, but lacks depth.";
+  //   } else {
+  //     fb = "✅ Strong answer. You're close to senior level.";
+  //   }
+
+  //   setFeedback(fb);
+  //   setCompleted((prev) => prev + 1);
+  // };
+  const handleSubmit = async () => {
+    if (!activeQ) return;
+
+    setSubmitted(false);
+    setFeedback("Analyzing your answer...");
+
+    // 👉 fake delay AI
+    await new Promise((res) => setTimeout(res, 800));
+
+    const result = evaluateAnswer(answer, activeQ.strong_answer);
+    const calculatedRank = calculateRank(result);
 
     setScore(result);
-    setSubmitted(true);
-
-    const calculatedRank = calculateRank(result);
     setRank(calculatedRank);
 
     let fb = "";
+    let analysis = "";
 
+    // 👉 AI-style breakdown
     if (result < 0.3) {
-      fb = "💀 You missed the core concept.";
+      fb = "💀 This answer would likely fail in a real interview.";
+
+      analysis = `
+• You missed the core concept
+• No real-world example
+• Lacks explanation of decisions
+    `;
+
       setFailedQuestions((prev) => {
         const map = new Map(prev.map((q) => [q.id, q]));
+        map.set(activeQ.id, activeQ);
+        const updated = Array.from(map.values());
 
-        if (activeQ) {
-          map.set(activeQ.id, activeQ); // overwrite nếu trùng
-        }
-
-        return Array.from(map.values());
+        localStorage.setItem("failedQuestions", JSON.stringify(updated));
+        return updated;
       });
-      localStorage.setItem("failedQuestions", JSON.stringify(failedQuestions));
     } else if (result < 0.6) {
-      fb = "⚠️ Decent, but lacks depth.";
+      fb = "⚠️ Decent, but not strong enough.";
+
+      analysis = `
+• You understand the concept
+• But your answer is too generic
+• Missing depth and trade-offs
+    `;
     } else {
-      fb = "✅ Strong answer. You're close to senior level.";
+      fb = "✅ Strong answer. You're approaching senior level.";
+
+      analysis = `
+• Clear understanding of the concept
+• Structured explanation
+• Good use of real-world thinking
+    `;
     }
 
-    setFeedback(fb);
+    // 👉 thêm delay để giống AI typing
+    await new Promise((res) => setTimeout(res, 500));
+
+    setFeedback(fb + "\n" + analysis);
+
     setCompleted((prev) => prev + 1);
+    setSubmitted(true);
   };
 
   return (
@@ -1127,7 +1206,7 @@ export default function Dashboard() {
                   setAnswer={setAnswer}
                   handleSubmit={handleSubmit}
                   score={score}
-                  feedback={feedback}
+                  feedback={displayedText}
                   rank={rank}
                   setActiveQ={setActiveQ}
                   setShowPaywall={setShowPaywall}
