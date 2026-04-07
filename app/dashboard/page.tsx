@@ -975,7 +975,7 @@ export default function Dashboard() {
     setFeedback("Analyzing your answer...");
 
     // 👉 fake delay AI
-    await new Promise((res) => setTimeout(res, 800));
+    await new Promise((res) => setTimeout(res, 500));
 
     const result = evaluateAnswer(answer, activeQ.strong_answer);
     const calculatedRank = calculateRank(result);
