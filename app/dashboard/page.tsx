@@ -821,6 +821,7 @@ export default function Dashboard() {
   const [isOpen, setIsOpen] = useState(false);
   const [plan, setPlan] = useState<"lifetime" | "monthly">("lifetime");
   const [isMobile, setIsMobile] = useState(false);
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
   const checkoutLinks = {
     lifetime:
       "https://noteflowai.lemonsqueezy.com/checkout/buy/98ea2ea8-1378-4bcc-900b-c0c3ea03e359",
@@ -968,67 +969,178 @@ export default function Dashboard() {
   //   setFeedback(fb);
   //   setCompleted((prev) => prev + 1);
   // };
+
   const handleSubmit = async () => {
     if (!activeQ) return;
 
     setSubmitted(false);
     setFeedback("Analyzing your answer...");
-
+    setIsAnalyzing(true);
     // 👉 fake delay AI
-    await new Promise((res) => setTimeout(res, 500));
+    await new Promise((res) => setTimeout(res, 800));
 
     const result = evaluateAnswer(answer, activeQ.strong_answer);
     const calculatedRank = calculateRank(result);
 
     setScore(result);
     setRank(calculatedRank);
-
     let fb = "";
     let analysis = "";
 
-    // 👉 AI-style breakdown
-    if (result < 0.3) {
-      fb = "💀 This answer would likely fail in a real interview.";
+    // 👉 random tone để tránh lặp
+    const tones = [
+      "🔍 AI Analysis:",
+      "🤖 Interview Evaluation:",
+      "📊 Response Breakdown:",
+    ];
+
+    const tone = tones[Math.floor(Math.random() * tones.length)];
+
+    if (result < 0.2) {
+      fb = "💀 Critical issues detected. This would fail immediately.";
 
       analysis = `
-• You missed the core concept
-• No real-world example
-• Lacks explanation of decisions
-    `;
+${tone}
 
-      setFailedQuestions((prev) => {
-        const map = new Map(prev.map((q) => [q.id, q]));
-        map.set(activeQ.id, activeQ);
-        const updated = Array.from(map.values());
+• Concept Understanding: Fundamentally incorrect or missing core idea.
 
-        localStorage.setItem("failedQuestions", JSON.stringify(updated));
-        return updated;
-      });
+• Clarity: Confusing and lacks structure.
+
+• Depth: Very shallow, no explanation of how things work.
+
+• Real-world Thinking: No practical context at all.
+
+👉 Overall: This answer signals a lack of readiness for interviews.
+  `;
+    } else if (result < 0.4) {
+      fb = "❌ Weak answer. You’re missing key elements.";
+
+      analysis = `
+${tone}
+
+• Concept Understanding: Partial understanding but incomplete.
+
+• Structure: Loose and not well-organized.
+
+• Depth: Missing important details.
+
+• Real-world Application: No strong example provided.
+
+👉 Overall: This would struggle in most interviews.
+  `;
     } else if (result < 0.6) {
-      fb = "⚠️ Decent, but not strong enough.";
+      fb = "⚠️ Average answer. Not enough to stand out.";
 
       analysis = `
-• You understand the concept
-• But your answer is too generic
-• Missing depth and trade-offs
-    `;
+${tone}
+
+• Concept Understanding: You understand the basics.
+
+• Structure: Readable but not compelling.
+
+• Depth: Lacks deeper insights or internals.
+
+• Real-world Application: Weak or implied, not explicit.
+
+👉 Overall: This is mid-level, but forgettable.
+  `;
+    } else if (result < 0.75) {
+      fb = "🙂 Good answer, but still not senior level.";
+
+      analysis = `
+${tone}
+
+• Concept Understanding: Correct and clear.
+
+• Structure: Reasonably well organized.
+
+• Depth: Some depth, but not fully explored.
+
+• Real-world Application: Present but could be stronger.
+
+👉 Overall: Solid mid-level answer, needs refinement.
+  `;
+    } else if (result < 0.9) {
+      fb = "🔥 Strong answer. You're close to senior level.";
+
+      analysis = `
+${tone}
+
+• Concept Understanding: Strong and accurate.
+
+• Structure: Clear and logical flow.
+
+• Depth: Good explanation of internals.
+
+• Real-world Application: Relevant and useful example.
+
+👉 Overall: This would perform well in interviews.
+  `;
     } else {
-      fb = "✅ Strong answer. You're approaching senior level.";
+      fb = "🚀 Excellent answer. Senior-level performance.";
 
       analysis = `
-• Clear understanding of the concept
-• Structured explanation
-• Good use of real-world thinking
-    `;
+${tone}
+
+• Concept Understanding: Deep and precise.
+
+• Structure: Very clear and professional.
+
+• Depth: Shows strong internal understanding.
+
+• Real-world Application: Highly relevant and impactful example.
+
+
+👉 Overall: This is a standout answer.
+  `;
     }
+    //     let fb = "";
+    //     let analysis = "";
+
+    //     // 👉 AI-style breakdown
+    //     if (result < 0.3) {
+    //       fb = "💀 This answer would likely fail in a real interview.";
+
+    //       analysis = `
+    // • You missed the core concept
+    // • No real-world example
+    // • Lacks explanation of decisions
+    //     `;
+
+    //       setFailedQuestions((prev) => {
+    //         const map = new Map(prev.map((q) => [q.id, q]));
+    //         map.set(activeQ.id, activeQ);
+    //         const updated = Array.from(map.values());
+
+    //         localStorage.setItem("failedQuestions", JSON.stringify(updated));
+    //         return updated;
+    //       });
+    //     } else if (result < 0.6) {
+    //       fb = "⚠️ Decent, but not strong enough.";
+
+    //       analysis = `
+    // • You understand the concept
+    // • But your answer is too generic
+    // • Missing depth and trade-offs
+    //     `;
+    //     } else {
+    //       fb = "✅ Strong answer. You're approaching senior level.";
+
+    //       analysis = `
+    // • Clear understanding of the concept
+    // • Structured explanation
+    // • Good use of real-world thinking
+    //     `;
+    //     }
 
     // 👉 thêm delay để giống AI typing
-    await new Promise((res) => setTimeout(res, 500));
+    await new Promise((res) => setTimeout(res, 800));
 
     setFeedback(fb + "\n" + analysis);
 
     setCompleted((prev) => prev + 1);
     setSubmitted(true);
+    setIsAnalyzing(false);
   };
 
   return (
@@ -1210,6 +1322,7 @@ export default function Dashboard() {
                   rank={rank}
                   setActiveQ={setActiveQ}
                   setShowPaywall={setShowPaywall}
+                  isAnalyzing={isAnalyzing}
                 />
               </div>
             </div>

@@ -12,6 +12,7 @@ type RightPanelProps = {
   rank: number | null;
   setActiveQ: (q: any) => void;
   setShowPaywall: (v: boolean) => void;
+  isAnalyzing: boolean;
 };
 export default function RightPanel({
   activeQ,
@@ -24,6 +25,7 @@ export default function RightPanel({
   rank,
   setActiveQ,
   setShowPaywall,
+  isAnalyzing,
 }: RightPanelProps) {
   if (!activeQ) return <EmptyState />;
 
@@ -41,9 +43,15 @@ export default function RightPanel({
 
         <button
           onClick={handleSubmit}
-          className={`cursor-pointer px-4 py-2 rounded-lg text-white bg-black`}
+          disabled={isAnalyzing}
+          className={`flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-white ${
+            isAnalyzing ? "bg-gray-400" : "bg-black"
+          }`}
         >
-          Analyze answer
+          {isAnalyzing && (
+            <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+          )}
+          {isAnalyzing ? "AI analyzing..." : "Analyze Answer"}
         </button>
       </div>
     );
