@@ -136,13 +136,7 @@ export default function EnterEmail() {
     const stored = localStorage.getItem("user_email_practice");
 
     if (stored) {
-      const parsed = JSON.parse(stored);
-
-      if (Date.now() < parsed.expiry) {
-        router.push("/dashboard");
-      } else {
-        localStorage.removeItem("user_email_practice");
-      }
+      router.push("/dashboard");
     }
   }, [router]);
 

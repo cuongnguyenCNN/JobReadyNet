@@ -850,18 +850,11 @@ export default function Dashboard() {
     const stored = localStorage.getItem("user_email_practice");
 
     if (!stored) {
-      router.push("/");
+      router.push("/login");
       return;
     }
 
     const parsed = JSON.parse(stored);
-
-    if (Date.now() > parsed.expiry) {
-      localStorage.removeItem("user_email_practice");
-      router.push("/");
-      return;
-    }
-
     setUser(parsed);
   }, [router]);
 
@@ -1338,12 +1331,16 @@ ${tone}
                   </p>
 
                   <div className="text-left text-sm mb-6 space-y-2">
-                    <p>✅ See how senior devs ACTUALLY answer </p>{" "}
-                    <p>✅ Understand what interviewers are testing</p>
-                    <p> ✅ Avoid the mistakes that get you rejected</p>{" "}
-                    <p>✅ Think like a senior (not memorize like a junior) </p>
+                    <p>✅ See EXACT answers that pass real .NET interviews</p>
+                    <p>✅ Fix the mistakes that make 78% of devs fail</p>
+                    <p>
+                      ✅ Learn how to explain like a senior (not guess like a
+                      junior)
+                    </p>
+                    <p>✅ Understand what interviewers are actually testing</p>
+                    <p>✅ Get AI feedback on your answers instantly</p>
+                    <p>✅ Practice like a real interview (not theory)</p>
                   </div>
-
                   <div className="flex gap-2 mb-6">
                     <button
                       onClick={() => setPlan("lifetime")}
@@ -2080,12 +2077,17 @@ ${tone}
                     </p>
 
                     <div className="text-left text-sm mb-6 space-y-2">
-                      <p>✅ See how senior devs ACTUALLY answer </p>{" "}
-                      <p>✅ Understand what interviewers are testing</p>
-                      <p> ✅ Avoid the mistakes that get you rejected</p>{" "}
+                      <p>✅ See EXACT answers that pass real .NET interviews</p>
+                      <p>✅ Fix the mistakes that make 78% of devs fail</p>
                       <p>
-                        ✅ Think like a senior (not memorize like a junior){" "}
+                        ✅ Learn how to explain like a senior (not guess like a
+                        junior)
                       </p>
+                      <p>
+                        ✅ Understand what interviewers are actually testing
+                      </p>
+                      <p>✅ Get AI feedback on your answers instantly</p>
+                      <p>✅ Practice like a real interview (not theory)</p>
                     </div>
 
                     <div className="flex gap-2 mb-6">
