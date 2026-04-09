@@ -1350,7 +1350,7 @@ ${tone}
                           : "text-gray-600"
                       }`}
                     >
-                      $19 Lifetime <br></br>
+                      $29 Lifetime <br></br>
                       <span className="text-xs text-green-500">Best value</span>
                     </button>
                     <button
@@ -1367,7 +1367,7 @@ ${tone}
 
                   <div className="mb-6">
                     <p className="text-3xl font-bold">
-                      {plan === "lifetime" ? "$19" : "$9"}
+                      {plan === "lifetime" ? "$29" : "$9"}
                     </p>
                     <p className="text-xs text-gray-400">
                       {plan === "lifetime"
