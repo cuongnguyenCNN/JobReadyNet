@@ -37,9 +37,9 @@ export default function LeftPanel({
 
         <button
           onClick={() => setShowPaywall(true)}
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm"
+          className="cursor-pointer bg-blue-600 text-white px-4 py-2 rounded-lg text-sm"
         >
-          Pass Interview Faster
+          Fix Your Mistakes Before Interview
         </button>
       </div>
 
@@ -56,7 +56,7 @@ export default function LeftPanel({
       {attemptsLeft <= 0 && (
         <div className="bg-black text-white p-5 rounded-xl text-center">
           <p className="text-lg font-semibold">
-            You've used all free attempts.
+            ⚠️ You’re 3 answers away from interview-ready level
           </p>
 
           <p className="text-sm text-gray-300 mt-2">
