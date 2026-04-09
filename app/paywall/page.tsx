@@ -39,7 +39,6 @@ export default function Paywall() {
           <p>✅ See EXACT answers that pass real .NET interviews</p>
           <p>✅ Fix the mistakes that make 78% of devs fail</p>
           <p>✅ Learn how to explain like a senior (not guess like a junior)</p>
-          <p>✅ Understand what interviewers are actually testing</p>
           <p>✅ Get AI feedback on your answers instantly</p>
           <p>✅ Practice like a real interview (not theory)</p>
         </div>
