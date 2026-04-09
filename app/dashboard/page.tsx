@@ -1213,14 +1213,15 @@ ${tone}
               <p className="text-sm font-semibold">Upgrade to Pro</p>
               <p className="text-xs opacity-80 mt-1">
                 {/* Unlock all questions + AI feedback */}
-                Pass your next .NET interview (or stay stuck)
+                Pass your next .NET interview - See How Senior Devs Answer (or
+                stay stuck)
               </p>
 
               <button
                 onClick={() => setShowPaywall(true)}
-                className="mt-3 w-full bg-white text-indigo-600 text-sm font-semibold py-2 rounded-lg hover:bg-gray-100 transition"
+                className="cursor-pointer mt-3 w-full bg-white text-indigo-600 text-sm font-semibold py-2 rounded-lg hover:bg-gray-100 transition"
               >
-                Pass Interview Faster
+                Unlock Real Answers
               </button>
             </div>
           </div>
