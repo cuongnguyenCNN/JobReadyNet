@@ -197,7 +197,10 @@ export default function Home() {
       </section>
       <section id="testimonials" className=" px-6 max-w-6xl mx-auto">
         <div className="mt-10  pt-8">
-          {/* Title */}
+          <h2 className="text-3xl font-semibold text-center">
+            Trusted by Developers Worldwide
+          </h2>
+          <br></br>
           <h2 className="text-lg font-semibold mb-2">
             From confused answers → confident senior-level thinking
           </h2>
