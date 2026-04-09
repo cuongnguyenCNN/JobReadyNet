@@ -917,7 +917,7 @@ export default function Dashboard() {
 
     const user = userAnswer.toLowerCase();
 
-    let matchCount = 0;
+    let matchCount = 1;
 
     keywords.forEach((word) => {
       if (user.includes(word)) {
