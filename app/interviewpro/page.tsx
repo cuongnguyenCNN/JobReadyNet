@@ -44,6 +44,21 @@ export default function LandingPageProNet() {
           </span>
         </h1> */}
         <HeroHeadline></HeroHeadline>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          {[
+            "You freeze on system design",
+            "You give textbook answers",
+            "You can’t explain trade-offs",
+            "They lose interest quickly",
+          ].map((item, i) => (
+            <div
+              key={i}
+              className="border border-gray-200 rounded-lg px-3 py-2 text-sm bg-gray-50"
+            >
+              ❌ {item}
+            </div>
+          ))}
+        </div>
         <p className="mt-6 text-lg text-gray-600 max-w-2xl">
           Learn how to explain systems, think in trade-offs, and answer like a
           senior developer — even if you’re not one yet.
@@ -96,13 +111,61 @@ export default function LandingPageProNet() {
           </div>
 
           {/* Trust signal */}
-          <div className="text-sm text-green-600 font-medium">
+          {/* <div className="text-sm text-green-600 font-medium">
             ✅ Trusted by 1000+ .NET developers worldwide
-          </div>
+          </div> */}
           <div className="text-sm text-green-600 font-medium">
             ✅ One guy told me: I failed 3 interviews even though I knew
             everything. This showed me WHY I was failing.
           </div>
+          <div className="max-w-xl mx-auto mt-6 p-5 border border-gray-200 rounded-xl bg-gray-50 text-center">
+            <h3 className="text-lg font-semibold mb-2">💸 The Hidden Cost</h3>
+
+            <p className="font-medium mb-2">
+              Every failed interview = a missed opportunity
+            </p>
+            <ul className="flex gap-4 text-gray-600 mb-3 justify-center">
+              <li>Another rejection</li>
+              <li>Another month stuck</li>
+              <li>Another chance gone</li>
+            </ul>
+
+            <p className="text-base mb-2">
+              👉 One missed US remote job ={" "}
+              <span className="font-semibold text-gray-900">
+                $50,000+ in lost income
+              </span>
+            </p>
+
+            <p className="text-sm text-gray-500 mb-3">
+              Most developers don’t realize this. <br />
+              They keep studying more… instead of fixing how they communicate.
+            </p>
+
+            <p className="text-sm">
+              Suddenly,{" "}
+              <span className="font-semibold">$19 is not expensive. </span>
+              <span className="font-semibold">Staying stuck is.</span>
+            </p>
+          </div>
+          {/* <div className="max-w-md mx-auto mt-6 p-4 border border-gray-200 rounded-lg bg-gray-50 text-center">
+            <p className="font-medium">
+              Every failed interview = a missed opportunity
+            </p>
+
+            <p className="mt-2">
+              👉 <span className="font-semibold">$50,000+ lost</span> from one
+              missed US job
+            </p>
+
+            <p className="mt-3 text-sm text-gray-600">
+              You're not deciding about $19.
+            </p>
+
+            <p className="text-sm font-semibold">
+              You're deciding whether to stay stuck.
+            </p>
+          </div> */}
           {/* Urgency */}
           <div className="text-sm text-red-500 font-semibold">
             ⏳ Price will increase to $29 soon
