@@ -100,7 +100,8 @@ export default function LandingPageProNet() {
             ✅ Trusted by 1000+ .NET developers worldwide
           </div>
           <div className="text-sm text-green-600 font-medium">
-            ✅ One guy told me: I failed 3 interviews before reading this
+            ✅ One guy told me: I failed 3 interviews even though I knew
+            everything. This showed me WHY I was failing.
           </div>
           {/* Urgency */}
           <div className="text-sm text-red-500 font-semibold">
