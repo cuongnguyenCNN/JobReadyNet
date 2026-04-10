@@ -27,22 +27,7 @@ export default function LandingPageProNet() {
 
   return (
     <div className="bg-white text-gray-900 font-sans">
-      {/* HERO */}
       <section className="min-h-screen flex flex-col justify-center items-center text-center px-6 bg-gradient-to-br from-blue-50 to-white">
-        {/* <h1 className="text-4xl md:text-6xl font-bold leading-tight max-w-4xl">
-          Most .NET Developers Fail Interviews
-          <br />
-          <span className="text-blue-600">
-            Because They Answer Like Juniors
-          </span>
-        </h1> */}
-        {/* <h1 className="text-4xl md:text-6xl font-bold leading-tight max-w-4xl">
-          Pass Your Next .NET Interview
-          <br />
-          <span className="text-blue-600">
-            By Answering Like a Senior (Even If You’re Not One Yet)
-          </span>
-        </h1> */}
         <HeroHeadline></HeroHeadline>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {[
@@ -64,25 +49,6 @@ export default function LandingPageProNet() {
           senior developer — even if you’re not one yet.
         </p>
 
-        {/* <Headline></Headline> */}
-
-        {/* <div className="mt-8 flex gap-4">
-          <a
-            href="https://noteflowai.lemonsqueezy.com/checkout/buy/f9ba06c7-64db-42bf-92f1-970bc6193609"
-            className="bg-blue-600 text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-lg hover:scale-105 transition"
-          >
-            Get the Guide – $19
-          </a>
-
-          <a
-            href="#example"
-            className="px-8 py-4 rounded-xl text-lg border border-gray-300 hover:bg-gray-100 transition"
-          >
-            See Example
-          </a>
-          <button onClick={handleBuyClick} >Mua ngay</button>
-        </div> */}
-        {/* Social Proof + Urgency */}
         <div className="mt-6 space-y-3">
           <div className="bg-gray-50 border border-gray-200 rounded-xl p-5 text-sm max-w-xl">
             <div className="flex items-start gap-3">
@@ -148,30 +114,28 @@ export default function LandingPageProNet() {
               <span className="font-semibold">Staying stuck is.</span>
             </p>
           </div>
-          {/* <div className="max-w-md mx-auto mt-6 p-4 border border-gray-200 rounded-lg bg-gray-50 text-center">
-            <p className="font-medium">
-              Every failed interview = a missed opportunity
-            </p>
-
-            <p className="mt-2">
-              👉 <span className="font-semibold">$50,000+ lost</span> from one
-              missed US job
-            </p>
-
-            <p className="mt-3 text-sm text-gray-600">
-              You're not deciding about $19.
-            </p>
-
-            <p className="text-sm font-semibold">
-              You're deciding whether to stay stuck.
-            </p>
-          </div> */}
-          {/* Urgency */}
           <div className="text-sm text-red-500 font-semibold">
             ⏳ Price will increase to $29 soon
           </div>
         </div>
-        <GeoPricing></GeoPricing>
+
+        <div className="mt-8 flex gap-4">
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://noteflowai.lemonsqueezy.com/checkout/buy/f9ba06c7-64db-42bf-92f1-970bc6193609"
+            className="bg-blue-600 text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-lg hover:scale-105 transition"
+          >
+            🎁 Get Instant Access - $19
+          </a>
+
+          <a
+            href="#example"
+            className="px-8 py-4 rounded-xl text-lg border border-gray-300 hover:bg-gray-100 transition"
+          >
+            See Example
+          </a>
+        </div>
 
         <section className="py-20 px-6 max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold text-center mb-12">
@@ -233,13 +197,12 @@ export default function LandingPageProNet() {
 
           {/* CTA */}
           <div className="mt-12 text-center">
-            <GeoPricing></GeoPricing>
-            {/* <button
+            <button
               onClick={handleBuyClick}
-              className="inline-block px-8 py-4 text-lg font-semibold text-black transition bg-white rounded-xl  hover:scale-105 hover:bg-gray-200"
+              className="cursor-pointer inline-block px-8 py-4 text-lg font-semibold bg-blue-600 text-white transition rounded-xl  hover:scale-105 hover:bg-gray-200"
             >
               👉 Get Instant Access
-            </button> */}
+            </button>
           </div>
         </div>
       </section>
@@ -365,13 +328,13 @@ export default function LandingPageProNet() {
           <p className="mt-4 text-gray-600">
             One-time payment. Lifetime access.
           </p>
-          <GeoPricing></GeoPricing>
-          {/* <button
+          {/* <GeoPricing></GeoPricing> */}
+          <button
             onClick={handleBuyClick}
-            className="mt-8 inline-block bg-blue-600 text-white px-10 py-5 rounded-xl text-xl font-semibold hover:scale-105 transition"
+            className="cursor-pointer mt-8 inline-block bg-blue-600 text-white px-10 py-5 rounded-xl text-xl font-semibold hover:scale-105 transition"
           >
             Get Instant Access
-          </button> */}
+          </button>
           <p className="mt-4 text-sm text-red-500">
             ⚠ Price will increase after adding more examples
           </p>
@@ -381,7 +344,6 @@ export default function LandingPageProNet() {
         </div>
       </section>
 
-      {/* FINAL */}
       <section className="py-20 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-center px-6">
         <h2 className="text-3xl font-bold">
           Next Interview — You Either Repeat The Same Mistakes
@@ -389,13 +351,13 @@ export default function LandingPageProNet() {
           Or You Think Like a Senior
         </h2>
 
-        {/* <button
+        <button
           onClick={handleBuyClick}
-          className="mt-6 inline-block bg-white text-blue-600 px-8 py-4 rounded-xl text-lg font-semibold hover:scale-105 transition"
+          className="cursor-pointer mt-6 inline-block bg-white text-blue-600 px-8 py-4 rounded-xl text-lg font-semibold hover:scale-105 transition"
         >
           Get the Guide Now
-        </button> */}
-        <GeoPricing></GeoPricing>
+        </button>
+        {/* <GeoPricing></GeoPricing> */}
       </section>
       <footer className="mt-24 text-center text-gray-500 text-sm pb-10">
         Built for developers preparing for .NET interviews by{" "}
