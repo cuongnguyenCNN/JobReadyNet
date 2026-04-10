@@ -47,7 +47,7 @@ export default function LandingPageProNet() {
         </p>
 
         <div className="mt-6 space-y-3">
-          <div className="bg-gray-50 border border-gray-200 rounded-xl p-5 text-sm max-w-xl">
+          <div className="bg-gray-50 border border-gray-200 rounded-xl p-5 text-sm max-w-3xl">
             <div className="flex items-start gap-3">
               <img
                 src="/pass.webp"
