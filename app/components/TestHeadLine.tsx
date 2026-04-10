@@ -12,11 +12,11 @@ const variants = [
     line1: "Pass Your Next .NET Interview",
     line2: "By Answering Like a Senior,",
   },
-  {
-    id: "insight",
-    line1: "You Don’t Fail .NET Interviews",
-    line2: "You Fail at Explaining Your Answers",
-  },
+  // {
+  //   id: "insight",
+  //   line1: "You Don’t Fail .NET Interviews",
+  //   line2: "You Fail at Explaining Your Answers",
+  // },
   {
     id: "hybrid",
     line1: "Stop Failing .NET Interviews",
