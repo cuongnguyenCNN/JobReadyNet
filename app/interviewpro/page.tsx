@@ -96,12 +96,12 @@ export default function LandingPageProNet() {
               <li>Another chance gone</li>
             </ul>
 
-            <p className="text-base mb-2">
+            {/* <p className="text-base mb-2">
               👉 One missed US remote job ={" "}
               <span className="font-semibold text-gray-900">
                 $50,000+ in lost income
               </span>
-            </p>
+            </p> */}
 
             <p className="text-sm text-gray-500 mb-3">
               Most developers don’t realize this. <br />
