@@ -30,19 +30,16 @@ export default function LandingPageProNet() {
       <section className="min-h-screen flex flex-col justify-center items-center text-center px-6 bg-gradient-to-br from-blue-50 to-white">
         <HeroHeadline></HeroHeadline>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-          {[
-            "You freeze on system design",
-            "You give textbook answers",
-            "You can’t explain trade-offs",
-            "They lose interest quickly",
-          ].map((item, i) => (
-            <div
-              key={i}
-              className="border border-gray-200 rounded-lg px-3 py-2 text-sm bg-gray-50"
-            >
-              ❌ {item}
-            </div>
-          ))}
+          {["You freeze on system design", "You give textbook answers"].map(
+            (item, i) => (
+              <div
+                key={i}
+                className="border border-gray-200 rounded-lg px-3 py-2 text-sm bg-gray-50"
+              >
+                ❌ {item}
+              </div>
+            ),
+          )}
         </div>
         <p className="mt-6 text-lg text-gray-600 max-w-2xl">
           Learn how to explain systems, think in trade-offs, and answer like a
