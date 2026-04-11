@@ -101,8 +101,7 @@ export default function LandingPageProNet() {
             </p> */}
 
             <p className="text-sm text-gray-500 mb-3">
-              Most developers don’t realize this. <br />
-              They keep studying more… instead of fixing how they communicate.
+              You keep studying more… instead of fixing how they communicate.
             </p>
 
             <p className="text-sm">
