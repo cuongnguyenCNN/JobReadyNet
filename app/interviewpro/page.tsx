@@ -29,7 +29,7 @@ export default function LandingPageProNet() {
     <div className="bg-white text-gray-900 font-sans">
       <section className="min-h-screen flex flex-col justify-center items-center text-center px-6 bg-gradient-to-br from-blue-50 to-white">
         <HeroHeadline></HeroHeadline>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+        {/* <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {["You freeze on system design", "You give textbook answers"].map(
             (item, i) => (
               <div
@@ -40,10 +40,10 @@ export default function LandingPageProNet() {
               </div>
             ),
           )}
-        </div>
+        </div> */}
         <p className="mt-6 text-lg text-gray-600 max-w-2xl">
-          Learn how to explain systems, think in trade-offs, and answer like a
-          senior developer — even if you’re not one yet.
+          Explain systems, think in trade-offs, and answer like a senior
+          developer — even if you’re not one yet.
         </p>
 
         <div className="mt-6 space-y-3">
