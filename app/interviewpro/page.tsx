@@ -135,15 +135,15 @@ export default function LandingPageProNet() {
 
         <section className="py-20 px-6 max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold text-center mb-12">
-            After This Guide, You Will:
+            After This, You Will Stop Sounding Like a Junior in Interviews
           </h2>
 
           <div className="grid md:grid-cols-2 gap-8">
             {[
-              "Senior Answer Framework (step-by-step)",
-              "Real .NET interview questions with deep answers",
-              "How to explain trade-offs (what interviewers actually want)",
-              "Common mistakes that make you sound junior",
+              "Sound like a senior — even if you’re not (step-by-step framework)",
+              "Steal real .NET answers that pass interviews",
+              "Master trade-offs (this is what gets you hired)",
+              "Stop giving answers that kill your chances",
             ].map((item, i) => (
               <div key={i} className="p-6 border rounded-xl">
                 ✔ {item}
